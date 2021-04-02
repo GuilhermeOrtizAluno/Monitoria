@@ -3,7 +3,7 @@ UTFPR - Projeto de Sistema Distribuído
 
 ## Cliente
 * Desenvolvimento da estrotura Cliente
-* ** Logout
+* **Logout**
    * Enviar pedido de Logout para Servidor
 
 ------------------------------------------
