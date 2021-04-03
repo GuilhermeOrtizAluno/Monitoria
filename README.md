@@ -2,7 +2,7 @@
 UTFPR - Projeto de Sistema Distribuído 
 
 ## Server
-* Desenvolvimento da estrotura Servidor
+* Desenvolvimento da estrotura Cliente
 * **CRUD**
     * Create
     * Read
