@@ -1,5 +1,5 @@
 # Monitoria
-UTFPR - Projeto de Sistema Distribuído
+UTFPR - Projeto de Sistema Distribuído 
 
 ## Cliente
 * Desenvolvimento da estrotura Cliente
@@ -7,3 +7,10 @@ UTFPR - Projeto de Sistema Distribuído
    * Enviar Pedido de Login para o Servidor
 
 ------------------------------------------
+## Server
+* Desenvolvimento da estrotura Servidor
+* **CRUD**
+    * Create
+    * Read
+    * Update
+    * Delete 
