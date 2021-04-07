@@ -6,6 +6,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import dice.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,10 +55,9 @@ public class LoginController implements Initializable {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
         Gson gson = new Gson(); 
-        /*Pessoa pessoa = gson.fromJson(str, Pessoa.class);
-        System.out.println(pessoa);*/
+        User usuario = gson.fromJson(str, User.class);
         
-        s.close();
+        //s.close();
     }
     
     public static void Client(){

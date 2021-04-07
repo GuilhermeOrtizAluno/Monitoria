@@ -19,16 +19,20 @@ is_monitor Boolean not null
 CREATE TABLE monitoria (
 pk_monitoria int PRIMARY KEY not null AUTO_INCREMENT,
 nome varchar(255) not null,
-senha varchar(255) not null
+senha varchar(255) not null,
+fk_pk_usuario int not null,
 ) ENGINE = innodb;
 
 CREATE TABLE horario_monit (
 pk_horario_monitoria int PRIMARY KEY not null AUTO_INCREMENT,
-horario DATE not null
+horario DATE not null,
+fk_pk_monitoria int not null
 ) ENGINE = innodb;
 
 CREATE TABLE aluno_monit (
-pk_aluno_monitoria int PRIMARY KEY not null AUTO_INCREMENT
+pk_aluno_monitoria int PRIMARY KEY not null AUTO_INCREMENT,
+fk_pk_monitoria int not null,
+fk_pk_usuario int not null,
 ) ENGINE = innodb;
 
 ALTER TABLE monitoria ADD CONSTRAINT fk_pk_usuario FOREIGN KEY (pk_usuario) REFERENCES usuario (pk_usuario);

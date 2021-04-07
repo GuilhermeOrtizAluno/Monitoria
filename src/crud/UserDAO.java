@@ -135,25 +135,32 @@ public class UserDAO {
     }
     
     //search
-    public int search(User u){
+    public User search(User u){
         Connection con = ConnectionFactory.getConnection();
-        
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        
+        User user = new User(); 
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM usuario WHERE usuario = ?");
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE usuario = ? AND senha = ?");
             stmt.setString(1, u.getUsuario());
+            stmt.setString(2, u.getSenha());
             rs = stmt.executeQuery();
             
-            return rs.getInt(1);
+            while (rs.next()) {
+                user.setPk_usuario(rs.getInt("pk_usuario"));
+                user.setUsuario(rs.getString("usuario"));
+                user.setNome(rs.getString("nome"));
+                user.setIs_admin(rs.getBoolean("is_admin"));
+                user.setIs_monitor(rs.getBoolean("is_monitor"));
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-
-        return -1;
+            return null;
+        } 
+        
+        return user;
     }
 }

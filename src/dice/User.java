@@ -61,5 +61,10 @@ public class User {
         this.is_monitor = is_monitor;
     }
 
+    @Override
+    public String toString() {
+        return "User{" + "pk_usuario=" + pk_usuario + ", usuario=" + usuario + ", nome=" + nome + ", senha=" + senha + ", is_admin=" + is_admin + ", is_monitor=" + is_monitor + '}';
+    }
+
     
 }
