@@ -1,13 +1,15 @@
 package clientServe;
 
+import dice.Login;
 import com.google.gson.Gson;
+import crud.UserDAO;
+import dice.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.ParseException;
 
 
 
@@ -24,12 +26,21 @@ public class Server {
             BufferedReader  bf = new BufferedReader(in);
             String string = bf.readLine(); 
             Gson gson = new Gson(); 
-            /*Pessoa pessoa = gson.fromJson(string, Pessoa.class);
-            System.out.println(pessoa);*/
+            Login login = gson.fromJson(string, Login.class);
+            System.out.println(login);
             
-            PrintWriter pr = new PrintWriter(s.getOutputStream());
+            User user = new User();
+            user.setUsuario(login.getUsuario());
+            
+            UserDAO userDao = new UserDAO();
+            
+            int search = userDao.search(user);
+            
+            System.out.println(search);
+            
+            /*PrintWriter pr = new PrintWriter(s.getOutputStream());
             pr.println(string);
-            pr.flush();
+            pr.flush();*/
         }catch(Exception ex){
         }
     }

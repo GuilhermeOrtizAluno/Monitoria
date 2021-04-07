@@ -133,4 +133,27 @@ public class UserDAO {
         }
 
     }
+    
+    //search
+    public int search(User u){
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM usuario WHERE usuario = ?");
+            stmt.setString(1, u.getUsuario());
+            rs = stmt.executeQuery();
+            
+            return rs.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return -1;
+    }
 }
