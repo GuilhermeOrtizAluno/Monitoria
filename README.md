@@ -26,7 +26,7 @@ UTFPR - Projeto de Sistema Distribuído
 ------------------------------------------
 ## Instalação
  1. Clonar o repositório
- 2. Intalar Bibliotecas
+ 2. Intalar Bibliotecas(Gson, JBDC, Json simple, json ogr, jafafx)
  3. Compilar e Executar Servidor e o Projeto
  
 ------------------------------------------

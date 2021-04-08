@@ -1,4 +1,4 @@
-package clientServe;
+package server;
 
 import com.google.gson.Gson;
 import crud.UserDAO;
