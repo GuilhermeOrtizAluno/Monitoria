@@ -6,6 +6,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import dice.Route;
 import dice.User;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,8 +19,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
 /**
@@ -35,11 +41,15 @@ public class LoginController implements Initializable {
     @FXML
     private TextField tfPass;
     
+    @FXML
+    private Button btnLogin;
+    
     private static Socket s;
     
     
     @FXML
     private void hundleLogin(ActionEvent event) throws IOException{
+        try {
         String user = tfUser.getText();
         String pass = tfPass.getText();
         
@@ -47,7 +57,9 @@ public class LoginController implements Initializable {
         jsonObject.put("rota", "login.login");
         jsonObject.put("usuario", user);
         jsonObject.put("senha", pass);
+        
         PrintWriter pr = new PrintWriter(s.getOutputStream());  
+       
         pr.println(jsonObject);
         pr.flush();
         
@@ -55,9 +67,33 @@ public class LoginController implements Initializable {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
         Gson gson = new Gson(); 
-        User usuario = gson.fromJson(str, User.class);
+        Route rota = gson.fromJson(str, Route.class);
         
-        //s.close();
+        
+        Stage stage = (Stage) btnLogin.getScene().getWindow();
+        User usuario;
+        
+        Pane root;
+        
+        if(rota.getErro() == null){
+            root =  FXMLLoader.load(getClass().getResource("../Screens/Home.fxml"));
+            usuario = gson.fromJson(str, User.class);
+        }else{
+            root =  FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
+        }
+
+        Stage primaryStage = new Stage();
+        Scene scene = new Scene(root);
+        
+        stage.close();
+        primaryStage.setScene(scene);
+        
+        s.close();
+        
+        primaryStage.show(); 
+        }catch(Error e){
+            
+        }
     }
     
     public static void Client(){

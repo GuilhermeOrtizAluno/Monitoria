@@ -11,6 +11,7 @@ package dice;
  */
 public class Route {
     String rota;
+    String erro;
 
     public String getRota() {
         return rota;
@@ -19,10 +20,19 @@ public class Route {
     public void setRota(String rota) {
         this.rota = rota;
     }
+    
+    public String getErro() {
+        return erro;
+    }
+
+    public void setErro(String rota) {
+        this.erro = rota;
+    }
+    
 
     @Override
     public String toString() {
-        return "Login{" + "rota=" + rota + '}';
+        return "Login{" + "rota=" + rota + ", erro=" + erro + "}";
     }
     
 }

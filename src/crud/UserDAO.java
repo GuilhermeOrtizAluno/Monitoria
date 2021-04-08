@@ -155,12 +155,11 @@ public class UserDAO {
                 user.setIs_admin(rs.getBoolean("is_admin"));
                 user.setIs_monitor(rs.getBoolean("is_monitor"));
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } 
-        
+        }finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
         return user;
     }
 }
