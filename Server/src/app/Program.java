@@ -25,17 +25,18 @@ public class Program {
     public static void main(String[] args) throws IOException {
 
         try (ServerSocket ss = new ServerSocket(PORT)) {
-            while (true) {
-                File fLog = new File("log.txt"); 
-                fLog.createNewFile();
-                FileWriter fwLog = new FileWriter(fLog, true); 
-                fwLog.write("conectado\n");
-                fwLog.flush();
-                fwLog.close();
-                
-                // Accept connection
-                s = ss.accept();
+           
+            File fLog = new File("log.txt"); 
+            fLog.createNewFile();
+            FileWriter fwLog = new FileWriter(fLog, true); 
+            fwLog.write("conectado\n");
+            fwLog.flush();
+            fwLog.close();
 
+            // Accept connection
+            s = ss.accept();
+            
+            while (true) {
                 // Receive string
                 InputStreamReader in = new InputStreamReader(s.getInputStream());
                 BufferedReader bf = new BufferedReader(in);
