@@ -10,7 +10,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.io.Writer;
 import java.net.ServerSocket;
 import java.net.Socket;
 import org.json.JSONException;
@@ -20,7 +19,7 @@ public class Program {
 
     public static final int PORT = 4999;
 
-    private static Socket s; 
+    private static Socket s;
 
     public static void main(String[] args) throws IOException {
 
@@ -28,7 +27,7 @@ public class Program {
            
             File fLog = new File("log.txt"); 
             fLog.createNewFile();
-            FileWriter fwLog = new FileWriter(fLog, true); 
+            FileWriter fwLog = new FileWriter(fLog); 
             fwLog.write("conectado\n");
             fwLog.flush();
             fwLog.close();
@@ -53,10 +52,10 @@ public class Program {
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
 
-                System.out.println(rRoute);
                 switch (rRoute.getRota()) {
                     case "login.login"  -> login(sRoute);
-                    case "login.logout" -> logout();                 }
+                    case "login.logout" -> logout();                 
+                }
             }
 
         } catch (Exception ex) {
@@ -95,6 +94,7 @@ public class Program {
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(route);
         pr.flush();
+        pr.close();
     }
     
     private static void logout() throws IOException, JSONException{
@@ -114,6 +114,7 @@ public class Program {
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(route);
         pr.flush();
+        pr.close();
     }
 
 }
