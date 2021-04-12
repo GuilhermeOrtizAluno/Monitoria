@@ -1,1 +1,3 @@
 conectado
+{"senha":"123","usuario":"admin","rota":"login.login"}
+{"erro":"false","rota":"login.login"}

@@ -94,7 +94,7 @@ public class Program {
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(route);
         pr.flush();
-        pr.close();
+        //pr.close();
     }
     
     private static void logout() throws IOException, JSONException{
@@ -114,7 +114,7 @@ public class Program {
         PrintWriter pr = new PrintWriter(s.getOutputStream());
         pr.println(route);
         pr.flush();
-        pr.close();
+        //pr.close();
     }
 
 }
