@@ -6,7 +6,6 @@
 package controllers;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -22,8 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static app.Program.socket;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -52,10 +49,10 @@ public class LogController implements Initializable {
             socket = new Socket(ip, Integer.valueOf(port));
             File fLog = new File("log.txt"); 
             fLog.createNewFile();
-            FileWriter fwLog = new FileWriter(fLog); 
+            /*FileWriter fwLog = new FileWriter(fLog); 
             fwLog.write("conectado\n");
             fwLog.flush();
-            fwLog.close();
+            fwLog.close();*/
         } catch (IOException ex) {
             int answerDialog = JOptionPane.showConfirmDialog(null, "Try to connect again", "Error Server", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
             //if(answerDialog == JOptionPane.YES_OPTION)

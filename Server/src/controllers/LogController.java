@@ -25,9 +25,9 @@ import crud.UserDAO;
 import dice.User;
 import java.io.PrintWriter;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,18 +65,20 @@ public class LogController implements Initializable {
            
             File fLog = new File("log.txt"); 
             fLog.createNewFile();
-            FileWriter fwLog = new FileWriter(fLog); 
+            /*FileWriter fwLog = new FileWriter(fLog); 
             fwLog.write("conectado\n");
             fwLog.flush();
-            fwLog.close();
+            fwLog.close();*/
 
             // Accept connection
             socket = ss.accept();
             
+            // Receive string
+            InputStreamReader in = new InputStreamReader(socket.getInputStream());
+            BufferedReader bf = new BufferedReader(in);
+            
             while (true) {
-                // Receive string
-                InputStreamReader in = new InputStreamReader(socket.getInputStream());
-                BufferedReader bf = new BufferedReader(in);
+                
                 //Read String
                 String sRoute = bf.readLine();
                 
@@ -87,12 +89,14 @@ public class LogController implements Initializable {
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
                 switch (rRoute.getRota()) {
-                    case "login.login"  -> login(sRoute);
-                    case "login.logout" -> logout();                 
+                    case "login.login"  : login(sRoute); break;
+                    case "login.logout" : logout(); break;                 
                 }
             }
 
         } catch (Exception ex) {
+            //JOptionPane.showConfirmDialog(null, "Error Conection", "Conection", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE);
+            //System.exit(0);
         }
     }
     
@@ -144,14 +148,14 @@ public class LogController implements Initializable {
     private void showSend(String route) throws IOException{
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println(route);
+        System.out.println("Send"+route);
         StackPane pLog = new StackPane();
         Label lLog = new Label();
         lLog.setText("Send"+route);
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         logs.getChildren().add(pLog);
-        fwLog.write(route.toString()+"\n");
+        fwLog.write("Send"+route.toString()+"\n");
         fwLog.flush();
         fwLog.close();
     }
@@ -160,7 +164,7 @@ public class LogController implements Initializable {
     private void showRecive(String recive) throws IOException{
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println(recive);
+        System.out.println("Receive"+recive);
         StackPane pLog = new StackPane();
         Label lLog = new Label();
         lLog.setText("Receive"+recive);
@@ -168,7 +172,7 @@ public class LogController implements Initializable {
         pLog.getStyleClass().add("box-log");
         logs.getChildren().add(pLog);
         fwLog = new FileWriter(fLog, true); 
-        fwLog.write(recive+"\n");
+        fwLog.write("Receive"+recive+"\n");
         fwLog.flush();
         fwLog.close();
     }

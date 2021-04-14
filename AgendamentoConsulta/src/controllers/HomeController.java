@@ -7,6 +7,8 @@ package controllers;
 
 import static app.Program.socket;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import javafx.scene.control.Label;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
@@ -41,7 +44,7 @@ public class HomeController implements Initializable {
         route.put("rota", "login.logout");
         
         // Shows what will be sent
-        System.out.println(route);
+        showSend(route.toString());
         //Send
         PrintWriter pr = new PrintWriter(socket.getOutputStream());  
         pr.println(route);
@@ -53,8 +56,7 @@ public class HomeController implements Initializable {
         //Read String
         String sRoute = bf.readLine();
         //Shows what came
-        System.out.println(sRoute);
-
+        showRecive(sRoute);
 
         Pane root = FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
         
@@ -71,6 +73,39 @@ public class HomeController implements Initializable {
         // Close Connection Serve
         //s.close();
 
+    }
+    
+    // Shows what will be sent
+    private void showSend(String route) throws IOException{
+        File fLog = new File("log.txt");
+        FileWriter fwLog = new FileWriter(fLog, true); 
+        System.out.println("Send"+route);
+        StackPane pLog = new StackPane();
+        Label lLog = new Label();
+        lLog.setText("Send"+route);
+        pLog.getChildren().add(lLog);
+        pLog.getStyleClass().add("box-log");
+        //logs.getChildren().add(pLog);
+        fwLog.write("Send"+route.toString()+"\n");
+        fwLog.flush();
+        fwLog.close();
+    }
+    
+    //Shows what came
+    private void showRecive(String recive) throws IOException{
+        File fLog = new File("log.txt");
+        FileWriter fwLog = new FileWriter(fLog, true); 
+        System.out.println("Receive"+recive);
+        StackPane pLog = new StackPane();
+        Label lLog = new Label();
+        lLog.setText("Receive"+recive);
+        pLog.getChildren().add(lLog);
+        pLog.getStyleClass().add("box-log");
+        //logs.getChildren().add(pLog);
+        fwLog = new FileWriter(fLog, true); 
+        fwLog.write("Receive"+recive+"\n");
+        fwLog.flush();
+        fwLog.close();
     }
 
     /**
