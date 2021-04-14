@@ -1,5 +1,9 @@
 conectado
-{"senha":"123","usuario":"admin","rota":"login.login"}
+{"is_admin":false,"senha":"123","is_monitor":false,"nome":"Maycon","usuario":"mdliborio","rota":"login.registro"}
+{"erro":"false","rota":"login.registro"}
+{"senha":"123","usuario":"mdliborio","rota":"login.login"}
 {"erro":"false","rota":"login.login"}
-{"rota":"login.logout"}
-{"erro":"false","rota":"login.login"}
+{"senha":"321","usuario":"mdliborio","rota":"login.update"}
+{"erro":"false","rota":"login.update"}
+{"senha":"321","usuario":"mdliborio","rota":"usuario.delete"}
+{"erro":"false","rota":"usario.delete"}s

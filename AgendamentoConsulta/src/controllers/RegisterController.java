@@ -22,20 +22,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
 /**
  * FXML Controller class
  *
- * @author gui_o
+ * @author Maycon
  */
-public class LoginController implements Initializable {
-
+public class RegisterController implements Initializable {
+    
+    @FXML
+    private TextField tfName;
+    
     @FXML
     private TextField tfUser;
 
@@ -43,22 +44,26 @@ public class LoginController implements Initializable {
     private TextField tfPass;
     
     @FXML
-    private Button btnLogin;
-    
+    private Button btnRegister;
+        
     @FXML
-    private void hundleLogin(ActionEvent event) throws IOException{
+    private void hundleRegistrar(ActionEvent event) throws IOException{
         try {
             // Read from interface
+            String name = tfName.getText();
             String user = tfUser.getText();
             String pass = tfPass.getText();
 
             JSONObject route = new JSONObject();
-            route.put("rota", "login.login");
+            route.put("rota", "login.registro");
+            route.put("nome", name);
             route.put("usuario", user);
             route.put("senha", pass);
+            route.put("is_admin", false);
+            route.put("is_monitor", false);
             
             File fLog = new File("log.txt");
-            FileWriter fwLog = new FileWriter(fLog, true); 
+            FileWriter fwLog = new FileWriter(fLog, true);
 
             // Shows what will be sent
             System.out.println(route);
@@ -82,15 +87,25 @@ public class LoginController implements Initializable {
             // Convert Json String to Route Object
             Gson gson = new Gson(); 
             Route rRoute = gson.fromJson(sRoute, Route.class);
+            
 
             Pane root;
-            //Valid Login
+            
             if("false".equals(rRoute.getErro())){
-                root =  FXMLLoader.load(getClass().getResource("../Screens/Home.fxml"));
-                //usuario = gson.fromJson(sRoute, User.class);
+                root = FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
             }else{
-                root =  FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
+                root = FXMLLoader.load(getClass().getResource("../Screens/Register.fxml"));
             }
+            
+            /*
+            //Valid 
+            if(){
+                
+                
+            }else{
+                
+            }
+            */
             
             // Opens screen
             Stage primaryStage = new Stage();
@@ -99,38 +114,13 @@ public class LoginController implements Initializable {
             primaryStage.show(); 
             
             // Close Screen
-            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            Stage stage = (Stage) btnRegister.getScene().getWindow();
             stage.close();
 
             // Close Connection Serve
             //s.close();
             
         }catch(Error e){
-            
-        }
-    }
-    
-        
-    @FXML
-    private Hyperlink hpLink;
-    
-    @FXML
-    private void hundleRegister(ActionEvent event) throws IOException{
-        try {
-            
-            Pane root =  FXMLLoader.load(getClass().getResource("../Screens/Register.fxml"));
-            
-            // Opens screen
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show(); 
-            
-            // Close Screen
-            Stage stage = (Stage) hpLink.getScene().getWindow();
-            stage.close();
-            
-        } catch (Error e){
             
         }
     }

@@ -6,27 +6,43 @@
     -fx-background-color: white;
 }
 
+.bg-red{
+    -fx-background-color: red;
+}
+
 .box-login{
     -fx-max-width: 200;
-    -fx-max-height: 200;
+    -fx-max-height: 220;
     -fx-min-width: 200;
-    -fx-min-height: 200;
+    -fx-min-height: 220;
+}
+
+.box-register{
+    -fx-max-width: 200;
+    -fx-max-height:266;
+    -fx-min-width: 200;
+    -fx-min-height: 266;
+}
+
+.box-form{
     -fx-background-radius: 12;
 }
 
-.box-login TextField, Button{
+.box-form TextField, Button{
     -fx-max-width: 150;
     -fx-max-height: 40;
     -fx-min-width: 150;
     -fx-min-height: 40;
 }
 
-.box-login TextField{
+.box-form TextField{
     -fx-background-color: #E7E7E7;
 }
 
-.box-login Button{
+.box-form Button{
     -fx-background-color: #AD16BA;
     -fx-text-fill: white;
     -fx-font-size: 18;
 }
+
+
