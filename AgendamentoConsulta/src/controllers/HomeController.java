@@ -5,19 +5,14 @@
  */
 package controllers;
 
-import static app.Program.s;
-import com.google.gson.Gson;
-import dice.User;
+import static app.Program.socket;
 import java.io.BufferedReader;
 import javafx.scene.control.Label;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,12 +43,12 @@ public class HomeController implements Initializable {
         // Shows what will be sent
         System.out.println(route);
         //Send
-        PrintWriter pr = new PrintWriter(s.getOutputStream());  
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());  
         pr.println(route);
         pr.flush();
         
         // Receive string
-        InputStreamReader in = new InputStreamReader(s.getInputStream());
+        InputStreamReader in = new InputStreamReader(socket.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         //Read String
         String sRoute = bf.readLine();
