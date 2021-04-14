@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="bg-primary" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.281" fx:controller="controllers.HomeController">
@@ -13,12 +19,95 @@
          <top>
             <Pane prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnLogout" layoutX="492.0" layoutY="14.0" minHeight="34.0" minWidth="138.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="94.0" style="-fx-min-width: 20; -fx-min-height: 20;" text="Sair" />
-                  <Label layoutX="14.0" layoutY="22.0" text="Seja bem vindo: " />
+                  <Button fx:id="btnLogout" layoutX="492.0" layoutY="14.0" minHeight="34.0" minWidth="138.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="34.0" prefWidth="94.0" style="-fx-min-width: 20; -fx-min-height: 20;" styleClass="bg-white" text="Sair">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="14.0" layoutY="18.0" text="Seja bem vindo: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                   <Label fx:id="nomeusuario" layoutX="109.0" layoutY="22.0" />
                </children>
             </Pane>
          </top>
+         <bottom>
+            <VBox alignment="CENTER" prefHeight="133.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <right>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="bg-white" />
+                  <String fx:value="box-login" />
+                  <String fx:value="box-form" />
+               </styleClass>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="box-login">
+                     <children>
+                        <TextField fx:id="tfUser" alignment="CENTER" promptText="Usuário">
+                           <VBox.margin>
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="tfPass" alignment="CENTER" promptText="Senha">
+                           <VBox.margin>
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#handleUpdate" text="Alterar">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="box-form" />
+                              <String fx:value="bg-red" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#handleDelete" style="-fx-background-color: red;" text="Apagar Conta" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="bg-red" />
+                              <String fx:value="box-form" />
+                           </styleClass>
+                           <VBox.margin>
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets right="50.0" top="20.0" />
+               </BorderPane.margin>
+            </Pane>
+         </right>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="bg-white" />
+                  <String fx:value="box-login" />
+                  <String fx:value="box-form" />
+               </styleClass>
+               <BorderPane.margin>
+                  <Insets left="50.0" top="20.0" />
+               </BorderPane.margin>
+               <children>
+                  <ListView prefHeight="200.0" prefWidth="200.0">
+                     <styleClass>
+                        <String fx:value="box-login" />
+                        <String fx:value="box-form" />
+                     </styleClass>
+                  </ListView>
+               </children>
+            </Pane>
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

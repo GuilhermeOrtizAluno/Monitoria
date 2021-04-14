@@ -27,6 +27,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
@@ -149,6 +153,29 @@ public class LoginController implements Initializable {
         fwLog.write("Receive"+recive+"\n");
         fwLog.flush();
         fwLog.close();
+        
+    @FXML
+    private Hyperlink hpLink;
+    
+    @FXML
+    private void hundleRegister(ActionEvent event) throws IOException{
+        try {
+            
+            Pane root =  FXMLLoader.load(getClass().getResource("../Screens/Register.fxml"));
+            
+            // Opens screen
+            Stage primaryStage = new Stage();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show(); 
+            
+            // Close Screen
+            Stage stage = (Stage) hpLink.getScene().getWindow();
+            stage.close();
+            
+        } catch (Error e){
+            
+        }
     }
     
     @Override
