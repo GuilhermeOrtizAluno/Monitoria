@@ -41,3 +41,11 @@ Send{"senha":"","usuario":"","rota":"login.login"}
 Receive{"erro":"false","rota":"login.login"}
 Send{"rota":"login.logout"}
 Receive{"erro":"false","rota":"login.login"}
+Send{"senha":"123","usuario":"admin","rota":"login.login"}
+Receive{"erro":"false","rota":"login.login"}
+Send{"rota":"login.logout"}
+Receive{"erro":"false","rota":"login.login"}
+Send{"is_admin":false,"senha":"teste","is_monitor":false,"nome":"teste","usuario":"teste","rota":"login.registro"}
+Send{"senha":"","usuario":"","rota":"login.login"}
+Receive{"erro":"false","rota":"login.login"}
+Send{"senha":"teste","usuario":"teste","rota":"login.update"}

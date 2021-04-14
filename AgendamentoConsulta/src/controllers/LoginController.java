@@ -23,14 +23,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
@@ -83,8 +80,6 @@ public class LoginController implements Initializable {
             String sRoute = bf.readLine();
             //Shows what came
             showRecive(sRoute);
-            
-            
             
             // Convert Json String to Route Object
             Gson gson = new Gson(); 
@@ -153,6 +148,7 @@ public class LoginController implements Initializable {
         fwLog.write("Receive"+recive+"\n");
         fwLog.flush();
         fwLog.close();
+    }
         
     @FXML
     private Hyperlink hpLink;
