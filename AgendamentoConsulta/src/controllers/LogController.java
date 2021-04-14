@@ -66,7 +66,9 @@ public class LogController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            
+            // Close Screen
+            Stage stage = (Stage) btnConection.getScene().getWindow();
+            stage.close();
         }
 
         

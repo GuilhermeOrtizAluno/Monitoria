@@ -24,10 +24,11 @@ import static app.Program.socket;
 import crud.UserDAO;
 import dice.User;
 import java.io.PrintWriter;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javax.swing.JOptionPane;
+import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +57,11 @@ public class LogController implements Initializable {
         String ip = tfIP.getText();
         String port = tfPort.getText();
         btnConection.setDisable(true);
+
+        // Close Screen
+        Stage stage = (Stage) btnConection.getScene().getWindow();
+        stage.close();
+        
         serverConection(ip, Integer.valueOf(port));
         
     }
@@ -89,8 +95,11 @@ public class LogController implements Initializable {
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
                 switch (rRoute.getRota()) {
-                    case "login.login"  : login(sRoute); break;
-                    case "login.logout" : logout(); break;                 
+                    case "login.login" :    login(sRoute);    break;
+                    case "login.logout" :   logout();         break;   
+                    case "login.registro" : register(sRoute); break;
+                    case "login.update" :   update(sRoute);   break;
+                    case "usuario.delete" : delete(sRoute);   break;
                 }
             }
 
@@ -144,6 +153,97 @@ public class LogController implements Initializable {
         //pr.close();
     }
     
+    private void register(String string) throws IOException, JSONException {
+        Gson gson = new Gson();
+        UserDAO dUser = new UserDAO();
+
+        // Convert Json String to User Object
+        User user = gson.fromJson(string, User.class);
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "login.registro"); 
+        
+        // Create User in the bank
+        
+        //boolean q = dUser.create(user);
+        
+        //if(q != true){
+          //  route.put("erro", "Cadastro não efetuado!");
+        //}else{
+            route.put("erro", "false");
+        //}
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());
+        pr.println(route);
+        pr.flush();
+        //pr.close();
+     }
+    
+    private void update(String string) throws IOException, JSONException {
+        Gson gson = new Gson();
+        UserDAO dUser = new UserDAO();
+        
+        // Convert Json String to User Object
+        User user = gson.fromJson(string, User.class);
+        
+        // Search for user in the bank
+        //boolean bool = dUser.update(user);
+        
+        JSONObject route = new JSONObject();
+        route.put("rota", "login.update"); 
+       
+        // Valid user
+        //if(!bool)
+          //  route.put("erro", "Alteração nao realizada");
+        //else 
+            route.put("erro", "false");
+        
+        /* String str = gson.toJson(user); */
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        System.out.println(route);
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());
+        pr.println(route);
+        pr.flush();
+        //pr.close();
+    }
+    
+    private void delete(String string) throws IOException, JSONException {
+        Gson gson = new Gson();
+        UserDAO dUser = new UserDAO();
+        
+        // Convert Json String to User Object
+        User user = gson.fromJson(string, User.class);
+        
+        // Search for user in the bank
+        //boolean bool = dUser.delete(user);
+        
+        JSONObject route = new JSONObject();
+        route.put("rota", "usario.delete"); 
+       
+        // Valid user
+        //if(!bool)
+          //  route.put("erro", "Usuario nao deletado");
+        //else 
+            route.put("erro", "false");
+        
+        /* String str = gson.toJson(user); */
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        System.out.println(route);
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());
+        pr.println(route);
+        pr.flush();
+        //pr.close();
+    }
+    
     // Shows what will be sent
     private void showSend(String route) throws IOException{
         File fLog = new File("log.txt");
@@ -155,7 +255,7 @@ public class LogController implements Initializable {
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         logs.getChildren().add(pLog);
-        fwLog.write("Send"+route.toString()+"\n");
+        fwLog.write("Send"+route+"\n");
         fwLog.flush();
         fwLog.close();
     }

@@ -1,16 +1,6 @@
 package app;
 
-import com.google.gson.Gson;
-import crud.StudentDAO;
-import crud.UserDAO;
-import dice.Route;
-import dice.Student;
-import dice.User;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
