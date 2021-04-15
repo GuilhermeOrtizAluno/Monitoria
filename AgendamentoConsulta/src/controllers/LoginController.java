@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import static app.Program.s;
+import static app.Program.socket;
 import com.google.gson.Gson;
 import dice.Route;
 import java.io.BufferedReader;
@@ -22,6 +22,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,6 +46,9 @@ public class LoginController implements Initializable {
     
     @FXML
     private Button btnLogin;
+    
+    @FXML
+    private VBox logs;
         
     @FXML
     private void hundleLogin(ActionEvent event) throws IOException{
@@ -59,23 +66,20 @@ public class LoginController implements Initializable {
             FileWriter fwLog = new FileWriter(fLog, true); 
 
             // Shows what will be sent
-            System.out.println(route);
-            fwLog.write(route.toString()+"\n");
-            fwLog.flush();
+            showSend(route.toString());
+            
             // Send
-            PrintWriter pr = new PrintWriter(s.getOutputStream());  
+            PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
             pr.flush();
 
             // Receive string
-            InputStreamReader in = new InputStreamReader(s.getInputStream());
+            InputStreamReader in = new InputStreamReader(socket.getInputStream());
             BufferedReader bf = new BufferedReader(in);
             //Read String
             String sRoute = bf.readLine();
             //Shows what came
-            System.out.println(sRoute);
-            fwLog.write(sRoute+"\n");
-            fwLog.flush();
+            showRecive(sRoute);
             
             // Convert Json String to Route Object
             Gson gson = new Gson(); 
@@ -104,6 +108,68 @@ public class LoginController implements Initializable {
             //s.close();
             
         }catch(Error e){
+            
+        }
+    }
+    
+    // Shows what will be sent
+    private void showSend(String route) throws IOException{
+        //Terminal
+        System.out.println("Send"+route);
+        
+        //Interface
+        StackPane pLog = new StackPane();
+        Label lLog = new Label();
+        lLog.setText("Send"+route);
+        pLog.getChildren().add(lLog);
+        pLog.getStyleClass().add("box-log");
+        //logs.getChildren().add(pLog);
+        
+        //Txt   
+        File fLog = new File("log.txt");
+        FileWriter fwLog = new FileWriter(fLog, true); 
+        fwLog.write("Send"+route.toString()+"\n");
+        fwLog.flush();
+        fwLog.close();
+    }
+    
+    //Shows what came
+    private void showRecive(String recive) throws IOException{
+        File fLog = new File("log.txt");
+        FileWriter fwLog = new FileWriter(fLog, true); 
+        System.out.println("Receive"+recive);
+        StackPane pLog = new StackPane();
+        Label lLog = new Label();
+        lLog.setText("Receive"+recive);
+        pLog.getChildren().add(lLog);
+        pLog.getStyleClass().add("box-log");
+        //logs.getChildren().add(pLog);
+        fwLog = new FileWriter(fLog, true); 
+        fwLog.write("Receive"+recive+"\n");
+        fwLog.flush();
+        fwLog.close();
+    }
+        
+    @FXML
+    private Hyperlink hpLink;
+    
+    @FXML
+    private void hundleRegister(ActionEvent event) throws IOException{
+        try {
+            
+            Pane root =  FXMLLoader.load(getClass().getResource("../Screens/Register.fxml"));
+            
+            // Opens screen
+            Stage primaryStage = new Stage();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show(); 
+            
+            // Close Screen
+            Stage stage = (Stage) hpLink.getScene().getWindow();
+            stage.close();
+            
+        } catch (Error e){
             
         }
     }

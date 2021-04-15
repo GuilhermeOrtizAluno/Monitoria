@@ -6,6 +6,7 @@
 package crud;
 
 import bd.ConnectionFactory;
+import com.google.gson.Gson;
 import dice.User;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,11 +23,12 @@ import javax.swing.JOptionPane;
  * @author Guilherme Ortiz
  */
 public class UserDAO {
+
     // Create
-    public void create(User u) {
-        
+    public boolean create(User u) {
+
         Connection con = ConnectionFactory.getConnection();
-        
+
         PreparedStatement stmt = null;
 
         try {
@@ -38,21 +40,24 @@ public class UserDAO {
             stmt.setBoolean(5, u.isIs_monitor());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+           
+            //Gson gson = new Gson();
+            //System.out.println(gson.toJson(u));
+           
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
 
+        return true;
     }
-    
+
     //Read
     public List<User> read() {
 
         Connection con = ConnectionFactory.getConnection();
-        
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -84,70 +89,71 @@ public class UserDAO {
         return users;
 
     }
-    
+
     //Update
-    public void update(User u) {
+    public boolean update(User u) {
 
         Connection con = ConnectionFactory.getConnection();
-        
+
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET suario = ?, nome = ?, senha = ?, is_admin = ?, is_monitor = ? WHERE pk_usuario = ?");
-            stmt.setString(1, u.getUsuario());
-            stmt.setString(2, u.getNome());
-            stmt.setString(3, u.getSenha());
-            stmt.setBoolean(4, u.isIs_admin());
-            stmt.setBoolean(5, u.isIs_monitor());
-            stmt.setInt(5, u.getPk_usuario());
+            stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
+            //stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ? WHERE pk_usuario = ?");
+            //stmt.setString(1, u.getUsuario());
+            stmt.setString(1, u.getSenha());
+            //stmt.setBoolean(4, u.isIs_admin());
+            //stmt.setBoolean(5, u.isIs_monitor());
+            stmt.setString(2, u.getUsuario());
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        return true;
     }
-    
+
     //Delete
-    public void delete(User u) {
+    public boolean delete(User u) {
 
         Connection con = ConnectionFactory.getConnection();
-        
+
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM usuario WHERE pk_usuario = ?");
-            stmt.setInt(1, u.getPk_usuario());
+            stmt = con.prepareStatement("DELETE FROM usuario WHERE usuario = ?");
+            //stmt.setInt(1, u.getPk_usuario());
+            stmt.setString(1, u.getUsuario());
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        return true;
     }
-    
+
     //search
-    public User search(User u){
+    public User search(User u) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        
-        User user = new User(); 
+
+        User user = new User();
 
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario WHERE usuario = ? AND senha = ?");
             stmt.setString(1, u.getUsuario());
             stmt.setString(2, u.getSenha());
             rs = stmt.executeQuery();
-            
+
             while (rs.next()) {
                 user.setPk_usuario(rs.getInt("pk_usuario"));
                 user.setUsuario(rs.getString("usuario"));
@@ -157,7 +163,7 @@ public class UserDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
         return user;
