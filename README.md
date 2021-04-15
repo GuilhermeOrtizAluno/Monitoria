@@ -15,18 +15,32 @@ UTFPR - Projeto de Sistema Distribuído
   * Receber e Tratar Pedido de Login
   * CRUD (Monitoria, Usuario, Horario Monitoria, Aluno)
   * Banco de Dados
+<<<<<<< HEAD
   * Interface Login
+=======
+  * back/front Login
+  * back/fornt de LOG
+>>>>>>> main
 
 * Maycon Douglas
   * Enviar pedido de Logout para Servidor
   * Receber e Tratar pedido de Logout
   * Cliente Servidor TCP UDP
+<<<<<<< HEAD
   * Interface Home
+=======
+  * back/front Home
+  * back/front Register
+>>>>>>> main
   
 ------------------------------------------
 ## Instalação
  1. Clonar o repositório
+<<<<<<< HEAD
  2. Intalar Bibliotecas(Gson, JBDC, Json simple, json ogr, jafafx)
+=======
+ 2. Intalar Netbeans 8 e JDK 8 (Arquivos em pasta install)
+>>>>>>> main
  3. Compilar e Executar Servidor e o Projeto
  
 ------------------------------------------
@@ -43,8 +57,11 @@ UTFPR - Projeto de Sistema Distribuído
 
 ------------------------------------------
 ## Funcionalidades pretendidas
+<<<<<<< HEAD
 - [ ] Log
 - [ ] Cadastro Aluno
+=======
+>>>>>>> main
 - [ ] Obter usuarios conectados 
 
 ------------------------------------------

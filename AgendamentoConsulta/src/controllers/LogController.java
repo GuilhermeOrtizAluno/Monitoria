@@ -45,8 +45,13 @@ public class LogController implements Initializable {
         String ip = tfIP.getText();
         String port = tfPort.getText();
 
+        conection(ip, Integer.valueOf(port));
+        
+    }
+    
+    private void conection(String ip, int port) throws IOException{
         try {
-            socket = new Socket(ip, Integer.valueOf(port));
+            socket = new Socket(ip, port);
             File fLog = new File("log.txt"); 
             fLog.createNewFile();
             /*FileWriter fwLog = new FileWriter(fLog); 
@@ -56,8 +61,8 @@ public class LogController implements Initializable {
         } catch (IOException ex) {
             int answerDialog = JOptionPane.showConfirmDialog(null, "Try to connect again", "Error Server", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
             //if(answerDialog == JOptionPane.YES_OPTION)
-              //  Client(primaryStage);
-            //else System.exit(0);
+               //conection(ip, port);
+             System.exit(0);
         } finally{
             // Opens screen
             Pane root = FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
@@ -70,8 +75,6 @@ public class LogController implements Initializable {
             Stage stage = (Stage) btnConection.getScene().getWindow();
             stage.close();
         }
-
-        
     }
     
     @Override
