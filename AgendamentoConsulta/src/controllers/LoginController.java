@@ -51,6 +51,7 @@ public class LoginController implements Initializable {
     private VBox logs;
         
     @FXML
+    @SuppressWarnings("unchecked")
     private void hundleLogin(ActionEvent event) throws IOException{
         try {
             // Read from interface
@@ -73,7 +74,7 @@ public class LoginController implements Initializable {
             pr.println(route);
             pr.flush();
 
-            // Receive string
+            // received string
             InputStreamReader in = new InputStreamReader(socket.getInputStream());
             BufferedReader bf = new BufferedReader(in);
             //Read String
@@ -115,12 +116,12 @@ public class LoginController implements Initializable {
     // Shows what will be sent
     private void showSend(String route) throws IOException{
         //Terminal
-        System.out.println("Send"+route);
+        System.out.println("Send -> "+route);
         
         //Interface
         StackPane pLog = new StackPane();
         Label lLog = new Label();
-        lLog.setText("Send"+route);
+        lLog.setText("Send -> "+route);
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         //logs.getChildren().add(pLog);
@@ -128,24 +129,24 @@ public class LoginController implements Initializable {
         //Txt   
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Send"+route.toString()+"\n");
+        fwLog.write("Send -> "+route+"\n");
         fwLog.flush();
         fwLog.close();
     }
     
     //Shows what came
-    private void showRecive(String recive) throws IOException{
+    private void showRecive(String received) throws IOException{
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Receive"+recive);
+        System.out.println("Received <- "+received);
         StackPane pLog = new StackPane();
         Label lLog = new Label();
-        lLog.setText("Receive"+recive);
+        lLog.setText("Received <- "+received);
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         //logs.getChildren().add(pLog);
         fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Receive"+recive+"\n");
+        fwLog.write("Received <- "+received+"\n");
         fwLog.flush();
         fwLog.close();
     }

@@ -56,6 +56,7 @@ public class HomeController implements Initializable {
     private Button btnUpdate;
     
     @FXML
+    @SuppressWarnings({"unchecked"})
     private void handleLogout(ActionEvent event) throws IOException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
@@ -67,13 +68,13 @@ public class HomeController implements Initializable {
         pr.println(route);
         pr.flush();
         
-        // Receive string
+        // received string
         InputStreamReader in = new InputStreamReader(socket.getInputStream());
         BufferedReader bf = new BufferedReader(in);
         //Read String
         String sRoute = bf.readLine();
         //Shows what came
-        showRecive(sRoute);
+        showReceived(sRoute);
 
         Pane root = FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
         
@@ -93,6 +94,7 @@ public class HomeController implements Initializable {
     }
     
     @FXML
+    @SuppressWarnings("unchecked")
     private void handleDelete(ActionEvent event) throws IOException {
         // Read from interface
             String user = tfUser.getText();
@@ -113,13 +115,13 @@ public class HomeController implements Initializable {
             pr.println(route);
             pr.flush();
 
-            // Receive string
+            // received string
             InputStreamReader in = new InputStreamReader(socket.getInputStream());
             BufferedReader bf = new BufferedReader(in);
             //Read String
             String sRoute = bf.readLine();
             //Shows what came
-            showRecive(sRoute);
+            showReceived(sRoute);
             
             // Convert Json String to Route Object
             Gson gson = new Gson(); 
@@ -147,6 +149,7 @@ public class HomeController implements Initializable {
     }
    
     @FXML
+    @SuppressWarnings({"unchecked", "unchecked"})
     private void handleUpdate(ActionEvent event) throws IOException {
         // Read from interface
             String user = tfUser.getText();
@@ -167,44 +170,44 @@ public class HomeController implements Initializable {
             pr.println(route);
             pr.flush();
 
-            // Receive string
+            // received string
             InputStreamReader in = new InputStreamReader(socket.getInputStream());
             BufferedReader bf = new BufferedReader(in);
             //Read String
             String sRoute = bf.readLine();
             //Shows what came
-            showRecive(sRoute);
+            showReceived(sRoute);
     }
     
      // Shows what will be sent
     private void showSend(String route) throws IOException{
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Send"+route);
+        System.out.println("Send -> "+route);
         StackPane pLog = new StackPane();
         Label lLog = new Label();
-        lLog.setText("Send"+route);
+        lLog.setText("Send -> "+route);
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         //logs.getChildren().add(pLog);
-        fwLog.write("Send"+route.toString()+"\n");
+        fwLog.write("Send -> "+route+"\n");
         fwLog.flush();
         fwLog.close();
     }
     
     //Shows what came
-    private void showRecive(String recive) throws IOException{
+    private void showReceived(String received) throws IOException{
         File fLog = new File("log.txt");
         FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Receive"+recive);
+        System.out.println("Received <- "+received);
         StackPane pLog = new StackPane();
         Label lLog = new Label();
-        lLog.setText("Receive"+recive);
+        lLog.setText("Received <- "+received);
         pLog.getChildren().add(lLog);
         pLog.getStyleClass().add("box-log");
         //logs.getChildren().add(pLog);
         fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Receive"+recive+"\n");
+        fwLog.write("Received <- "+received+"\n");
         fwLog.flush();
         fwLog.close();
     }

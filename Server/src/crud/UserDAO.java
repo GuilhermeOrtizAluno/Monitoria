@@ -134,6 +134,7 @@ public class UserDAO {
             //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
+            return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

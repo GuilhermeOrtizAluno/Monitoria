@@ -52,6 +52,9 @@ public class LogController implements Initializable {
     private void conection(String ip, int port) throws IOException{
         try {
             socket = new Socket(ip, port);
+            if(socket!=null){
+                System.out.println("Cliente conectado em: "+ ip + " porta: " + port);
+            }
             File fLog = new File("log.txt"); 
             fLog.createNewFile();
             /*FileWriter fwLog = new FileWriter(fLog); 

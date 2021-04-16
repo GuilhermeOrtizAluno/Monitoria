@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class Program extends Application {
     
     
-    public static Socket socket;
+    public static Socket socket = null;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
