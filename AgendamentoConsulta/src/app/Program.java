@@ -20,7 +20,7 @@ public class Program extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Pane root = FXMLLoader.load(getClass().getResource("../Screens/Log.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("../Screens/ClientConection.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

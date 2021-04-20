@@ -27,7 +27,7 @@ import static app.Program.socket;
  *
  * @author gui_o
  */
-public class LogController implements Initializable {
+public class ClientConectionController implements Initializable {
 
     @FXML
     private TextField tfIP;
