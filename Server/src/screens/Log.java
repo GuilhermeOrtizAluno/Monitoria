@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.IOException;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,36 +26,30 @@ public class Log {
     private JFrame jfLog;
     private JScrollPane spLog;
     private JPanel pLog;
-    private GridLayout glLog;
     private JPanel log;
     private JLabel lLog;
    
     public void startLog(){
-        glLog = new GridLayout(0,2);
-        glLog.setHgap(10);
-        glLog.setVgap(10);
         
         pLog  = new JPanel();
-        pLog.setSize(400, 35);
+        //pLog.setSize(400, 35);
         pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
-        pLog.setLayout(glLog);
+        pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
         pLog.setBackground(Color.decode("#c91dd8"));
-        
-        ReceivedSend("Received");
-        ReceivedSend("Send");
         
         spLog = new JScrollPane(pLog);
         spLog.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         spLog.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         
-        jfLog = new JFrame("Log Server");
+        jfLog = new JFrame("Log Client");
+        jfLog.setLayout(null);
         jfLog.setSize(900, 400);
         jfLog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jfLog.setContentPane(spLog);
         jfLog.setVisible(true); 
     }
     
-    public void ReceivedSend(String type){
+    private void ReceivedSend(String type){
         lLog = new JLabel();
         lLog.setText(type);
         lLog.setForeground(Color.white);
@@ -66,14 +62,15 @@ public class Log {
         pLog.add(log);
     }
     
-    public void includeLog(String sLog){
+    public void includeLog(String sLog, Color cLog){
         lLog = new JLabel();
         lLog.setText(sLog);
                 
         log = new JPanel();
-        log.setBorder(new LineBorder(Color.white, 5, true));
-        //log.setSize(400,35);
-        log.setBackground(Color.WHITE);
+        log.setBorder(new LineBorder(cLog, 5, true));
+        log.setSize(400,35);
+        log.setBorder(new EmptyBorder(10, 10, 10, 10));
+        log.setBackground(cLog);
         log.add(lLog);
         
         pLog.add(log);
@@ -82,4 +79,5 @@ public class Log {
         
         spLog.revalidate();
     }
+    
 }

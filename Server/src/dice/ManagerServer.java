@@ -7,6 +7,7 @@ package dice;
 
 import com.google.gson.Gson;
 import crud.UserDAO;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
@@ -216,7 +217,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> "+send);
         
         //Iterface Log
-        log.includeLog(send);
+        log.includeLog("Send -> "+send, Color.ORANGE);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -232,7 +233,7 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- "+received);
         
         //Iterface Log
-        log.includeLog(received);
+        log.includeLog("Received <- "+received, Color.cyan);
         
         //Log txt
         File fLog = new File("log.txt");

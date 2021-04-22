@@ -7,6 +7,7 @@ package controllers;
 
 import static app.Program.log;
 import static app.Program.socket;
+import java.awt.Color;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -60,6 +61,7 @@ public class ClientConectionController implements Initializable {
             
             log = new Log();
             log.startLog();
+            log.includeLog("Conectado com Servidor pelo ip "+ip+" e pela porta "+port, Color.green);
             
             // Close Screen Conection
             Stage stage = (Stage) btnConection.getScene().getWindow();
