@@ -5,22 +5,19 @@
  */
 package controllers;
 
+import static app.Program.log;
+import static app.Program.socket;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import static app.Program.socket;
-import static app.Program.log;
 import screens.Log;
 
 /**
@@ -38,8 +35,7 @@ public class ClientConectionController implements Initializable {
     
     @FXML
     private Button btnConection;
-    
-    
+     
     @FXML
     private void hundleConection(ActionEvent event) throws IOException{
         
@@ -54,31 +50,21 @@ public class ClientConectionController implements Initializable {
                 "Invalid field", 
                 JOptionPane.WARNING_MESSAGE
             );
-        else conection(ip, Integer.valueOf(port));
-        
+        else Connection(ip, Integer.valueOf(port));
+            
     }
     
-    private boolean isInteger(String str) {
-        return str != null && str.matches("[0-9]*");
-    }
-    
-    private void conection(String ip, int port) throws IOException{
+    private void Connection(String ip, int port) throws IOException{
         try {
             socket = new Socket(ip, port);
-            // Opens screen Login
-            Pane root = FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
             
-            // Opens screen Log
             log = new Log();
             log.startLog();
             
             // Close Screen Conection
             Stage stage = (Stage) btnConection.getScene().getWindow();
             stage.close();
+            
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(
                 null, 
@@ -88,6 +74,11 @@ public class ClientConectionController implements Initializable {
             );
         } 
     }
+    
+    private boolean isInteger(String str) {
+        return str != null && str.matches("[0-9]*");
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

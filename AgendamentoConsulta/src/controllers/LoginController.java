@@ -6,11 +6,7 @@
 package controllers;
 
 import static app.Program.socket;
-import com.google.gson.Gson;
-import dice.Route;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -63,40 +59,10 @@ public class LoginController implements Initializable {
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
             pr.flush();
-
-            // received string
-            InputStreamReader in = new InputStreamReader(socket.getInputStream());
-            BufferedReader bf = new BufferedReader(in);
-            //Read String
-            String sRoute = bf.readLine();
-            //Shows what came
-            log.showReceived(sRoute);
-            
-            // Convert Json String to Route Object
-            Gson gson = new Gson(); 
-            Route rRoute = gson.fromJson(sRoute, Route.class);
-
-            Pane root;
-            //Valid Login
-            if("false".equals(rRoute.getErro())){
-                root =  FXMLLoader.load(getClass().getResource("../screens/Home.fxml"));
-                //usuario = gson.fromJson(sRoute, User.class);
-            }else{
-                root =  FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
-            }
-            
-            // Opens screen
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show(); 
             
             // Close Screen
-            Stage stage = (Stage) btnLogin.getScene().getWindow();
-            stage.close();
-
-            // Close Connection Serve
-            //s.close();
+            //Stage stage = (Stage) btnLogin.getScene().getWindow();
+            //stage.close();
             
         }catch(Error e){
             

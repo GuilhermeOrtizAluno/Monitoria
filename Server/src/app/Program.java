@@ -15,6 +15,9 @@ public class Program extends Application {
         Pane root = FXMLLoader.load(getClass().getResource("../Screens/ServerConection.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
+        primaryStage.setOnCloseRequest(eh->{
+            System.exit(0);
+        });
         primaryStage.show();
     }
 

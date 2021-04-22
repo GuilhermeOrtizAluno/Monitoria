@@ -1,5 +1,6 @@
 package app;
 
+import dice.ManagerClient;
 import java.io.IOException;
 import java.net.Socket;
 import javafx.application.Application;
@@ -16,16 +17,27 @@ import screens.Log;
  */
 public class Program extends Application {
     
-    
     public static Socket socket = null;
     public static Log log;
+    private ManagerClient managerClient;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Pane root = FXMLLoader.load(getClass().getResource("../screens/ClientConection.fxml"));
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try{
+            Stage stage = new Stage();
+            Pane root = FXMLLoader.load(getClass().getResource("../screens/ClientConection.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            primaryStage.setOnCloseRequest(eh->{
+                System.exit(0);
+            });
+            stage.showAndWait();
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            managerClient = new ManagerClient();
+            managerClient.startReceived();
+        }
     }
 
     /**

@@ -5,22 +5,15 @@
  */
 package controllers;
 
-import com.google.gson.Gson;
-import dice.Route;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import static app.Program.socket;
@@ -70,50 +63,10 @@ public class RegisterController implements Initializable {
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
             pr.flush();
-
-            // received string
-            InputStreamReader in = new InputStreamReader(socket.getInputStream());
-            BufferedReader bf = new BufferedReader(in);
-            //Read String
-            String sRoute = bf.readLine();
-            //Shows what came
-            log.showReceived(sRoute);
-            
-            // Convert Json String to Route Object
-            Gson gson = new Gson(); 
-            Route rRoute = gson.fromJson(sRoute, Route.class);
-            
-
-            Pane root;
-            
-            if("false".equals(rRoute.getErro())){
-                root = FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
-            }else{
-                root = FXMLLoader.load(getClass().getResource("../screens/Register.fxml"));
-            }
-            
-            /*
-            //Valid 
-            if(){
-                
-                
-            }else{
-                
-            }
-            */
-            
-            // Opens screen
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show(); 
             
             // Close Screen
-            Stage stage = (Stage) btnRegister.getScene().getWindow();
-            stage.close();
-
-            // Close Connection Serve
-            //s.close();
+            //Stage stage = (Stage) btnRegister.getScene().getWindow();
+            //stage.close();
             
         }catch(Error e){
             

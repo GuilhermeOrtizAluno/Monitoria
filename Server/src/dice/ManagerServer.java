@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 import screens.Log;
@@ -68,7 +69,9 @@ public class ManagerServer extends Thread {
                     case "login.logout" -> logout();
                     case "login.registro" -> register(sRoute);
                     case "login.update" -> update();
-                    case "usuario.delete" -> delete();                  
+                    case "usuario.delete" -> delete(); 
+                    case "mensagem.mesagem" -> mensagem();
+                    default -> errorRoute();
                 }
             }
          } catch(EOFException e) {
@@ -191,7 +194,7 @@ public class ManagerServer extends Thread {
         boolean bool = dUser.delete(user);
         
         JSONObject route = new JSONObject();
-        route.put("rota", "usario.delete"); 
+        route.put("rota", "usuario.delete"); 
        
         // Valid user
         if(!bool)
@@ -239,4 +242,16 @@ public class ManagerServer extends Thread {
         }
     }
     
+    private void mensagem() {
+
+    }
+
+    private void errorRoute() {
+        JOptionPane.showMessageDialog(
+            null, 
+            "No route found", 
+            "Route error", 
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
 }
