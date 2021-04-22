@@ -111,6 +111,8 @@ public class UserDAO {
             //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+            ConnectionFactory.closeConnection(con, stmt);
+            return false;
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }

@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import static app.Program.log;
 
@@ -92,12 +91,12 @@ public class HomeController implements Initializable {
     private void handleUpdate(ActionEvent event) throws IOException {
         // Read from interface
         String user = tfUser.getText();
-        //String pass = tfPass.getText();
+        String pass = tfPass.getText();
 
         JSONObject route = new JSONObject();
         route.put("rota", "login.update");
         route.put("usuario", user);
-        //route.put("senha", pass);
+        route.put("senha", pass);
 
         // Shows what will be sent
         log.showSend(route.toString());

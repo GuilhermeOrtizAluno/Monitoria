@@ -68,7 +68,7 @@ Receive{"erro":"false","rota":"login.login"}
 Send{"senha":"teste","usuario":"teste","rota":"login.update"}
 Receive{"erro":"false","rota":"login.update"}
 Send{"senha":"teste","usuario":"teste","rota":"usuario.delete"}
-Receive{"erro":"false","rota":"usario.delete"}
+Receive{"erro":"false","rota":"usuario.delete"}
 Send{"is_admin":false,"senha":"tese","is_monitor":false,"nome":"teset","usuario":"teste","rota":"login.registro"}
 Receive{"erro":"false","rota":"login.registro"}
 Send{"senha":"teste","usuario":"tesdte","rota":"login.login"}
@@ -76,7 +76,7 @@ Receive{"erro":"false","rota":"login.login"}
 Send{"senha":"teste","usuario":"teste","rota":"login.update"}
 Receive{"erro":"false","rota":"login.update"}
 Send{"senha":"teste","usuario":"teste","rota":"usuario.delete"}
-Receive{"erro":"false","rota":"usario.delete"}
+Receive{"erro":"false","rota":"usuario.delete"}
 Send{"is_admin":false,"senha":"teste","is_monitor":false,"nome":"teste","usuario":"teste","rota":"login.registro"}
 Receive{"erro":"false","rota":"login.registro"}
 Send{"senha":"teste","usuario":"teste","rota":"login.login"}
@@ -84,7 +84,7 @@ Receive{"erro":"false","rota":"login.login"}
 Send{"senha":"teste","usuario":"teste","rota":"login.update"}
 Receive{"erro":"false","rota":"login.update"}
 Send{"senha":"teste","usuario":"teste","rota":"usuario.delete"}
-Receive{"erro":"false","rota":"usario.delete"}
+Receive{"erro":"false","rota":"usuario.delete"}
 Send{"senha":"teste","usuario":"teste","rota":"login.login"}
 Receive{"erro":"false","rota":"login.login"}
 Send{"rota":"login.logout"}
@@ -96,7 +96,7 @@ Receive{"erro":"false","rota":"login.login"}
 Send{"senha":"teste","usuario":"teste","rota":"login.update"}
 Receive{"erro":"false","rota":"login.update"}
 Send{"senha":"teste","usuario":"teste","rota":"usuario.delete"}
-Receive{"erro":"false","rota":"usario.delete"}
+Receive{"erro":"false","rota":"usuario.delete"}
 Send{"senha":"","usuario":"","rota":"login.login"}
 Receive{"erro":"false","rota":"login.login"}
 Send{"rota":"login.logout"}
@@ -122,7 +122,7 @@ Receive{"erro":"false","rota":"login.login"}
 Send{"senha":"","usuario":"","rota":"login.update"}
 Receive{"erro":"false","rota":"login.update"}
 Send{"senha":"","usuario":"","rota":"usuario.delete"}
-Receive{"erro":"false","rota":"usario.delete"}
+Receive{"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"123","usuario":"adm","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
@@ -148,7 +148,7 @@ Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.update"}
 Received <- {"erro":"false","rota":"login.update"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"is_admin":false,"senha":"","is_monitor":false,"nome":"","usuario":"","rota":"login.registro"}
 Received <- {"erro":"false","rota":"login.registro"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
@@ -164,7 +164,7 @@ Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"is_admin":false,"senha":"","is_monitor":false,"nome":"","usuario":"","rota":"login.registro"}
@@ -184,7 +184,7 @@ Received <- {"erro":"false","rota":"login.registro"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
@@ -210,7 +210,7 @@ Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"asasas","usuario":"","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"is_admin":false,"senha":"md","is_monitor":false,"nome":"md","usuario":"md","rota":"login.registro"}
@@ -226,11 +226,11 @@ Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"12","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"12","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"12","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"rota":"login.logout"}
@@ -240,7 +240,7 @@ Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"12","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"12","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.update"}
@@ -256,13 +256,13 @@ Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"md","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"md","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"is_admin":false,"senha":"","is_monitor":false,"nome":"","usuario":"","rota":"login.registro"}
@@ -274,15 +274,15 @@ Received <- {"erro":"false","rota":"login.registro"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"md","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"md","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"md","usuario":"md","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"is_admin":false,"senha":"","is_monitor":false,"nome":"","usuario":"","rota":"login.registro"}
@@ -300,7 +300,7 @@ Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"123","usuario":"md","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"123","usuario":"md","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"123","usuario":"md","rota":"login.login"}
 Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"md","usuario":"md","rota":"login.login"}
@@ -308,7 +308,7 @@ Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Received <- {"erro":"false","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"usuario.delete"}
-Received <- {"erro":"false","rota":"usario.delete"}
+Received <- {"erro":"false","rota":"usuario.delete"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Send -> {"senha":"","usuario":"","rota":"login.login"}
 Send -> {"senha":"teste","usuario":"teste","rota":"login.login"}

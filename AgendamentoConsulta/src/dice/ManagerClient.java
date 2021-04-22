@@ -89,7 +89,7 @@ public class ManagerClient extends Thread{
         }
     } 
     
-    private void openStage(Pane root){
+    public void openStage(Pane root){
         // Opens screen
         new Thread(() -> {
             Platform.runLater(() ->{
@@ -138,16 +138,6 @@ public class ManagerClient extends Thread{
         }else{
             root = FXMLLoader.load(getClass().getResource("../screens/Register.fxml"));
         }
-
-        /*
-        //Valid 
-        if(){
-
-
-        }else{
-
-        }
-        */
 
         openStage(root);
     }

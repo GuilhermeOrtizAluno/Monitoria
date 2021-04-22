@@ -19,12 +19,13 @@ public class Program extends Application {
     
     public static Socket socket = null;
     public static Log log;
-    private ManagerClient managerClient;
+    public static ManagerClient managerClient;
+    public Stage stage;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
         try{
-            Stage stage = new Stage();
+            stage = new Stage();
             Pane root = FXMLLoader.load(getClass().getResource("../screens/ClientConection.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
