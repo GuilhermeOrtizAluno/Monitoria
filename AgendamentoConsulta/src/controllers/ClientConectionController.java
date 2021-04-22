@@ -5,7 +5,6 @@
  */
 package controllers;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -21,6 +20,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static app.Program.socket;
+import static app.Program.log;
+import screens.Log;
 
 /**
  * FXML Controller class
@@ -38,6 +39,7 @@ public class ClientConectionController implements Initializable {
     @FXML
     private Button btnConection;
     
+    
     @FXML
     private void hundleConection(ActionEvent event) throws IOException{
         
@@ -45,39 +47,46 @@ public class ClientConectionController implements Initializable {
         String ip = tfIP.getText();
         String port = tfPort.getText();
 
-        conection(ip, Integer.valueOf(port));
+        if("".equals(ip) || "".equals(port) || !isInteger(port))
+            JOptionPane.showMessageDialog(
+                null, 
+                "Invalid fields, please try again", 
+                "Invalid field", 
+                JOptionPane.WARNING_MESSAGE
+            );
+        else conection(ip, Integer.valueOf(port));
         
+    }
+    
+    private boolean isInteger(String str) {
+        return str != null && str.matches("[0-9]*");
     }
     
     private void conection(String ip, int port) throws IOException{
         try {
             socket = new Socket(ip, port);
-            if(socket!=null){
-                System.out.println("Cliente conectado em: "+ ip + " porta: " + port);
-            }
-            File fLog = new File("log.txt"); 
-            fLog.createNewFile();
-            /*FileWriter fwLog = new FileWriter(fLog); 
-            fwLog.write("conectado\n");
-            fwLog.flush();
-            fwLog.close();*/
-        } catch (IOException ex) {
-            int answerDialog = JOptionPane.showConfirmDialog(null, "Try to connect again", "Error Server", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
-            //if(answerDialog == JOptionPane.YES_OPTION)
-               //conection(ip, port);
-             System.exit(0);
-        } finally{
-            // Opens screen
-            Pane root = FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
+            // Opens screen Login
+            Pane root = FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
             Stage primaryStage = new Stage();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
             
-            // Close Screen
+            // Opens screen Log
+            log = new Log();
+            log.startLog();
+            
+            // Close Screen Conection
             Stage stage = (Stage) btnConection.getScene().getWindow();
             stage.close();
-        }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Error when trying to connect, try again", 
+                "Connection error ", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        } 
     }
     
     @Override

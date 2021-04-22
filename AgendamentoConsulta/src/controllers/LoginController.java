@@ -9,8 +9,6 @@ import static app.Program.socket;
 import com.google.gson.Gson;
 import dice.Route;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -22,14 +20,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
+import static app.Program.log;
 
 /**
  * FXML Controller class
@@ -46,9 +42,6 @@ public class LoginController implements Initializable {
     
     @FXML
     private Button btnLogin;
-    
-    @FXML
-    private VBox logs;
         
     @FXML
     @SuppressWarnings("unchecked")
@@ -62,12 +55,9 @@ public class LoginController implements Initializable {
             route.put("rota", "login.login");
             route.put("usuario", user);
             route.put("senha", pass);
-            
-            File fLog = new File("log.txt");
-            FileWriter fwLog = new FileWriter(fLog, true); 
 
             // Shows what will be sent
-            showSend(route.toString());
+            log.showSend(route.toString());
             
             // Send
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
@@ -80,7 +70,7 @@ public class LoginController implements Initializable {
             //Read String
             String sRoute = bf.readLine();
             //Shows what came
-            showRecive(sRoute);
+            log.showReceived(sRoute);
             
             // Convert Json String to Route Object
             Gson gson = new Gson(); 
@@ -89,10 +79,10 @@ public class LoginController implements Initializable {
             Pane root;
             //Valid Login
             if("false".equals(rRoute.getErro())){
-                root =  FXMLLoader.load(getClass().getResource("../Screens/Home.fxml"));
+                root =  FXMLLoader.load(getClass().getResource("../screens/Home.fxml"));
                 //usuario = gson.fromJson(sRoute, User.class);
             }else{
-                root =  FXMLLoader.load(getClass().getResource("../Screens/Login.fxml"));
+                root =  FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
             }
             
             // Opens screen
@@ -112,44 +102,6 @@ public class LoginController implements Initializable {
             
         }
     }
-    
-    // Shows what will be sent
-    private void showSend(String route) throws IOException{
-        //Terminal
-        System.out.println("Send -> "+route);
-        
-        //Interface
-        StackPane pLog = new StackPane();
-        Label lLog = new Label();
-        lLog.setText("Send -> "+route);
-        pLog.getChildren().add(lLog);
-        pLog.getStyleClass().add("box-log");
-        //logs.getChildren().add(pLog);
-        
-        //Txt   
-        File fLog = new File("log.txt");
-        FileWriter fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Send -> "+route+"\n");
-        fwLog.flush();
-        fwLog.close();
-    }
-    
-    //Shows what came
-    private void showRecive(String received) throws IOException{
-        File fLog = new File("log.txt");
-        FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Received <- "+received);
-        StackPane pLog = new StackPane();
-        Label lLog = new Label();
-        lLog.setText("Received <- "+received);
-        pLog.getChildren().add(lLog);
-        pLog.getStyleClass().add("box-log");
-        //logs.getChildren().add(pLog);
-        fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Received <- "+received+"\n");
-        fwLog.flush();
-        fwLog.close();
-    }
         
     @FXML
     private Hyperlink hpLink;
@@ -158,7 +110,7 @@ public class LoginController implements Initializable {
     private void hundleRegister(ActionEvent event) throws IOException{
         try {
             
-            Pane root =  FXMLLoader.load(getClass().getResource("../Screens/Register.fxml"));
+            Pane root =  FXMLLoader.load(getClass().getResource("../screens/Register.fxml"));
             
             // Opens screen
             Stage primaryStage = new Stage();

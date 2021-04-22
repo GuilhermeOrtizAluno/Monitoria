@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import screens.Log;
 
 /**
  *
@@ -17,10 +18,11 @@ public class Program extends Application {
     
     
     public static Socket socket = null;
+    public static Log log;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Pane root = FXMLLoader.load(getClass().getResource("../Screens/ClientConection.fxml"));
+        Pane root = FXMLLoader.load(getClass().getResource("../screens/ClientConection.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();

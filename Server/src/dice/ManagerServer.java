@@ -6,7 +6,6 @@
 package dice;
 
 import com.google.gson.Gson;
-import controllers.LogController;
 import crud.UserDAO;
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -18,10 +17,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import org.json.JSONException;
 import org.json.JSONObject;
+import screens.Log;
 
 /**
  *
@@ -32,16 +30,19 @@ public class ManagerServer extends Thread {
     private BufferedReader bf;
     private PrintWriter pr;
     private final Socket clientSocket;
+    private final Log log;
+    private User user;
 
-    public ManagerServer(Socket clientSocket) {
+    public ManagerServer(Socket clientSocket, Log log) {
         this.clientSocket = clientSocket;
+        this.log = log;
     }
     
     public void Connection () {
         try {
-            in = new InputStreamReader(clientSocket.getInputStream());
-            bf = new BufferedReader(in);
-            pr = new PrintWriter(clientSocket.getOutputStream());
+            in   = new InputStreamReader(clientSocket.getInputStream());
+            bf   = new BufferedReader(in);
+            pr   = new PrintWriter(clientSocket.getOutputStream());
             this.start();
         }catch(IOException e) {
             System.out.println("Connection:"+e.getMessage());
@@ -66,8 +67,8 @@ public class ManagerServer extends Thread {
                     case "login.login" -> login(sRoute);
                     case "login.logout" -> logout();
                     case "login.registro" -> register(sRoute);
-                    case "login.update" -> update(sRoute);
-                    case "usuario.delete" -> delete(sRoute);                  
+                    case "login.update" -> update();
+                    case "usuario.delete" -> delete();                  
                 }
             }
          } catch(EOFException e) {
@@ -91,7 +92,7 @@ public class ManagerServer extends Thread {
         UserDAO dUser = new UserDAO();
       
         // Convert Json String to User Object
-        User user = gson.fromJson(string, User.class);
+        user = gson.fromJson(string, User.class);
         
         // Search for user in the bank
         user = dUser.search(user);
@@ -117,7 +118,7 @@ public class ManagerServer extends Thread {
     
     private void logout() throws IOException, JSONException{
         JSONObject route = new JSONObject();
-        route.put("rota", "login.login");
+        route.put("rota", "login.logout");
         route.put("erro", "false");
         
         // Shows what will be sent
@@ -134,16 +135,16 @@ public class ManagerServer extends Thread {
         UserDAO dUser = new UserDAO();
 
         // Convert Json String to User Object
-        User user = gson.fromJson(string, User.class);
+        user = gson.fromJson(string, User.class);
 
         JSONObject route = new JSONObject();
         route.put("rota", "login.registro"); 
         
         // Create User in the bank
         
-        boolean q = dUser.create(user);
+        boolean bUser = dUser.create(user);
         
-        if(q != true){
+        if(!bUser){
             route.put("erro", "Cadastro não efetuado!");
         }else{
             route.put("erro", "false");
@@ -157,21 +158,18 @@ public class ManagerServer extends Thread {
         //pr.close();
      }
     
-    private void update(String string) throws IOException, JSONException {
+    private void update() throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
         
-        // Convert Json String to User Object
-        User user = gson.fromJson(string, User.class);
-        
         // Search for user in the bank
-        boolean bool = dUser.update(user);
+        boolean bUser = dUser.update(user);
         
         JSONObject route = new JSONObject();
         route.put("rota", "login.update"); 
        
         // Valid user
-        if(!bool)
+        if(!bUser)
             route.put("erro", "Alteração nao realizada");
         else 
             route.put("erro", "false");
@@ -186,12 +184,8 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
     
-    private void delete(String string) throws IOException, JSONException {
-        Gson gson = new Gson();
+    private void delete() throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
-        
-        // Convert Json String to User Object
-        User user = gson.fromJson(string, User.class);
         
         // Search for user in the bank
         boolean bool = dUser.delete(user);
@@ -214,36 +208,35 @@ public class ManagerServer extends Thread {
     }
     
     // Shows what will be sent
-    private void showSend(String route) throws IOException{
+    private void showSend(String send) throws IOException{
+        //Terminal
+        System.out.println("Send -> "+send);
+        
+        //Iterface Log
+        log.includeLog(send);
+        
+        //Log txt
         File fLog = new File("log.txt");
-        FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Send -> "+route);
-        StackPane pLog = new StackPane();
-        Label lLog = new Label();
-        lLog.setText("Send -> "+route);
-        pLog.getChildren().add(lLog);
-        pLog.getStyleClass().add("box-log");
-        //logs.getChildren().add(pLog);
-        fwLog.write("Send -> "+route+"\n");
-        fwLog.flush();
-        fwLog.close();
+        try (FileWriter fwLog = new FileWriter(fLog, true)) {
+            fwLog.write("Send -> "+send+"\n");
+            fwLog.flush();
+        }
     }
     
     //Shows what came
     private void showReceived(String received) throws IOException{
+         //Terminal
+        System.out.println("Received <- "+received);
+        
+        //Iterface Log
+        log.includeLog(received);
+        
+        //Log txt
         File fLog = new File("log.txt");
-        FileWriter fwLog = new FileWriter(fLog, true); 
-        System.out.println("Received <- " + received);
-        StackPane pLog = new StackPane();
-        Label lLog = new Label();
-        lLog.setText("Receive <- " + received);
-        pLog.getChildren().add(lLog);
-        pLog.getStyleClass().add("box-log");
-        //logs.getChildren().add(pLog);
-        fwLog = new FileWriter(fLog, true); 
-        fwLog.write("Received <- " + received+"\n");
-        fwLog.flush();
-        fwLog.close();
+        try (FileWriter fwLog = new FileWriter(fLog, true)) {
+            fwLog.write("Received <- "+received+"\n");
+            fwLog.flush();
+        }
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import bd.ConnectionFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,10 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import dice.TCPServer;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import java.sql.Connection;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -35,8 +35,29 @@ public class ServerConectionController implements Initializable {
     @FXML
     private void hundleConection(ActionEvent event) throws IOException{
         // Read from interface
-        int port = Integer.valueOf(tfPort.getText());
+        String port = tfPort.getText();
+        
+        Connection con = ConnectionFactory.getConnection();
+        
+        if(con == null) 
+            JOptionPane.showMessageDialog(
+                null, 
+                "Error when trying to connect to the database", 
+                "Error SQL", 
+                JOptionPane.ERROR_MESSAGE
+            );
+       else if("".equals(port) || !isInteger(port))
+            JOptionPane.showMessageDialog(
+                null, 
+                "Invalid fields, please try again", 
+                "Invalid field", 
+                JOptionPane.WARNING_MESSAGE
+            );
+        else startConection(Integer.valueOf(port));
 
+    }
+    
+    private void startConection(int port){
         // Close Screen
         Stage stage = (Stage) btnConection.getScene().getWindow();
         stage.close();
@@ -45,7 +66,9 @@ public class ServerConectionController implements Initializable {
         tcpServer.StartConnection();
     }
     
-   
+   private boolean isInteger(String str) {
+        return str != null && str.matches("[0-9]*");
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
