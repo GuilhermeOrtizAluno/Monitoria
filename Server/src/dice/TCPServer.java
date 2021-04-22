@@ -6,8 +6,11 @@
 package dice;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import org.json.JSONArray;
 import screens.Log;
 
 /**
@@ -20,6 +23,9 @@ public class TCPServer {
     private ServerSocket listenSocket;
     private Socket clientSocket;
     private ManagerServer managerServer;
+    public static ArrayList<PrintWriter> listPw = new ArrayList();
+    public static JSONArray usuariosAtivos = new JSONArray();
+    
     private Log log;
     
     public void StartConnection()  {

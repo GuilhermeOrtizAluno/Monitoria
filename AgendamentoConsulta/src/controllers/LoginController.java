@@ -14,14 +14,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import static app.Program.log;
+import static app.Program.managerClient;
 
 /**
  * FXML Controller class
@@ -76,18 +74,7 @@ public class LoginController implements Initializable {
     private void hundleRegister(ActionEvent event) throws IOException{
         try {
             
-            Pane root =  FXMLLoader.load(getClass().getResource("../screens/Register.fxml"));
-            
-            // Opens screen
-            Stage primaryStage = new Stage();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show(); 
-            
-            // Close Screen
-            Stage stage = (Stage) hpLink.getScene().getWindow();
-            stage.close();
-            
+            managerClient.openStage(FXMLLoader.load(getClass().getResource("../screens/Register.fxml")));
         } catch (Error e){
             
         }

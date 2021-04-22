@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="300.0" styleClass="bg-primary" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServerConectionController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="300.0" styleClass="bg-primary" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ServerConectionController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -29,7 +29,7 @@
                               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField fx:id="tfPort" alignment="CENTER" promptText="Porta">
+                        <TextField fx:id="tfPort" alignment="CENTER" promptText="Porta" text="4999">
                            <VBox.margin>
                               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </VBox.margin>
