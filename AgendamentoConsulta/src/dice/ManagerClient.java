@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import static app.Program.log;
+import java.awt.Color;
 import javafx.application.Platform;
 
 /*
@@ -55,12 +56,16 @@ public class ManagerClient extends Thread{
                 //Read String
                 String sRoute = bf.readLine();
                 
-                //Shows what came
-                log.showReceived(sRoute);
-
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
+                
+                //Shows what came
+                if("cliente.usuarios-ativos".equals(rRoute.getRota())){
+                    System.out.println("Received <- "+sRoute);
+                    log.includeLog("Received <- "+sRoute, Color.PINK);
+                }else log.showReceived(sRoute);
+                
                 switch (rRoute.getRota()) {
                     case "login.login" -> login(sRoute);
                     case "login.logout" -> logout();

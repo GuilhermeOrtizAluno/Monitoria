@@ -307,7 +307,11 @@ public class ManagerServer extends Thread {
         JSONObject route = new JSONObject();
         route.put("rota", "cliente.usuarios-ativos");
         route.put("usuarios", usuariosAtivos);
-        showSend(route.toString());
+        
+        System.out.println("Send -> " + route);
+
+        //Iterface Log
+        log.includeLog("Send -> "+route.toString(), Color.pink);
 
         for (PrintWriter pw : listPw) {
             pw.println(route);
