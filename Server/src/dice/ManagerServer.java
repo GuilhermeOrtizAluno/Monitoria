@@ -263,7 +263,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + send);
 
         //Iterface Log
-        logController.includeLog("Send -> "+send);
+        //logController.includeLog("Send -> "+send);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -279,7 +279,7 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- " + received);
 
         //Iterface Log
-        logController.includeLog("Received <- "+received);
+        //logController.includeLog("Received <- "+received);
         
         //Log txt
         File fLog = new File("log.txt");
