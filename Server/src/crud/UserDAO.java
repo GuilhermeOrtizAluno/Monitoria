@@ -7,7 +7,7 @@ package crud;
 
 import bd.ConnectionFactory;
 import com.google.gson.Gson;
-import dice.User;
+import entities.User;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;

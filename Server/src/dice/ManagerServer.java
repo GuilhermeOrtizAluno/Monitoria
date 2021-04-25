@@ -5,9 +5,11 @@
  */
 package dice;
 
+import static app.Program.logController;
+import entities.Route;
+import entities.User;
 import com.google.gson.Gson;
 import crud.UserDAO;
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
@@ -21,7 +23,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
-import screens.Log;
 import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
 
@@ -34,13 +35,11 @@ public class ManagerServer extends Thread {
     private InputStreamReader in;
     private BufferedReader bf;
     private PrintWriter pr;
-    private Socket clientSocket;
-    private final Log log;
+    private final Socket clientSocket;
     private User user;
 
-    public ManagerServer(Socket clientSocket, Log log) {
+    public ManagerServer(Socket clientSocket) {
         this.clientSocket = clientSocket;
-        this.log = log;
     }
 
     public void Connection() {
@@ -264,7 +263,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + send);
 
         //Iterface Log
-        log.includeLog("Send -> "+send, Color.ORANGE);
+        logController.includeLog("Send -> "+send);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -280,7 +279,7 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- " + received);
 
         //Iterface Log
-        log.includeLog("Received <- "+received, Color.cyan);
+        logController.includeLog("Received <- "+received);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -311,7 +310,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        log.includeLog("Send -> "+route.toString(), Color.pink);
+        logController.includeLog("Send -> "+route.toString());
 
         for (PrintWriter pw : listPw) {
             pw.println(route);

@@ -1,7 +1,7 @@
 package crud;
 
 import bd.ConnectionFactory;
-import dice.Schedule;
+import entities.Schedule;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

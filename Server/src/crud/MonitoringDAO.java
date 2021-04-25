@@ -6,7 +6,7 @@
 package crud;
 
 import bd.ConnectionFactory;
-import dice.Monitoring;
+import entities.Monitoring;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

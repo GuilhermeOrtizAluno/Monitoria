@@ -1,4 +1,4 @@
-package dice;
+package entities;
 
 import java.util.Date;
 

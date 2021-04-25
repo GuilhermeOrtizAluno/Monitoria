@@ -1,5 +1,7 @@
 package app;
 
+import controllers.LogController;
+import dice.TCPServer;
 import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -10,15 +12,28 @@ import javafx.stage.Stage;
 
 public class Program extends Application {
     
+    public Stage stage;
+    public static Stage connectionServe;
+    public static int door;
+    public static LogController logController;
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Pane root = FXMLLoader.load(getClass().getResource("../Screens/ServerConection.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../screens/Log.fxml"));
+        Pane root = loader.load();
+        logController = loader.getController();
+        stage = new Stage();
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.setOnCloseRequest(eh->{
+        stage.setScene(scene);
+        stage.setOnCloseRequest(eh->{
             System.exit(0);
         });
-        primaryStage.show();
+        stage.show();
+        connectionServe = new Stage();
+        connectionServe.showAndWait();
+        TCPServer tcps = new TCPServer(door);
+        tcps.StartConnection();
     }
 
     /**

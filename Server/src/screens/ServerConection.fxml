@@ -11,27 +11,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="300.0" styleClass="bg-primary" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ServerConectionController">
+<AnchorPane id="AnchorPane" prefHeight="360.0" prefWidth="300.0" styleClass="bg-white" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ServerConectionController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="373.0" prefWidth="300.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER">
-               <styleClass>
-                  <String fx:value="bg-white" />
-                  <String fx:value="box-login" />
-                  <String fx:value="box-form" />
-               </styleClass>
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Label prefHeight="17.0" prefWidth="150.0" text="IP" />
                         <TextField fx:id="tfIP" alignment="CENTER" promptText="IP" text="localhost">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                              <Insets bottom="10.0" left="6.0" right="6.0" />
                            </VBox.margin>
                         </TextField>
+                        <Label prefHeight="17.0" prefWidth="150.0" text="Porta" />
                         <TextField fx:id="tfPort" alignment="CENTER" promptText="Porta" text="4999">
                            <VBox.margin>
-                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
+                              <Insets bottom="10.0" left="6.0" right="6.0" />
                            </VBox.margin>
                         </TextField>
                         <Button id="btnLogin" fx:id="btnConection" mnemonicParsing="false" onAction="#hundleConection" text="Iniciar">
@@ -49,14 +46,19 @@
                      </styleClass>
                   </VBox>
                </children>
+               <styleClass>
+                  <String fx:value="bg-white" />
+                  <String fx:value="box-login" />
+                  <String fx:value="box-form" />
+               </styleClass>
             </Pane>
          </center>
          <top>
             <Pane prefHeight="96.0" prefWidth="300.0" BorderPane.alignment="BOTTOM_CENTER">
                <children>
-                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="87.0" prefWidth="300.0" text="Server" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="87.0" prefWidth="300.0" text="Iniciar Servidor" textAlignment="CENTER" textFill="#bfbfbf">
                      <font>
-                        <Font name="System Bold" size="30.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
                </children>

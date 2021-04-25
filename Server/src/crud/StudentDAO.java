@@ -1,6 +1,6 @@
 package crud;
 
-import dice.Student;
+import entities.Student;
 import java.sql.Connection;
 import bd.ConnectionFactory;
 import java.sql.PreparedStatement;

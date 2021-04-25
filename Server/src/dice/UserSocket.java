@@ -5,6 +5,7 @@
  */
 package dice;
 
+import entities.User;
 import java.io.BufferedReader;
 import java.net.Socket;
 
