@@ -32,6 +32,13 @@ public class LogController extends Log {
     private StackPane content;
 
     private VBox logs;
+
+    public LogController() {
+        //p
+    }
+    
+    
+    
     
     private void hundleGuilherme(ActionEvent event) throws MalformedURLException, IOException{
         URL url = new URL("https://api.whatsapp.com/send?phone=5542999730002&text=Venho%20atrav%C3%A9s%20do%20site%20Novo%20Rio%20Im%C3%B3veis%2C%20para%20perguntar-lhe%20%3A");
@@ -39,6 +46,7 @@ public class LogController extends Log {
     }
     
     private void ReceivedSend(String type){
+        
         /*lLog = new JLabel();
         lLog.setText(type);
         lLog.setForeground(Color.white);
