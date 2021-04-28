@@ -60,13 +60,11 @@ public class Log extends javax.swing.JFrame {
         pServer = new JPanel();
         pTitle = new JPanel();
         lTitle = new JLabel();
-        //pContent = new JPanel();
+        pContent = new JPanel();
         spLog = new JScrollPane();
         pLog = new JPanel();
         
-        JPanel teste = new JPanel();
-        teste.add(new JLabel("teste"));
-        pContent = new JPanel(teste);
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,17 +89,6 @@ public class Log extends javax.swing.JFrame {
         );
 
         pContent.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pContentLayout = new javax.swing.GroupLayout(pContent);
-        pContent.setLayout(pContentLayout);
-        pContentLayout.setHorizontalGroup(
-            pContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
-        );
-        pContentLayout.setVerticalGroup(
-            pContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 396, Short.MAX_VALUE)
-        );
 
         spLog.setBackground(new java.awt.Color(204, 0, 204));
 
@@ -153,6 +140,10 @@ public class Log extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pServer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        
+        JPanel teste = new JPanel();
+        teste.add(new JLabel("teste"));
+        pContent.add(new JLabel("teste"));
 
         pack();
     }// </editor-fold>                        
@@ -184,7 +175,7 @@ public class Log extends javax.swing.JFrame {
 
         /* Create and display the form */
         ServerConection serverConection = new ServerConection();
-        ;
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Log().setVisible(true);

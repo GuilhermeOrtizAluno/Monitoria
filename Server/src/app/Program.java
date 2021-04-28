@@ -19,6 +19,8 @@ public class Program extends Application {
     public void start(Stage primaryStage) throws IOException {
         
         LogController logController = new LogController();
+        ServerConection serverConection = new ServerConection();
+        logController.getpContent().add(serverConection);
         logController.main();
         
         
