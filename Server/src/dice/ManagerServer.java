@@ -5,7 +5,6 @@
  */
 package dice;
 
-import static app.Program.logController;
 import entities.Route;
 import entities.User;
 import com.google.gson.Gson;
@@ -310,7 +309,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        logController.includeLog("Send -> "+route.toString());
+        //logController.includeLog("Send -> "+route.toString());
 
         for (PrintWriter pw : listPw) {
             pw.println(route);

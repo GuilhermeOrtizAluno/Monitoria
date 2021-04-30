@@ -5,8 +5,7 @@
  */
 package dice;
 
-import static app.Program.logController;
-import java.awt.Color;
+import static app.Program.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -40,7 +39,7 @@ public class TCPServer{
             while(true) {
                 clientSocket = listenSocket.accept();
                 String client = "Endereço "+clientSocket.getInetAddress()+" Conectado";
-                //logController.includeLog(client);
+                //serverController.includeLog(client);
                 managerServer = new ManagerServer(clientSocket);
                 managerServer.Connection();
             }

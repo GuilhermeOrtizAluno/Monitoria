@@ -1,39 +1,16 @@
 package app;
 
-import controllers.LogController;
-import dice.TCPServer;
-import java.io.IOException;
-import javafx.application.Application;
-import static javafx.application.Application.launch;
-import javafx.stage.Stage;
-import screens.ServerConection;
+import controllers.ConnectionController;
+import controllers.ServerController;
 
-public class Program extends Application {
+public class Program  {
     
-    public Stage stage;
-    public static Stage connectionServe;
-    public static int door;
-    public static LogController logController;
+    public static ServerController serverController;
+    public static ConnectionController connectionController;
     
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        
-        LogController logController = new LogController();
-        ServerConection serverConection = new ServerConection();
-        logController.getpContent().add(serverConection);
-        logController.main();
-        
-        
-        
-        //TCPServer tcps = new TCPServer(door);
-        //tcps.StartConnection();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        launch(args);
+        serverController = new ServerController();
+        connectionController = new ConnectionController();
     }
     
 }
