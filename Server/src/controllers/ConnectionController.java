@@ -2,10 +2,13 @@ package controllers;
 
 import static app.Program.*;
 import bd.ConnectionFactory;
+import dice.TCPServer;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
-import dice.TCPServer;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import screens.ConnectionScreen;
 
 /**
@@ -26,11 +29,15 @@ public class ConnectionController extends ConnectionScreen{
      
    private void continuationInitComponents(){
         bConection.addActionListener((ActionEvent evt) -> {
-            hunldeConnection();
+            try {
+                hunldeConnection();
+            } catch (IOException ex) {
+                Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }); 
    }
    
-   private void hunldeConnection(){
+   private void hunldeConnection() throws IOException{
        // Read from interface
         String port = tfPort.getText();
         
@@ -51,9 +58,9 @@ public class ConnectionController extends ConnectionScreen{
                 JOptionPane.WARNING_MESSAGE
             );
        else {
-            setVisible(false);
-            serverController.startLog();
-            TCPServer tcps = new TCPServer(Integer.valueOf(port));
+           dispose();
+           serverController.startLog();
+           TCPServer tcps = new TCPServer(Integer.valueOf(port));
             tcps.StartConnection();
        }
    }

@@ -11,13 +11,15 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.JSONArray;
 
 /**
  *
  * @author gui_o
  */
-public class TCPServer{
+public class TCPServer extends Thread{
       
     private final int serverPort;
     private ServerSocket listenSocket;
@@ -30,23 +32,28 @@ public class TCPServer{
         this.serverPort = serverPort;
     }
     
-    public void StartConnection()  {
-        try{
-            listenSocket = new ServerSocket(serverPort);
-            listPw = new ArrayList<>();
-            usuariosAtivos = new JSONArray();
-            
-            while(true) {
+    public void StartConnection() throws IOException  {
+        listenSocket = new ServerSocket(serverPort);
+        listPw = new ArrayList<>();
+        usuariosAtivos = new JSONArray();
+        start();
+    }
+    
+    @Override
+    public void run() {
+        while(true) {
+            try {
                 clientSocket = listenSocket.accept();
                 String client = "Endereço "+clientSocket.getInetAddress()+" Conectado";
-                //serverController.includeLog(client);
+                serverController.includeLog(client);
                 managerServer = new ManagerServer(clientSocket);
                 managerServer.Connection();
+            } catch (IOException ex) {
+                Logger.getLogger(TCPServer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } catch(IOException e) {
-            System.out.println("Listen :"+e.getMessage());
+               
         }
+    
     }
 }
 

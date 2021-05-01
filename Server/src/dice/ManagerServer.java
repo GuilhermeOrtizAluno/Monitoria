@@ -5,6 +5,7 @@
  */
 package dice;
 
+import static app.Program.*;
 import entities.Route;
 import entities.User;
 import com.google.gson.Gson;
@@ -262,7 +263,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + send);
 
         //Iterface Log
-        //logController.includeLog("Send -> "+send);
+        serverController.includeLog("Send -> "+send);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -278,7 +279,7 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- " + received);
 
         //Iterface Log
-        //logController.includeLog("Received <- "+received);
+        serverController.includeLog("Received <- "+received);
         
         //Log txt
         File fLog = new File("log.txt");

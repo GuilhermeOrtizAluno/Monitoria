@@ -3,6 +3,8 @@ package controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import screens.ServerScreen;
 
 /**
@@ -10,6 +12,9 @@ import screens.ServerScreen;
  * @author gui_o
  */
 public class ServerController extends ServerScreen {
+    
+    JLabel lLog;
+    JPanel log;
 
     public void startLog() {
         initComponents();
@@ -36,14 +41,19 @@ public class ServerController extends ServerScreen {
     }
     
     public void includeLog(String sLog){
-        /*lLog = new Label();
+        lLog = new JLabel();
         lLog.setText(sLog);
                 
-        log = new Pane();
-        log.getChildren().add(lLog);
+        log = new JPanel();
+        log.add(lLog);
         
-        this.logs.getChildren().add(log);
-        */
+        pLog.add(log);
+        pLog.repaint();
+        pLog.validate();
+        pLog.revalidate();
+        
+        spLog.revalidate();
+        
     }   
 
     

@@ -1379,3 +1379,11 @@ Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
 Send -> {"erro":"false","rota":"login.login"}
 Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
 Send -> {"erro":"false","rota":"login.login"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","rota":"login.login"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","rota":"login.login"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","rota":"login.login"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","rota":"login.login"}
