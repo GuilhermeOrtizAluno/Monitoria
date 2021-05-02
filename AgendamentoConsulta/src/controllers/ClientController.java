@@ -2,13 +2,18 @@ package controllers;
 
 import static app.Program.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.json.simple.JSONObject;
 import screens.ClientScreen;
 
 /**
@@ -20,15 +25,42 @@ public class ClientController extends ClientScreen {
     private JLabel lLog, lClient;
     private JPanel pType;
     private JPanel log, client;
-    private int yLog, x, yClient;
+    private int yLog;
+    private int yClient;
+    private int x;
+    
+    private void continuationInitComponents(){
+        bExit.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleLogout();
+            } catch (IOException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); 
+   }
 
     public void start() {
         initComponents();
-        setVisible(true);
-        pContent.add(connectionController);
+        continuationInitComponents();
+        pContentAdd("connection");
         yLog = 5;
         yClient = 5;
         x = 5;
+        setVisible(true);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void hundleLogout() throws IOException {
+        JSONObject route = new JSONObject();
+        route.put("rota", "login.logout");
+        
+        // Shows what will be sent
+        showSend(route.toString());
+        //Send
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());  
+        pr.println(route);
+        pr.flush();
+        
     }
     
     private void hundleGuilherme() throws MalformedURLException, IOException{
@@ -124,22 +156,32 @@ public class ClientController extends ClientScreen {
         }
     }
     
-    public void pContentClear(String type){
-        switch(type){
-            case "connection"   -> pContent.remove(connectionController); 
-            case "login"        -> pContent.remove(loginController);
-            //case "home"         -> pContent.remove(homeController);
-            case "register"     -> pContent.remove(registerController);
+    public void pContentClear (){
+        switch(screen){
+            case "connection"       -> pContent.remove(connectionController); 
+            case "login"            -> pContent.remove(loginController);
+            //case "home"           -> pContent.remove(homeController);
+            case "registerStudent"  -> pContent.remove(registerStudentController);
         }
         revalidate();
     }
     
     public void pContentAdd(String type){
         switch(type){
-            case "connection"   -> pContent.add(connectionController); 
-            case "login"        -> pContent.add(loginController);
-            //case "home"         -> pContent.add(homeController);
-            case "register"     -> pContent.add(registerController);
+            case "connection" -> 
+            {
+                pContent.add(connectionController); 
+                screen = "connection";
+            }
+            case "login" -> {
+                pContent.add(loginController);
+                screen = "login";
+            }
+            case "registerStudent" -> {
+                pContent.add(registerStudentController);
+                screen = "register";
+            }
+            case "registerMonitor"  -> pContent.add(registerMonitorController);
         }
         revalidate();
     }

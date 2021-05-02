@@ -5,24 +5,23 @@
  */
 package controllers;
 
-import static app.Program.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import org.json.simple.JSONObject;
+import static app.Program.clientController;
 import static app.Program.socket;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import screens.RegisterScreen;
+import org.json.simple.JSONObject;
+import screens.RegisterMonitorScreen;
 
 /**
- * FXML Controller class
  *
- * @author Maycon
+ * @author Guilherme Ortiz
  */
-public class RegisterController extends RegisterScreen{
-
-    public RegisterController() {
+public class RegisterMonitorController extends RegisterMonitorScreen{
+     
+    public RegisterMonitorController() {
         initComponents();
         continuationInitComponents();
     }
@@ -51,7 +50,7 @@ public class RegisterController extends RegisterScreen{
             route.put("usuario", user);
             route.put("senha", pass);
             route.put("is_admin", false);
-            route.put("is_monitor", false);
+            route.put("is_monitor", true);
 
             // Shows what will be sent
             clientController.showSend(route.toString());

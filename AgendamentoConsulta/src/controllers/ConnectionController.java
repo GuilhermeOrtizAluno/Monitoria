@@ -1,7 +1,6 @@
 package controllers;
 
 import static app.Program.*;
-import dice.ManagerClient;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -52,7 +51,7 @@ public class ConnectionController extends ConnectionScreen{
                 socket = new Socket("localhost", Integer.valueOf(port));
 
                 clientController.includeLog("Conectado com Servidor pelo ip localhost e pela porta "+port, Color.BLACK, new Color(204, 0, 204));
-                clientController.pContentClear("connection");
+                clientController.pContentClear();
                 managerClient.startReceived();
             
             } catch (IOException ex) {

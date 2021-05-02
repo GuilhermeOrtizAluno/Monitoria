@@ -32,9 +32,10 @@ public class Register extends javax.swing.JPanel {
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
-        bSingIn = new javax.swing.JButton();
-        tfNome = new javax.swing.JTextField();
+        bSingUp = new javax.swing.JButton();
+        tfName = new javax.swing.JTextField();
         lNome = new javax.swing.JLabel();
+        bVoltar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -57,19 +58,21 @@ public class Register extends javax.swing.JPanel {
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
-        bSingIn.setBackground(new java.awt.Color(204, 0, 204));
-        bSingIn.setText("Cadastrar");
-        bSingIn.addActionListener(new java.awt.event.ActionListener() {
+        bSingUp.setBackground(new java.awt.Color(204, 0, 204));
+        bSingUp.setText("Cadastrar");
+        bSingUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSingInActionPerformed(evt);
+                bSingUpActionPerformed(evt);
             }
         });
 
-        tfNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tfNome.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lNome.setText("Nome");
+
+        bVoltar.setText("Voltar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,8 +81,11 @@ public class Register extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bSingIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bVoltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lPass)
@@ -87,7 +93,7 @@ public class Register extends javax.swing.JPanel {
                             .addComponent(lNome)
                             .addComponent(lUser))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tfNome)
+                    .addComponent(tfName)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -97,11 +103,13 @@ public class Register extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bVoltar))
                 .addGap(18, 18, 18)
                 .addComponent(lNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -111,23 +119,24 @@ public class Register extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(bSingIn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bSingInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSingInActionPerformed
+    private void bSingUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSingUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bSingInActionPerformed
+    }//GEN-LAST:event_bSingUpActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bSingIn;
+    private javax.swing.JButton bSingUp;
+    private javax.swing.JButton bVoltar;
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lPass;
     private javax.swing.JLabel lTitle;
     private javax.swing.JLabel lUser;
-    private javax.swing.JTextField tfNome;
+    private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPass;
     private javax.swing.JTextField tfUser;
     // End of variables declaration//GEN-END:variables

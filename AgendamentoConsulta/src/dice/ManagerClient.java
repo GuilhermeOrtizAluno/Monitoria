@@ -3,6 +3,7 @@ package dice;
 import entites.Route;
 import static app.Program.*;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class ManagerClient extends Thread{
                     case "login.login" ->
                     {    
                         clientController.showReceived(sRoute, legend);
-                        login();
+                        login(rRoute.getTipo_usuario());
                     }
                     case "login.logout" ->
                     {
@@ -91,42 +92,52 @@ public class ManagerClient extends Thread{
                     }
                 }
             }
-         } catch(EOFException e) {
+        } catch(EOFException e) {
              System.out.println("EOF:"+e.getMessage());
-         } catch(IOException e) {
+        } catch(IOException e) {
              System.out.println("IO:"+e.getMessage());
-         }
-        catch(Exception e){
+        } catch(JsonSyntaxException e){
             System.out.println(e);
         }
-         finally{ 
-            try {
-                socket.close();
-            }catch (IOException e){
-                /*close failed*/
-            }
+        finally{ 
+           try {
+               socket.close();
+           }catch (IOException e){
+               /*close failed*/
+           }
         }
     } 
 
-    private void login() throws IOException {
+    private void login(String sTypeUser) throws IOException {
 
         //Valid Login
-        if(bRoute){
-            clientController.pContentClear("login");
-            //clientController.pContentAdd("login");
+        if(!bRoute) return;
+        
+        clientController.pContentClear();
+        switch(sTypeUser){
+            case "admin"    -> 
+            {
+                admin = true;
+                clientController.pContentAdd("registerMonitor");
+            }
+            //case "monitor"  ->
+            //case "aluno"    ->
         }
+            //clientController.pContentAdd("login");
+        
     }
 
     private void logout() throws IOException {
         
-        clientController.pContentClear("home");
+        clientController.pContentClear();
         clientController.pContentAdd("login");
     }
 
     private void register() throws IOException {
 
-        if(bRoute){
-            clientController.pContentClear("register");
+        if(!bRoute) return;
+        if (!admin){
+            clientController.pContentClear();
             clientController.pContentAdd("login");
         }
 

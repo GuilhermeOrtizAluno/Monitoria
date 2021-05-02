@@ -2,14 +2,12 @@
 package screens;
 
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -40,24 +38,34 @@ public class ClientScreen extends JFrame {
 
         pServer.setBackground(new Color(255, 255, 255));
 
-        pHeader.setBackground(new Color(204, 0, 204));
+        pHeader.setBackground(new java.awt.Color(204, 0, 204));
 
-        lTitle.setFont(new Font("MV Boli", 1, 24)); // NOI18N
-        lTitle.setForeground(new Color(255, 255, 255));
-        lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+        lTitle.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
+        lTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lTitle.setText("Client");
 
-        GroupLayout pHeaderLayout = new GroupLayout(pHeader);
+        bExit.setBackground(new java.awt.Color(255, 255, 255));
+        bExit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bExit.setSize(60, 30);
+        //bExit.set
+        bExit.setText("Sair");
+
+        javax.swing.GroupLayout pHeaderLayout = new javax.swing.GroupLayout(pHeader);
         pHeader.setLayout(pHeaderLayout);
         pHeaderLayout.setHorizontalGroup(
-            pHeaderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(lTitle, GroupLayout.Alignment.CENTER, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bExit, GroupLayout.Alignment.TRAILING, 100, 100, Short.MAX_VALUE)
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHeaderLayout.createSequentialGroup()
+                .addGap(443, 443, 443)
+                .addComponent(lTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            )
         );
         pHeaderLayout.setVerticalGroup(
-            pHeaderLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(lTitle, GroupLayout.Alignment.CENTER, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-            .addComponent(bExit, GroupLayout.Alignment.TRAILING, 100, 62, Short.MAX_VALUE)
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+            )
         );
 
         pContent.setBackground(new Color(255, 255, 255));

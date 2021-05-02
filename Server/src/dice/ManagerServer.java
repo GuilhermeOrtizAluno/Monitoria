@@ -158,9 +158,10 @@ public class ManagerServer extends Thread {
             route.put("erro", "Usuario ou Senha invalido");
         } else {
             legend = Color.BLACK;
+            String sTypeUser = user.isIs_admin() ? "admin" : user.isIs_monitor() ? "monitor" : "aluno";
             usuariosAtivos.put(user.getUsuario());
             route.put("erro", "false");
-            
+            route.put("tipo_usuario", sTypeUser);
             // show client on
             serverController.includeClient(user.getUsuario());
         }
@@ -192,12 +193,12 @@ public class ManagerServer extends Thread {
         showSend(route.toString());
         int i = 0;
 
-        for (; i < usuariosAtivos.length(); i++) {
+        /*for (; i < usuariosAtivos.length(); i++) {
             if (usuariosAtivos.getString(i).equals(user.getNome())) {
                 break;
             }
-        }
-        usuariosAtivos.remove(i);
+        }*/
+        //usuariosAtivos.remove(i);
 
         // Send
         pr.println(route);

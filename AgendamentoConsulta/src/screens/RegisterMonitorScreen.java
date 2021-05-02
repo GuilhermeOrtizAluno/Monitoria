@@ -14,19 +14,19 @@ import javax.swing.JTextField;
  *
  * @author Guilherme Ortiz
  */
-public class LoginScreen extends JPanel {
-
-    public JButton bSingIn;
+public class RegisterMonitorScreen extends JPanel {
+    
+    public JButton bSingUp;
+    public JLabel lNome;
     public JLabel lPass;
     public JLabel lTitle;
     public JLabel lUser;
+    public JTextField tfName;
     public JTextField tfPass;
     public JTextField tfUser;
-    public JButton bRegister;
-    public JLabel lRegister;
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Components">                          
+    // <editor-fold defaultstate="collapsed" desc="Component">                          
     public void initComponents() {
 
         lTitle = new javax.swing.JLabel();
@@ -34,16 +34,16 @@ public class LoginScreen extends JPanel {
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
-        bSingIn = new javax.swing.JButton();
-        lRegister = new javax.swing.JLabel();
-        bRegister = new javax.swing.JButton();
+        bSingUp = new javax.swing.JButton();
+        tfName = new javax.swing.JTextField();
+        lNome = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Login");
+        lTitle.setText("Cadastro Monitor");
 
         lUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lUser.setText("Usuario");
@@ -59,14 +59,14 @@ public class LoginScreen extends JPanel {
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
-        bSingIn.setBackground(new java.awt.Color(204, 0, 204));
-        bSingIn.setText("Entrar");;
+        bSingUp.setBackground(new java.awt.Color(204, 0, 204));
+        bSingUp.setText("Cadastrar");
 
-        lRegister.setText("Não tem uma conta? ");
+        tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        bRegister.setBackground(new java.awt.Color(255, 255, 255));
-        bRegister.setForeground(new java.awt.Color(0, 204, 204));
-        bRegister.setText("Cadastre-se");
+        lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lNome.setText("Nome");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,19 +75,19 @@ public class LoginScreen extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lRegister)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bRegister))
-                            .addComponent(lPass, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lUser, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfUser, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bSingIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lPass)
+                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lNome)
+                            .addComponent(lUser))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tfName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -96,22 +96,21 @@ public class LoginScreen extends JPanel {
                 .addContainerGap()
                 .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(lNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lUser)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lPass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(bSingIn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bRegister)
-                        .addComponent(lRegister)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
-    }// </editor-fold>                        
-                                         
+    }// </editor-fold>                                                              
+                  
 }

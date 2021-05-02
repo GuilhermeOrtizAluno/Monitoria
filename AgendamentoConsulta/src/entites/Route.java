@@ -12,6 +12,15 @@ package entites;
 public class Route {
     String rota;
     String erro;
+    String tipo_usuario;
+
+    public String getTipo_usuario() {
+        return tipo_usuario;
+    }
+
+    public void setTipo_usuario(String tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
+    }
 
     public String getRota() {
         return rota;

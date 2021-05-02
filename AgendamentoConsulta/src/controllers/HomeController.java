@@ -20,21 +20,7 @@ import org.json.simple.JSONObject;
  */
 public class HomeController {
 
-    /*private void handleLogout () throws IOException {
-        JSONObject route = new JSONObject();
-        route.put("rota", "login.logout");
-        
-        // Shows what will be sent
-        //log.showSend(route.toString());
-        //Send
-        PrintWriter pr = new PrintWriter(socket.getOutputStream());  
-        pr.println(route);
-        pr.flush();
-        
-        // Close Screen
-        //Stage stage = (Stage) btnLogout.getScene().getWindow();
-        //stage.close();
-    }
+    /*
     
 
     private void handleDelete( ) throws IOException {
