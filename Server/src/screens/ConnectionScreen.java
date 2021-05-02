@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,7 +16,7 @@ import javax.swing.SwingConstants;
  *
  * @author gui_o
  */
-public class ConnectionScreen extends JFrame {
+public class ConnectionScreen extends JPanel {
     
     public JButton bConection;
     public JLabel lIP;
@@ -111,8 +110,8 @@ public class ConnectionScreen extends JFrame {
             .addComponent(pConection, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(pConection, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -122,8 +121,6 @@ public class ConnectionScreen extends JFrame {
             .addComponent(pConection, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
     }// </editor-fold>                                                               
           
 }

@@ -11,6 +11,7 @@ public class Program  {
     public static void main(String[] args) {
         serverController = new ServerController();
         connectionController = new ConnectionController();
+        serverController.start();
     }
     
 }

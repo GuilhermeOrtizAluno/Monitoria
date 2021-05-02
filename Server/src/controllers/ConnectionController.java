@@ -19,7 +19,6 @@ public class ConnectionController extends ConnectionScreen{
 
    public ConnectionController() {
         initComponents();
-        setVisible(true);
         continuationInitComponents();
     } 
     
@@ -58,11 +57,9 @@ public class ConnectionController extends ConnectionScreen{
                 JOptionPane.WARNING_MESSAGE
             );
        else {
-           dispose();
-           serverController.startLog();
+           serverController.pContentClear();
            TCPServer tcps = new TCPServer(Integer.valueOf(port));
-            tcps.StartConnection();
+           tcps.StartConnection();
        }
    }
-   
 }

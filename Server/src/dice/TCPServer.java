@@ -6,6 +6,7 @@
 package dice;
 
 import static app.Program.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -45,7 +46,7 @@ public class TCPServer extends Thread{
             try {
                 clientSocket = listenSocket.accept();
                 String client = "Endereço "+clientSocket.getInetAddress()+" Conectado";
-                serverController.includeLog(client);
+                serverController.includeLog(client, Color.BLACK, new Color(204, 0, 204));
                 managerServer = new ManagerServer(clientSocket);
                 managerServer.Connection();
             } catch (IOException ex) {

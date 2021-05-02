@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
+import java.awt.Color;
 
 /**
  *
@@ -37,6 +38,7 @@ public class ManagerServer extends Thread {
     private PrintWriter pr;
     private final Socket clientSocket;
     private User user;
+    private Color legend;
 
     public ManagerServer(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -63,27 +65,61 @@ public class ManagerServer extends Thread {
                 //Read String
                 String sRoute = bf.readLine();
 
-                //Shows what came
-                showReceived(sRoute);
-
+                legend = Color.GREEN;
+                
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
                 switch (rRoute.getRota()) {
                     case "login.login" ->
+                    {
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         login(sRoute);
+                    }
                     case "login.logout" ->
+                    {
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         logout();
+                    }
                     case "login.registro" ->
+                    {
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         register(sRoute);
+                    }
                     case "login.update" ->
+                    {
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         update(sRoute);
-                    case "usuario.delete" ->
+                    }
+                    case "usuario.delete" ->{
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         delete();
+                    }
                     case "mensagem.mesagem" ->
+                    {
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         mensagem();
+                    }
                     default ->
+                    {
+                        legend = Color.RED;
+                        //Shows what came
+                        showReceived(sRoute);
+                        
                         errorRoute();
+                    }
                 }
             }
         } catch (EOFException e) {
@@ -110,16 +146,23 @@ public class ManagerServer extends Thread {
 
         // Search for user in the bank
         user = dUser.search(user);
+        
+        boolean bUser = user.getUsuario() != null;
 
         JSONObject route = new JSONObject();
         route.put("rota", "login.login");
 
         // Valid user
-        if (user.getUsuario() == null) {
+        if (!bUser) {
+            legend = Color.ORANGE;
             route.put("erro", "Usuario ou Senha invalido");
         } else {
+            legend = Color.GREEN;
             usuariosAtivos.put(user.getUsuario());
             route.put("erro", "false");
+            
+            // show client on
+            serverController.includeClient(user.getUsuario());
         }
 
         //Send User
@@ -142,6 +185,8 @@ public class ManagerServer extends Thread {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
         route.put("erro", "false");
+        
+        legend = Color.GREEN;
 
         // Shows what will be sent
         showSend(route.toString());
@@ -177,8 +222,10 @@ public class ManagerServer extends Thread {
         boolean bUser = dUser.create(user);
 
         if (!bUser) {
+            legend = Color.ORANGE;
             route.put("erro", "Cadastro não efetuado!");
         } else {
+            legend = Color.GREEN;
             route.put("erro", "false");
         }
 
@@ -205,8 +252,10 @@ public class ManagerServer extends Thread {
 
         // Valid user
         if (!bUser) {
+            legend = Color.ORANGE;
             route.put("erro", "Alteração nao realizada");
         } else {
+            legend = Color.GREEN;
             route.put("erro", "false");
         }
 
@@ -224,15 +273,17 @@ public class ManagerServer extends Thread {
         UserDAO dUser = new UserDAO();
 
         // Search for user in the bank
-        boolean bool = dUser.delete(user);
+        boolean bUser = dUser.delete(user);
 
         JSONObject route = new JSONObject();
         route.put("rota", "usuario.delete");
 
         // Valid user
-        if (!bool) {
+        if (!bUser) {
+            legend = Color.ORANGE;
             route.put("erro", "Usuario nao deletado");
         } else {
+            legend = Color.GREEN;
             int i=0;
             
             for(; i < usuariosAtivos.length(); i++){
@@ -263,7 +314,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + send);
 
         //Iterface Log
-        serverController.includeLog("Send -> "+send);
+        serverController.includeLog("Send -> "+send, legend, Color.BLUE);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -279,7 +330,7 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- " + received);
 
         //Iterface Log
-        serverController.includeLog("Received <- "+received);
+        serverController.includeLog("Received <- "+received, legend, Color.cyan);
         
         //Log txt
         File fLog = new File("log.txt");
@@ -310,7 +361,7 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        //logController.includeLog("Send -> "+route.toString());
+        serverController.includeLog("Send -> "+route.toString(), Color.BLACK, Color.PINK);
 
         for (PrintWriter pw : listPw) {
             pw.println(route);

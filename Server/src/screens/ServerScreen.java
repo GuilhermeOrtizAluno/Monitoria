@@ -56,7 +56,7 @@ public class ServerScreen extends JFrame {
 
         pContent.setBackground(new Color(255, 255, 255));
 
-        
+        pContent.setSize(250, GroupLayout.DEFAULT_SIZE);
 
         spLog.setBackground(new Color(204, 0, 204));
 
