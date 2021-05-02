@@ -5,69 +5,73 @@
  */
 package screens;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 /**
  *
  * @author Guilherme Ortiz
  */
-public class RegisterMonitorScreen extends JPanel {
+public class ManagementMonitorScreen extends javax.swing.JPanel {
     
-    public JButton bSingUp;
-    public JLabel lNome;
-    public JLabel lPass;
-    public JLabel lTitle;
-    public JLabel lUser;
-    public JTextField tfName;
-    public JTextField tfPass;
-    public JTextField tfUser;
+    public javax.swing.JButton bSingUp;
+    public javax.swing.JComboBox<String> cbMonitor;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel lNome;
+    public javax.swing.JLabel lPass;
+    public javax.swing.JLabel lUser;
+    public javax.swing.JTextField tfName;
+    public javax.swing.JTextField tfPass;
+    public javax.swing.JTextField tfUser;
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Component">                          
+    // <editor-fold defaultstate="collapsed" desc="Components">                          
     public void initComponents() {
 
-        lTitle = new javax.swing.JLabel();
+        cbMonitor = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        lNome = new javax.swing.JLabel();
+        tfName = new javax.swing.JTextField();
         lUser = new javax.swing.JLabel();
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
         bSingUp = new javax.swing.JButton();
-        tfName = new javax.swing.JTextField();
-        lNome = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(230, 300));
+        setMinimumSize(new java.awt.Dimension(230, 300));
         setSize(230, 300);
 
-        lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lTitle.setForeground(new java.awt.Color(204, 204, 204));
-        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Cadastro Monitor");
+        //cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Gerenciar Monitor");
+
+        lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lNome.setText("Nome");
+
+        tfName.setEditable(false);
+        tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lUser.setText("Usuario");
 
+        tfUser.setEditable(false);
         tfUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfUser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lPass.setText("Senha");
 
+        tfPass.setEditable(false);
         tfPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
         bSingUp.setBackground(new java.awt.Color(204, 0, 204));
-        bSingUp.setText("Cadastrar");
-
-        tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lNome.setText("Nome");
+        bSingUp.setText("Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,27 +80,30 @@ public class RegisterMonitorScreen extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lPass)
-                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lNome)
-                            .addComponent(lUser))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(tfName)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lPass)
+                            .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lUser)
+                            .addComponent(lNome, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbMonitor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(lNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -108,10 +115,9 @@ public class RegisterMonitorScreen extends JPanel {
                 .addComponent(lPass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
-    }// </editor-fold>                                                              
-                  
+    }// </editor-fold>                                                                              
 }

@@ -15,15 +15,15 @@ import javax.swing.JTextField;
  * @author Guilherme Ortiz
  */
 public class LoginScreen extends JPanel {
-
+    
+    public JButton bRegister;
     public JButton bSingIn;
     public JLabel lPass;
+    public JLabel lRegister;
     public JLabel lTitle;
     public JLabel lUser;
     public JTextField tfPass;
     public JTextField tfUser;
-    public JButton bRegister;
-    public JLabel lRegister;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
@@ -39,6 +39,11 @@ public class LoginScreen extends JPanel {
         bRegister = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(230, 300));
+        setMinimumSize(new java.awt.Dimension(230, 300));
+        setPreferredSize(new  java.awt.Dimension(230, 300));
+        setSize(330, 300);
+        setName(""); // NOI18N
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));
@@ -50,21 +55,24 @@ public class LoginScreen extends JPanel {
 
         tfUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfUser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfPass.setToolTipText("Usuario");
+        tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
         lPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lPass.setText("Senha");
 
         tfPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfPass.setToolTipText("");
+        tfPass.setToolTipText("Senha");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
         bSingIn.setBackground(new java.awt.Color(204, 0, 204));
-        bSingIn.setText("Entrar");;
+        bSingIn.setForeground(new java.awt.Color(255, 255, 255));
+        bSingIn.setText("Entrar");
 
         lRegister.setText("Não tem uma conta? ");
 
-        bRegister.setBackground(new java.awt.Color(255, 255, 255));
+        bRegister.setBackground(new java.awt.Color(204, 0, 204));
         bRegister.setForeground(new java.awt.Color(0, 204, 204));
         bRegister.setText("Cadastre-se");
 
@@ -113,5 +121,5 @@ public class LoginScreen extends JPanel {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
-                                         
+                 
 }

@@ -856,3 +856,124 @@ Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
 Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"is_admin":false,"senha":"123","is_monitor":true,"nome":"teste","usuario":"dormi","rota":"login.registro"}
 Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":false,"nome":"Aluno01","usuario":"01","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"01","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor01","usuario":"mo01","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor02","usuario":"mon02","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor02","usuario":"mon02","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor02","usuario":"mon02","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"is_admin":false,"senha":"123","is_monitor":false,"nome":"aluno01","usuario":"a01","rota":"login.registro"}
+Received <- {"erro":"false","rota":"login.registro"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"senha":"123","usuario":"dmin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}

@@ -26,7 +26,7 @@ public class ConnectionController extends ConnectionScreen{
     }
      
    private void continuationInitComponents(){
-        bConection.addActionListener((ActionEvent evt) -> {
+        bConnection.addActionListener((ActionEvent evt) -> {
             try {
                 hunldeConnection();
             } catch (IOException ex) {

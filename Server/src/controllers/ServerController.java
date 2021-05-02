@@ -15,17 +15,16 @@ import screens.ServerScreen;
  */
 public class ServerController extends ServerScreen {
     
-    private JLabel lLog, lClient;
+    private JLabel lLog;
     private JPanel pType;
-    private JPanel log, client;
-    private int yLog, x, yClient;
+    private JPanel log;
+    private int yLog, x;
 
     public void start() {
         initComponents();
         setVisible(true);
         pContent.add(connectionController);
         yLog = 5;
-        yClient = 5;
         x = 5;
     }
     
@@ -67,32 +66,5 @@ public class ServerController extends ServerScreen {
         spLog.validate();
         spLog.revalidate();
     }   
-
-    public void pContentClear(){
-        pContent.remove(connectionController);
-        revalidate();
-    }
     
-    public void includeClient(String sClient){
-        lClient = new JLabel();
-        lClient.setText(sClient);
-        
-        pType = new JPanel();
-        pType.setSize(20, 20);
-        pType.setBackground(Color.GREEN);
-                
-        client = new JPanel();
-        client.setSize(300,35);
-        client.setLocation(x, yClient);
-        client.add(pType);
-        client.add(lClient);
-        
-        yClient += 40;
-        
-        pContent.add(client);
-        pContent.repaint();
-        pContent.validate();
-        
-        revalidate();
-    }
 }

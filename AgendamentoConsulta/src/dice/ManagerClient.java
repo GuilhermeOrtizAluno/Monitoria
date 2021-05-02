@@ -4,12 +4,16 @@ import entites.Route;
 import static app.Program.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -17,12 +21,15 @@ import java.awt.Color;
  */
 public class ManagerClient extends Thread{
     private InputStreamReader in;
+    private OutputStreamWriter ou;
+    private PrintWriter pr;
     private BufferedReader bf;
     private Color legend;
     private boolean bRoute;
     
     public void startReceived() throws IOException{
         in = new InputStreamReader(socket.getInputStream());
+        ou = new OutputStreamWriter(socket.getOutputStream());
         bf = new BufferedReader(in);
         
         // Opens screen Login
@@ -85,6 +92,10 @@ public class ManagerClient extends Thread{
                         clientController.showReceived(sRoute, legend);
                         mensagem();
                     }
+                    case "monitor.listar" ->{
+                        clientController.showReceived(sRoute, legend);
+                        monitores();
+                    }
                     default -> 
                     {
                         clientController.showReceived(sRoute, Color.RED);
@@ -108,6 +119,7 @@ public class ManagerClient extends Thread{
         }
     } 
 
+    @SuppressWarnings("unchecked")
     private void login(String sTypeUser) throws IOException {
 
         //Valid Login
@@ -119,6 +131,18 @@ public class ManagerClient extends Thread{
             {
                 admin = true;
                 clientController.pContentAdd("registerMonitor");
+                clientController.pContentAdd("managementMonitor");
+                
+                JSONObject route = new JSONObject();
+                route.put("rota", "monitor.listar");
+                
+                clientController.showSend(route.toString());
+                
+                // Send
+                pr = new PrintWriter(ou);  
+                pr.println(route);
+                pr.flush();
+                
             }
             //case "monitor"  ->
             //case "aluno"    ->
@@ -154,6 +178,10 @@ public class ManagerClient extends Thread{
             //usuario = gson.fromJson(sRoute, User.class);
         }
 
+    }
+    
+    private void monitores(){
+        managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
     }
 
     private void users(String sRoute) {

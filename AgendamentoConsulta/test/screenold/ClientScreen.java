@@ -1,55 +1,71 @@
 
-package screens;
+package screenold;
 
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 
 /**
  *
  * @author Guilherme Ortiz
  */
-public class ServerScreen extends JFrame {
+public class ClientScreen extends JFrame {
     
     public JLabel lTitle;
     public JPanel pContent;
     public JPanel pLog;
     public JPanel pServer;
-    public JPanel pTitle;
+    public JPanel pHeader;
     public JScrollPane spLog;
+    public JButton bExit;
                       
     public void initComponents() {
 
-        lTitle = new JLabel();
         pServer = new JPanel();
-        pTitle = new JPanel();
+        pHeader = new JPanel();
+        lTitle = new JLabel();
         pContent = new JPanel();
-        pLog = new JPanel();
         spLog = new JScrollPane();
+        pLog = new JPanel();
+        bExit = new JButton();
+        
+        bExit.setBackground(Color.WHITE);
+        bExit.setText("Sair");
 
         pServer.setBackground(new Color(255, 255, 255));
 
-        pTitle.setBackground(new Color(204, 0, 204));
+        pHeader.setBackground(new java.awt.Color(204, 0, 204));
 
-        lTitle.setFont(new Font("MV Boli", 1, 24)); // NOI18N
-        lTitle.setForeground(new Color(255, 255, 255));
-        lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lTitle.setText("Server");
+        lTitle.setFont(new java.awt.Font("MV Boli", 1, 24)); // NOI18N
+        lTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lTitle.setText("Client");
 
-        GroupLayout pTitleLayout = new GroupLayout(pTitle);
-        pTitle.setLayout(pTitleLayout);
-        pTitleLayout.setHorizontalGroup(
-            pTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(lTitle, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        bExit.setBackground(new java.awt.Color(255, 255, 255));
+        bExit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        bExit.setSize(60, 30);
+        //bExit.set
+        bExit.setText("Sair");
+
+        javax.swing.GroupLayout pHeaderLayout = new javax.swing.GroupLayout(pHeader);
+        pHeader.setLayout(pHeaderLayout);
+        pHeaderLayout.setHorizontalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHeaderLayout.createSequentialGroup()
+                .addGap(443, 443, 443)
+                .addComponent(lTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            )
         );
-        pTitleLayout.setVerticalGroup(
-            pTitleLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(lTitle, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+        pHeaderLayout.setVerticalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+            )
         );
 
         pContent.setBackground(new Color(255, 255, 255));
@@ -77,7 +93,7 @@ public class ServerScreen extends JFrame {
         pServer.setLayout(pServerLayout);
         pServerLayout.setHorizontalGroup(
             pServerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(pTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pHeader, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(GroupLayout.Alignment.TRAILING, pServerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pContent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -88,7 +104,7 @@ public class ServerScreen extends JFrame {
         pServerLayout.setVerticalGroup(
             pServerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(pServerLayout.createSequentialGroup()
-                .addComponent(pTitle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(pHeader, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pServerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(pContent, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -108,7 +124,7 @@ public class ServerScreen extends JFrame {
         );
        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("Server");
+        setTitle("Client");
         pack();
     }                       
                

@@ -57,9 +57,12 @@ public class ConnectionController extends ConnectionScreen{
                 JOptionPane.WARNING_MESSAGE
             );
        else {
-           serverController.pContentClear();
-           TCPServer tcps = new TCPServer(Integer.valueOf(port));
-           tcps.StartConnection();
+            serverController.pContent.remove(connectionController);
+            serverController.pContent.add(usersController);
+            serverController.revalidate();
+           
+            TCPServer tcps = new TCPServer(Integer.valueOf(port));
+            tcps.StartConnection();
        }
    }
 }

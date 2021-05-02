@@ -10,7 +10,6 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.json.simple.JSONObject;
@@ -34,9 +33,9 @@ public class ClientController extends ClientScreen {
             try {
                 hundleLogout();
             } catch (IOException ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                java.util.logging.Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }); 
+        });
    }
 
     public void start() {
@@ -158,31 +157,67 @@ public class ClientController extends ClientScreen {
     
     public void pContentClear (){
         switch(screen){
-            case "connection"       -> pContent.remove(connectionController); 
-            case "login"            -> pContent.remove(loginController);
-            //case "home"           -> pContent.remove(homeController);
-            case "registerStudent"  -> pContent.remove(registerStudentController);
+            case "connection"           -> pcCenter.remove(connectionController); 
+            case "login"                -> pcCenter.remove(loginController);
+            case "registerStudent"      -> pcCenter.remove(registerStudentController);
+            case "registerMonitor"      -> {
+                pExit.remove(bExit);
+                pcLeft.remove(registerMonitorController);
+                pcCenter.remove(managementMonitorController);
+                
+            }
+            case "managementMonitor"    -> {
+                pExit.remove(bExit);
+                pcLeft.remove(registerMonitorController);
+                pcCenter.remove(managementMonitorController);
+            }
+
         }
-        revalidate();
+        pcCenter.repaint();
+        pcCenter.validate();
+        pcLeft.repaint();
+        pcLeft.validate();
+        pcRight.repaint();
+        pcRight.validate();
+        pExit.repaint();
+        pExit.validate();
+        pContent.revalidate();
+        pHeader.revalidate();
     }
     
     public void pContentAdd(String type){
         switch(type){
             case "connection" -> 
             {
-                pContent.add(connectionController); 
+                pcCenter.add(connectionController); 
                 screen = "connection";
             }
             case "login" -> {
-                pContent.add(loginController);
+                pcCenter.add(loginController); 
                 screen = "login";
             }
             case "registerStudent" -> {
-                pContent.add(registerStudentController);
-                screen = "register";
+                pcCenter.add(registerStudentController);
+                screen = "registerStudent";
             }
-            case "registerMonitor"  -> pContent.add(registerMonitorController);
+            case "registerMonitor"  -> 
+            {
+                pExit.add(bExit);
+                pcLeft.add(registerMonitorController);
+                screen = "registerMonitor";
+            }
+            case "managementMonitor" ->
+            {
+                pcCenter.add(managementMonitorController);
+                screen = "managementMonitor";
+            }
         }
-        revalidate();
+        pcCenter.repaint();
+        pcCenter.validate();
+        pcLeft.repaint();
+        pcLeft.validate();
+        pcRight.repaint();
+        pcRight.validate();
+        pContent.revalidate();
     }
 }

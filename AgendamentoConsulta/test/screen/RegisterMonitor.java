@@ -9,12 +9,12 @@ package screen;
  *
  * @author Guilherme Ortiz
  */
-public class Register extends javax.swing.JPanel {
+public class RegisterMonitor extends javax.swing.JPanel {
 
     /**
      * Creates new form Register
      */
-    public Register() {
+    public RegisterMonitor() {
         initComponents();
     }
 

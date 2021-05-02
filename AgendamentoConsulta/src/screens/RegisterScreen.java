@@ -42,6 +42,7 @@ public class RegisterScreen extends JPanel {
         bVoltar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setSize(230, 300);
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));

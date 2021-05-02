@@ -112,6 +112,12 @@ public class ManagerServer extends Thread {
                         
                         mensagem();
                     }
+                    case "monitor.listar" ->{
+                        //Shows what came
+                        showReceived(sRoute);
+                        
+                        monitores();
+                    }
                     default ->
                     {
                         legend = Color.RED;
@@ -163,7 +169,7 @@ public class ManagerServer extends Thread {
             route.put("erro", "false");
             route.put("tipo_usuario", sTypeUser);
             // show client on
-            serverController.includeClient(user.getUsuario());
+            usersController.includeClient(user.getUsuario());
         }
 
         //Send User
@@ -308,6 +314,49 @@ public class ManagerServer extends Thread {
 
         //pr.close();
     }
+    
+    private void mensagem() {
+
+    }
+
+    private void errorRoute() {
+        JOptionPane.showMessageDialog(
+                null,
+                "No route found",
+                "Route error",
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+    
+    private void monitores() throws JSONException, IOException{
+        Gson gson = new Gson();
+        UserDAO dUser = new UserDAO();
+
+        // Search for user in the bank
+        var monitores = dUser.read();
+        
+        boolean bUser = monitores != null;
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitor.listar");
+
+        // Valid user
+        if (!bUser) {
+            legend = Color.ORANGE;
+            route.put("erro", "Nenhum monitor encontrado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            route.put("monitores", monitores);
+        }
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+
+    }
 
     // Shows what will be sent
     private void showSend(String send) throws IOException {
@@ -339,19 +388,6 @@ public class ManagerServer extends Thread {
             fwLog.write("Received <- " + received + "\n");
             fwLog.flush();
         }
-    }
-
-    private void mensagem() {
-
-    }
-
-    private void errorRoute() {
-        JOptionPane.showMessageDialog(
-                null,
-                "No route found",
-                "Route error",
-                JOptionPane.ERROR_MESSAGE
-        );
     }
 
     private void sendToAll() throws JSONException, IOException {

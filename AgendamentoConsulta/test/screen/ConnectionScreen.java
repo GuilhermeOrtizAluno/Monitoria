@@ -1,27 +1,19 @@
-
-package screens;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package screen;
 
 /**
  *
- * @author gui_o
+ * @author Guilherme Ortiz
  */
-public class ConnectionScreen extends JPanel {
-    
-    public JButton bConnection;
-    public JLabel lIP;
-    public JLabel lPass;
-    public JLabel lTitle;
-    public JTextField tfIP;
-    public JTextField tfPort;
+public class ConnectionScreen extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Components">                          
-    public void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         lTitle = new javax.swing.JLabel();
         lIP = new javax.swing.JLabel();
@@ -35,7 +27,6 @@ public class ConnectionScreen extends JPanel {
         setMinimumSize(new java.awt.Dimension(230, 270));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(230, 270));
-        setSize(230, 270);
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));
@@ -50,6 +41,11 @@ public class ConnectionScreen extends JPanel {
         tfIP.setForeground(new java.awt.Color(204, 204, 204));
         tfIP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfIP.setText("localhost");
+        tfIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfIPActionPerformed(evt);
+            }
+        });
 
         lPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lPass.setText("Porta");
@@ -61,7 +57,12 @@ public class ConnectionScreen extends JPanel {
 
         bConnection.setBackground(new java.awt.Color(204, 0, 204));
         bConnection.setText("Conectar");
-        
+        bConnection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConnectionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,6 +100,23 @@ public class ConnectionScreen extends JPanel {
         );
 
         getAccessibleContext().setAccessibleName("");
-    }// </editor-fold>                                                           
-                 
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void bConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConnectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bConnectionActionPerformed
+
+    private void tfIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfIPActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton bConnection;
+    public javax.swing.JLabel lIP;
+    public javax.swing.JLabel lPass;
+    public javax.swing.JLabel lTitle;
+    public javax.swing.JTextField tfIP;
+    public javax.swing.JTextField tfPort;
+    // End of variables declaration//GEN-END:variables
 }

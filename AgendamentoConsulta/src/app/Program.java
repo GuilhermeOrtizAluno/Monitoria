@@ -2,8 +2,8 @@ package app;
 
 import controllers.ClientController;
 import controllers.ConnectionController;
-import controllers.HomeController;
 import controllers.LoginController;
+import controllers.ManagementMonitorController;
 import controllers.RegisterStudentController;
 import controllers.RegisterMonitorController;
 import dice.ManagerClient;
@@ -22,8 +22,8 @@ public class Program  {
     public static LoginController loginController;
     public static RegisterStudentController registerStudentController;
     public static RegisterMonitorController registerMonitorController;
+    public static ManagementMonitorController managementMonitorController;
     public static boolean admin;
-    
     public static String screen;
 
     public static void main(String[] args) {
@@ -35,6 +35,7 @@ public class Program  {
         managerClient = new ManagerClient();
         registerStudentController = new RegisterStudentController();
         registerMonitorController = new RegisterMonitorController();
+        managementMonitorController = new ManagementMonitorController();
         clientController.start();
     }
     
