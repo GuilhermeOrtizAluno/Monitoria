@@ -157,7 +157,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Usuario ou Senha invalido");
         } else {
-            legend = Color.GREEN;
+            legend = Color.BLACK;
             usuariosAtivos.put(user.getUsuario());
             route.put("erro", "false");
             
@@ -186,7 +186,7 @@ public class ManagerServer extends Thread {
         route.put("rota", "login.logout");
         route.put("erro", "false");
         
-        legend = Color.GREEN;
+        legend = Color.BLACK;
 
         // Shows what will be sent
         showSend(route.toString());
@@ -225,7 +225,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Cadastro não efetuado!");
         } else {
-            legend = Color.GREEN;
+            legend = Color.BLACK;
             route.put("erro", "false");
         }
 
@@ -255,7 +255,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Alteração nao realizada");
         } else {
-            legend = Color.GREEN;
+            legend = Color.BLACK;
             route.put("erro", "false");
         }
 
@@ -283,7 +283,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Usuario nao deletado");
         } else {
-            legend = Color.GREEN;
+            legend = Color.BLACK;
             int i=0;
             
             for(; i < usuariosAtivos.length(); i++){

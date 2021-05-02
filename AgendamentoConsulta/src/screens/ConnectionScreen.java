@@ -41,7 +41,7 @@ public class ConnectionScreen extends JPanel {
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new Color(204, 204, 204));
         lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-        lTitle.setText("Iniciar Servidor");
+        lTitle.setText("Conectar com Servidor");
 
         tfIP.setEditable(false);
         tfIP.setBackground(new Color(204, 204, 204));
@@ -61,7 +61,7 @@ public class ConnectionScreen extends JPanel {
         tfPort.setPreferredSize(new Dimension(60, 23));
 
         bConection.setBackground(new Color(204, 0, 204));
-        bConection.setText("Iniciar");
+        bConection.setText("Conectar");
 
         GroupLayout pConectionLayout = new GroupLayout(pConection);
         pConection.setLayout(pConectionLayout);

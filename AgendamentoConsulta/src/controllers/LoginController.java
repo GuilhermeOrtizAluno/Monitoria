@@ -5,41 +5,47 @@
  */
 package controllers;
 
+import static app.Program.*;
 import static app.Program.socket;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
 import org.json.simple.JSONObject;
-import static app.Program.log;
-import static app.Program.managerClient;
+import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import screens.LoginScreen;
 
 /**
  * FXML Controller class
  *
  * @author gui_o
  */
-public class LoginController implements Initializable {
-
-    @FXML
-    private TextField tfUser;
-
-    @FXML
-    private TextField tfPass;
+public class LoginController extends LoginScreen{ 
     
-    @FXML
-    private Button btnLogin;
-        
-    @FXML
+    public LoginController(){
+        initComponents();
+        continuationInitComponents();
+    }
+    
+    private void continuationInitComponents(){
+        bSingIn.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleLogin();
+            } catch (IOException ex) {
+                Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); 
+        bRegister.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleRegister();
+            } catch (IOException ex) {
+                Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); 
+   }
+
     @SuppressWarnings("unchecked")
-    private void hundleLogin(ActionEvent event) throws IOException{
+    private void hundleLogin() throws IOException{
         try {
             // Read from interface
             String user = tfUser.getText();
@@ -51,37 +57,25 @@ public class LoginController implements Initializable {
             route.put("senha", pass);
 
             // Shows what will be sent
-            log.showSend(route.toString());
+            clientController.showSend(route.toString());
             
             // Send
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
             pr.flush();
             
-            // Close Screen
-            //Stage stage = (Stage) btnLogin.getScene().getWindow();
-            //stage.close();
-            
         }catch(Error e){
             
         }
     }
-        
-    @FXML
-    private Hyperlink hpLink;
     
-    @FXML
-    private void hundleRegister(ActionEvent event) throws IOException{
+    private void hundleRegister() throws IOException{
         try {
-            
-            managerClient.openStage(FXMLLoader.load(getClass().getResource("../screens/Register.fxml")));
+            clientController.pContentClear("login");
+            clientController.pContentAdd("register");
         } catch (Error e){
             
         }
-    }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }    
+    }  
     
 }

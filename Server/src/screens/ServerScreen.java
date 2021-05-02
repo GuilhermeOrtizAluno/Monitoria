@@ -109,7 +109,7 @@ public class ServerScreen extends JFrame {
             .addComponent(pServer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
        
-
+        setTitle("Server");
         pack();
     }                       
                

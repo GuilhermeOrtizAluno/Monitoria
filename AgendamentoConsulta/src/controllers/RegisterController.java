@@ -5,45 +5,40 @@
  */
 package controllers;
 
+import static app.Program.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import org.json.simple.JSONObject;
 import static app.Program.socket;
-import static app.Program.log;
-import static app.Program.managerClient;
-import javafx.fxml.FXMLLoader;
+import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import screens.RegisterScreen;
 
 /**
  * FXML Controller class
  *
  * @author Maycon
  */
-public class RegisterController implements Initializable {
-    
-    @FXML
-    private TextField tfName;
-    
-    @FXML
-    private TextField tfUser;
+public class RegisterController extends RegisterScreen{
 
-    @FXML
-    private TextField tfPass;
-    
-    @FXML
-    private Button btnRegister;
-    
-    
-        
-    @FXML
+    public RegisterController() {
+        initComponents();
+        continuationInitComponents();
+    }
+
+    private void continuationInitComponents(){
+        bSingUp.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleRegistrar();
+            } catch (IOException ex) {
+                Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }); 
+   }
+
     @SuppressWarnings("unchecked")
-    private void hundleRegistrar(ActionEvent event) throws IOException{
+    private void hundleRegistrar() throws IOException{
         try {
             // Read from interface
             String name = tfName.getText();
@@ -59,25 +54,14 @@ public class RegisterController implements Initializable {
             route.put("is_monitor", false);
 
             // Shows what will be sent
-            log.showSend(route.toString());
+            clientController.showSend(route.toString());
             // Send
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
             pr.flush();
             
-            managerClient.openStage(FXMLLoader.load(getClass().getResource("../screens/Login.fxml")));
-            
-            // Close Screen
-            //Stage stage = (Stage) btnRegister.getScene().getWindow();
-            //stage.close();
-            
         }catch(Error e){
             
         }
     }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }    
-    
 }

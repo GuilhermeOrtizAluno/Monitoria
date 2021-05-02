@@ -2,18 +2,20 @@ package controllers;
 
 import static app.Program.*;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import screens.ServerScreen;
+import screens.ClientScreen;
 
 /**
  *
  * @author gui_o
  */
-public class ServerController extends ServerScreen {
+public class ClientController extends ClientScreen {
     
     private JLabel lLog, lClient;
     private JPanel pType;
@@ -63,15 +65,9 @@ public class ServerController extends ServerScreen {
         pLog.repaint();
         pLog.validate();
         
-        spLog.repaint();
-        spLog.validate();
         spLog.revalidate();
+        
     }   
-
-    public void pContentClear(){
-        pContent.remove(connectionController);
-        revalidate();
-    }
     
     public void includeClient(String sClient){
         lClient = new JLabel();
@@ -93,6 +89,58 @@ public class ServerController extends ServerScreen {
         pContent.repaint();
         pContent.validate();
         
+        revalidate();
+    }
+    
+        // Shows what will be sent
+    public void showSend(String send) throws IOException {
+        //Terminal
+        System.out.println("Send -> " + send);
+
+        //Iterface Log
+        includeLog("Send -> "+send, Color.BLACK, Color.BLUE);
+        
+        //Log txt
+        File fLog = new File("log.txt");
+        try (FileWriter fwLog = new FileWriter(fLog, true)) {
+            fwLog.write("Send -> " + send + "\n");
+            fwLog.flush();
+        }
+    }
+
+    //Shows what came
+    public void showReceived(String received, Color legend) throws IOException {
+        //Terminal
+        System.out.println("Received <- " + received);
+
+        //Iterface Log
+        includeLog("Received <- "+received, legend, Color.CYAN);
+        
+        //Log txt
+        File fLog = new File("log.txt");
+        try (FileWriter fwLog = new FileWriter(fLog, true)) {
+            fwLog.write("Received <- " + received + "\n");
+            fwLog.flush();
+        }
+    }
+    
+    public void pContentClear(String type){
+        switch(type){
+            case "connection"   -> pContent.remove(connectionController); 
+            case "login"        -> pContent.remove(loginController);
+            //case "home"         -> pContent.remove(homeController);
+            case "register"     -> pContent.remove(registerController);
+        }
+        revalidate();
+    }
+    
+    public void pContentAdd(String type){
+        switch(type){
+            case "connection"   -> pContent.add(connectionController); 
+            case "login"        -> pContent.add(loginController);
+            //case "home"         -> pContent.add(homeController);
+            case "register"     -> pContent.add(registerController);
+        }
         revalidate();
     }
 }
