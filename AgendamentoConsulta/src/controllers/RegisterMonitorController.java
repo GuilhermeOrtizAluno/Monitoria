@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import screens.RegisterMonitorScreen;
 
@@ -24,7 +25,15 @@ public class RegisterMonitorController extends RegisterMonitorScreen{
     public RegisterMonitorController() {
         initComponents();
         continuationInitComponents();
+        cleanFields();
     }
+    
+     public void cleanFields(){
+        tfName.setText("");
+        tfUser.setText("");
+        tfPass.setText("");
+        revalidate();
+    } 
 
     private void continuationInitComponents(){
         bSingUp.addActionListener((ActionEvent evt) -> {
@@ -43,6 +52,16 @@ public class RegisterMonitorController extends RegisterMonitorScreen{
             String name = tfName.getText();
             String user = tfUser.getText();
             String pass = tfPass.getText();
+            
+            if("".equals(name) || "".equals(user) || "".equals(pass)){
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Invalid fields, please try again", 
+                    "Invalid field", 
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
 
             JSONObject route = new JSONObject();
             route.put("rota", "login.registro");

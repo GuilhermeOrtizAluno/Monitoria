@@ -2,6 +2,7 @@ package controllers;
 
 import static app.Program.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,6 +11,7 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.json.simple.JSONObject;
@@ -93,6 +95,7 @@ public class ClientController extends ClientScreen {
         yLog += 40;
         
         pLog.add(log);
+        pLog.add(Box.createRigidArea(new Dimension(0,5)));
         pLog.repaint();
         pLog.validate();
         
@@ -161,13 +164,11 @@ public class ClientController extends ClientScreen {
             case "login"                -> pcCenter.remove(loginController);
             case "registerStudent"      -> pcCenter.remove(registerStudentController);
             case "registerMonitor"      -> {
-                pExit.remove(bExit);
                 pcLeft.remove(registerMonitorController);
                 pcCenter.remove(managementMonitorController);
                 
             }
             case "managementMonitor"    -> {
-                pExit.remove(bExit);
                 pcLeft.remove(registerMonitorController);
                 pcCenter.remove(managementMonitorController);
             }
@@ -189,25 +190,29 @@ public class ClientController extends ClientScreen {
         switch(type){
             case "connection" -> 
             {
+                connectionController.cleanFields();
                 pcCenter.add(connectionController); 
                 screen = "connection";
             }
             case "login" -> {
+                loginController.cleanFields();
                 pcCenter.add(loginController); 
                 screen = "login";
             }
             case "registerStudent" -> {
+                registerStudentController.cleanFields();
                 pcCenter.add(registerStudentController);
                 screen = "registerStudent";
             }
             case "registerMonitor"  -> 
             {
-                pExit.add(bExit);
+                registerMonitorController.cleanFields();
                 pcLeft.add(registerMonitorController);
                 screen = "registerMonitor";
             }
             case "managementMonitor" ->
             {
+                managementMonitorController.cleanFields();
                 pcCenter.add(managementMonitorController);
                 screen = "managementMonitor";
             }

@@ -1,9 +1,12 @@
 
 package screens;
 
+import java.awt.Color;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -14,6 +17,7 @@ public class UsersScreen extends JPanel {
     public JPanel pTitle;
     public JLabel lTitle;
     public JPanel pUsers;
+    public JPanel pContentUser;
     public JScrollPane spUsers;
 
     @SuppressWarnings("unchecked")
@@ -24,6 +28,7 @@ public class UsersScreen extends JPanel {
         lTitle = new javax.swing.JLabel();
         spUsers = new javax.swing.JScrollPane();
         pUsers = new javax.swing.JPanel();
+        pContentUser = new JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(230, 390));
@@ -48,10 +53,16 @@ public class UsersScreen extends JPanel {
 
         spUsers.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         spUsers.setPreferredSize(new java.awt.Dimension(210, 320));
+        
+        pUsers.setBackground(Color.WHITE);
+        pUsers.setBorder(new EmptyBorder(10, 10, 10, 10));
+        pUsers.setLayout(new BoxLayout(pUsers, BoxLayout.Y_AXIS));
+        
+        pContentUser.setBackground(Color.WHITE);
+        
+        pContentUser.add(pUsers);
 
-        pUsers.setPreferredSize(new java.awt.Dimension(208, 320));
-
-        javax.swing.GroupLayout pUsersLayout = new javax.swing.GroupLayout(pUsers);
+        /*javax.swing.GroupLayout pUsersLayout = new javax.swing.GroupLayout(pUsers);
         pUsers.setLayout(pUsersLayout);
         pUsersLayout.setHorizontalGroup(
             pUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -60,9 +71,9 @@ public class UsersScreen extends JPanel {
         pUsersLayout.setVerticalGroup(
             pUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 320, Short.MAX_VALUE)
-        );
+        );*/
 
-        spUsers.setViewportView(pUsers);
+        spUsers.setViewportView(pContentUser);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

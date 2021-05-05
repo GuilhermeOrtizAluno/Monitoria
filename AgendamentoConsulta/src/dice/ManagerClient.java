@@ -4,6 +4,7 @@ import entites.Route;
 import static app.Program.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import entites.User;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class ManagerClient extends Thread{
         in = new InputStreamReader(socket.getInputStream());
         ou = new OutputStreamWriter(socket.getOutputStream());
         bf = new BufferedReader(in);
+        pr = new PrintWriter(ou);  
         
         // Opens screen Login
         clientController.pContentAdd("login");
@@ -85,15 +87,41 @@ public class ManagerClient extends Thread{
                         clientController.showReceived(sRoute, legend);
                         delete();
                     }
-                    case "cliente.usuarios-ativos" -> users(sRoute);
+                    case "cliente.usuarios-ativos" -> {
+                        clientController.showReceived(sRoute, legend);
+                        users(sRoute);
+                    }
+                    case "cliente.usuarios" -> {
+                        clientController.showReceived(sRoute, legend);
+                        users(sRoute);
+                        if(admin)
+                            monitores(sRoute);
+                    }
                     case "mensagem.mesagem" -> 
                     {
                         clientController.showReceived(sRoute, legend);
                         mensagem();
                     }
-                    case "monitor.listar" ->{
+                    case "monitoria.listar-monitor" ->{
                         clientController.showReceived(sRoute, legend);
-                        monitores();
+                    }
+                    case "monitoria.registro" ->{
+                        clientController.showReceived(sRoute, legend);
+                    }
+                    case "monitoria.update" ->{
+                        clientController.showReceived(sRoute, legend);
+                    }
+                    case "monitoria.listar" ->{
+                        clientController.showReceived(sRoute, legend);
+                    }
+                    case "monitoria.listar-aluno" ->{
+                        clientController.showReceived(sRoute, legend);
+                    }
+                    case "aluno-monitoria.inscrever" -> {
+                        clientController.showReceived(sRoute, legend);
+                    }
+                    case "aluno-monitoria.delete" -> {
+                        clientController.showReceived(sRoute, legend);
                     }
                     default -> 
                     {
@@ -106,6 +134,7 @@ public class ManagerClient extends Thread{
              System.out.println("EOF:"+e.getMessage());
         } catch(IOException e) {
              System.out.println("IO:"+e.getMessage());
+             //clientController("");
         } catch(JsonSyntaxException e){
             System.out.println(e);
         }
@@ -125,6 +154,7 @@ public class ManagerClient extends Thread{
         if(!bRoute) return;
         
         clientController.pContentClear();
+        clientController.pExit.add(clientController.bExit);
         switch(sTypeUser){
             case "admin"    -> 
             {
@@ -133,14 +163,13 @@ public class ManagerClient extends Thread{
                 clientController.pContentAdd("managementMonitor");
                 
                 JSONObject route = new JSONObject();
-                //route.put("rota", "monitor.listar");
+                route.put("rota", "cliente.usuarios");
                 
-                //clientController.showSend(route.toString());
+                clientController.showSend(route.toString());
                 
                 // Send
-                //pr = new PrintWriter(ou);  
-                //pr.println(route);
-                //pr.flush();
+                pr.println(route);
+                pr.flush();
                 
             }
             //case "monitor"  ->
@@ -151,17 +180,35 @@ public class ManagerClient extends Thread{
     }
 
     private void logout() throws IOException {
-        
+        clientController.pExit.remove(clientController.bExit);
         clientController.pContentClear();
         clientController.pContentAdd("login");
     }
 
     private void register() throws IOException {
 
-        if(!bRoute) return;
+        if(!bRoute){ 
+            JOptionPane.showMessageDialog(
+                null, 
+                "Failed to register", 
+                "Register User", 
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null, 
+            "Registration Success", 
+            "Register User", 
+            JOptionPane.INFORMATION_MESSAGE
+        );
+        
         if (!admin){
             clientController.pContentClear();
             clientController.pContentAdd("login");
+        }else{
+            registerMonitorController.cleanFields();
         }
 
     }
@@ -179,8 +226,15 @@ public class ManagerClient extends Thread{
 
     }
     
-    private void monitores(){
-        managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    private void monitores(String sMonitores){
+        Gson gson = new Gson();
+
+        // Convert Json String to User Object
+        User users = gson.fromJson(sMonitores, User.class);
+        
+        String[] monitors = new String[] {users.getUsuario()};
+        
+        managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
     }
 
     private void users(String sRoute) {

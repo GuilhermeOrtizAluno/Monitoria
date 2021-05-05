@@ -419,7 +419,7 @@ public class ManagerServer extends Thread {
         boolean bUser = monitores != null;
 
         JSONObject route = new JSONObject();
-        route.put("rota", "monitor.listar");
+        route.put("rota", "monitoria.listar-monitor");
 
         // Valid user
         if (!bUser) {
@@ -521,25 +521,6 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
     }
-
-    //TEM Q ARRUMAR PRA PASSAR LISTA PRA JSON, TEM QUE USAR O CLIENT DO MINARI Q DPS DE LUGAR TEM UM BOTAO "USUARIOS CONSOLE"
-    private void usersAll() throws JSONException, IOException {
-        List<User> list = new UserDAO().read();
-        JSONObject route = new JSONObject();
-
-        legend = Color.BLACK;
-
-        JSONArray jsArray = (JSONArray) list;
-        System.out.println(jsArray);
-        
-        route.put("rota", "cliente.usuarios");
-        route.put("usuarios", jsArray);
-
-        // Send
-        pr.println(route);
-        pr.flush();
-
-    }
     //NAO MEXI
     private void students() {
     }
@@ -550,10 +531,38 @@ public class ManagerServer extends Thread {
     private void studentDelete() {
     }
 
-    //ALTERAR ATUALIZAÇÃO USERS ONLINE NO SERVIDOR
+    
+    private void usersAll() throws JSONException, IOException{
+        UserDAO dUser = new UserDAO();
+
+        // Search for user in the bank
+        var users = dUser.read();
+        
+        boolean bUser = users != null;
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "cliente.usuarios");
+
+        // Valid user
+        if (!bUser) {
+            legend = Color.ORANGE;
+            route.put("erro", "Nenhum usuario encontrado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            route.put("usuarios", users);
+        }
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+    }
+            
     private void usersOn() throws JSONException, IOException {
         JSONObject route = new JSONObject();
-        route.put("rota", "cliente.usuarios-ativos"); //ALTEREI NOME DA ROTA DO BROADCAST, AGR TA IGUAL DA EP1
+        route.put("rota", "cliente.usuarios-ativos");
         route.put("usuarios", usuariosAtivos);
 
         System.out.println("Send -> " + route);
