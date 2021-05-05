@@ -172,6 +172,7 @@ public class ClientController extends ClientScreen {
                 pcLeft.remove(registerMonitorController);
                 pcCenter.remove(managementMonitorController);
             }
+            case "updateStudent" -> pcLeft.remove(updateStudentController);
 
         }
         pcCenter.repaint();
@@ -215,6 +216,11 @@ public class ClientController extends ClientScreen {
                 managementMonitorController.cleanFields();
                 pcCenter.add(managementMonitorController);
                 screen = "managementMonitor";
+            }
+            case "updateStudent" ->{
+                updateStudentController.cleanFields();
+                pcLeft.add(updateStudentController);
+                screen = "updateStudent";
             }
         }
         pcCenter.repaint();

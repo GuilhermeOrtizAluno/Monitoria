@@ -6,6 +6,7 @@ import controllers.LoginController;
 import controllers.ManagementMonitorController;
 import controllers.RegisterStudentController;
 import controllers.RegisterMonitorController;
+import controllers.UpdateStudentController;
 import dice.ManagerClient;
 import java.net.Socket;
 
@@ -23,8 +24,10 @@ public class Program  {
     public static RegisterStudentController registerStudentController;
     public static RegisterMonitorController registerMonitorController;
     public static ManagementMonitorController managementMonitorController;
+    public static UpdateStudentController updateStudentController;
     public static boolean admin;
     public static String screen;
+    public static String usernameON;
 
     public static void main(String[] args) {
         socket = null;
@@ -36,6 +39,7 @@ public class Program  {
         registerStudentController = new RegisterStudentController();
         registerMonitorController = new RegisterMonitorController();
         managementMonitorController = new ManagementMonitorController();
+        updateStudentController = new UpdateStudentController();
         clientController.start();
     }
     

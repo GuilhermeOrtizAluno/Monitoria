@@ -8,10 +8,19 @@ package entities;
 public class User {
     private int pk_usuario;
     private String usuario;
+    private String novo_usuario;
     private String nome;
     private String senha;
     private boolean is_admin;
     private boolean is_monitor;
+    
+    public String getNovo_usuario() {
+        return novo_usuario;
+    }
+
+    public void setNovo_usuario(String novo_usuario) {
+        this.novo_usuario = novo_usuario;
+    }
 
     public int getPk_usuario() {
         return pk_usuario;

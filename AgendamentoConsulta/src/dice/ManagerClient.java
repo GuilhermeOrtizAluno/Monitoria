@@ -88,6 +88,7 @@ public class ManagerClient extends Thread{
                         delete();
                     }
                     case "cliente.usuarios-ativos" -> {
+                        legend = Color.GREEN;
                         clientController.showReceived(sRoute, legend);
                         users(sRoute);
                     }
@@ -151,7 +152,15 @@ public class ManagerClient extends Thread{
     private void login(String sTypeUser) throws IOException {
 
         //Valid Login
-        if(!bRoute) return;
+        if(!bRoute) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "User invalid", 
+                "Login", 
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
         
         clientController.pContentClear();
         clientController.pExit.add(clientController.bExit);
@@ -172,8 +181,13 @@ public class ManagerClient extends Thread{
                 pr.flush();
                 
             }
-            //case "monitor"  ->
-            //case "aluno"    ->
+            case "monitor"  ->{
+            }
+            case "aluno"    ->{
+                admin = false;
+                clientController.pContentAdd("updateStudent");
+                //clientController.pContentAdd("");
+            }
         }
             //clientController.pContentAdd("login");
         
@@ -214,14 +228,16 @@ public class ManagerClient extends Thread{
     }
 
     private void update() throws IOException {
-        
+        if(bRoute){ 
+            clientController.pContentClear();
+            clientController.pContentAdd("login");
+        }
     }
 
     private void delete() throws IOException {
-
-        if(bRoute){
-          //  root =  FXMLLoader.load(getClass().getResource("../screens/Login.fxml"));
-            //usuario = gson.fromJson(sRoute, User.class);
+        if(bRoute){ 
+            clientController.pContentClear();
+            clientController.pContentAdd("login");
         }
 
     }

@@ -100,10 +100,11 @@ public class UserDAO {
 
         try {
             //stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
-            stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ?, nome = ? WHERE pk_usuario = ?");
-            stmt.setString(1, u.getUsuario());
+            stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ?, nome = ? WHERE usuario = ?");
+            stmt.setString(1, u.getNovo_usuario());
             stmt.setString(2, u.getSenha());
             stmt.setString(3, u.getNome());
+            stmt.setString(4, u.getUsuario());
 
             stmt.executeUpdate();
 

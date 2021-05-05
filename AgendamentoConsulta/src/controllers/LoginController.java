@@ -68,6 +68,8 @@ public class LoginController extends LoginScreen{
                 );
                 return;
             }
+            
+            usernameON = user;
 
             JSONObject route = new JSONObject();
             route.put("rota", "login.login");

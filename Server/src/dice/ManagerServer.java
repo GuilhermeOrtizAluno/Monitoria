@@ -23,8 +23,6 @@ import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
 import entities.Monitoring;
 import java.awt.Color;
-import java.util.List;
-import org.json.JSONArray;
 
 /**
  * Gerenciador do Servidor
@@ -301,6 +299,7 @@ public class ManagerServer extends Thread {
         user.setSenha(rUser.getSenha());
         user.setNome(rUser.getNome());
         user.setUsuario(rUser.getUsuario());
+        user.setNovo_usuario(rUser.getNovo_usuario());
 
         // Search for user in the bank
         boolean bUser = dUser.update(user);

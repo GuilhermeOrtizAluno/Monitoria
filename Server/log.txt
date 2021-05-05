@@ -2359,3 +2359,87 @@ Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Received <- {"rota":"cliente.usuarios"}
 Send -> {"erro":"false","usuarios":["User{pk_usuario=12, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=14, usuario=ortiz, nome=Guilherme Ortiz, senha=123, is_admin=false, is_monitor=false}","User{pk_usuario=19, usuario=monitor, nome=monitor, senha=123, is_admin=false, is_monitor=true}"],"rota":"cliente.usuarios"}
 >>>>>>> Guilherme-Ortiz
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"guilherme ortiz","usuario":"ortiz","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"rota":"usuario.delete"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"ortiz","usuario":"ortix","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"123","usuario":"ortix","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"ortix","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"ortiz","usuario":"ortiz","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"ortiz","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"ortiz","usuario":"ortiz","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"ortiz","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"ortiz","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"gui","usuario":"gui","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"gui","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"is_admin":false,"senha":"1","is_monitor":false,"nome":"g","usuario":"g","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"g","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"is_admin":false,"senha":"1","is_monitor":false,"nome":"g","usuario":"g","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuario":"g","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"is_admin":false,"senha":"1","is_monitor":false,"nome":"g","usuario":"gui","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"1","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"novo_usuario":"ortiz","senha":"123","usuario":"gui","nome":"Guilherme","rota":"login.update"}
+Send -> {"erro":"Alteração nao realizada","rota":"login.update"}
+Received <- {"senha":"1","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"novo_usuario":"ortiz","senha":"12","usuario":"gui","nome":"Guilherme","rota":"login.update"}
+Send -> {"erro":"Alteração nao realizada","rota":"login.update"}
+Received <- {"senha":"123","usuario":"g","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"123","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"1","usuario":"g","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"1","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"novo_usuario":"ortiz","senha":"123","usuario":"gui","nome":"Guilherme","rota":"login.update"}
+Send -> {"erro":"Alteração nao realizada","rota":"login.update"}
+Received <- {"senha":"1","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"novo_usuario":"ortiz","senha":"123","usuario":"gui","nome":"Guilherme","rota":"login.update"}
+Received <- {"senha":"1","usuario":"gui","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"novo_usuario":"ortiz","senha":"123","usuario":"gui","nome":"Guilherme","rota":"login.update"}
+Send -> {"erro":"false","rota":"login.update"}
