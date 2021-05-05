@@ -6,6 +6,8 @@
 package controllers;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import screens.UsersScreen;
@@ -44,6 +46,7 @@ public class UsersController extends UsersScreen{
         y += 40;
         
         pUsers.add(client);
+        pUsers.add(Box.createRigidArea(new Dimension(0,5)));
         pUsers.repaint();
         pUsers.validate();
         

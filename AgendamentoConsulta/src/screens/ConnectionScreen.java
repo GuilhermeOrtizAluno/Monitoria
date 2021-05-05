@@ -45,9 +45,7 @@ public class ConnectionScreen extends JPanel {
         lIP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lIP.setText("IP");
 
-        tfIP.setEditable(false);
         tfIP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tfIP.setForeground(new java.awt.Color(204, 204, 204));
         tfIP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfIP.setText("localhost");
 

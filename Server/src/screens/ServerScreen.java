@@ -3,7 +3,6 @@ package screens;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -60,18 +59,13 @@ public class ServerScreen extends JFrame {
         );
 
         pContent.setBackground(new Color(255, 255, 255));
-
         pContent.setSize(250, GroupLayout.DEFAULT_SIZE);
 
-        spLog.setBackground(new Color(204, 0, 204));
-
-        pLogContent.setBackground(new Color(204, 0, 204));
-        
         pLog.setBackground(new Color(204, 0, 204));
-        
         pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
         pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
         
+        pLogContent.setBackground(new Color(204, 0, 204));
         pLogContent.add(pLog);
 
         /*GroupLayout pLogLayout = new GroupLayout(pLogContent);
@@ -85,6 +79,8 @@ public class ServerScreen extends JFrame {
             .addGap(0, 396, Short.MAX_VALUE)
         );*/
 
+        
+        spLog.setBackground(new Color(204, 0, 204));
         spLog.setViewportView(pLogContent);
 
         GroupLayout pServerLayout = new GroupLayout(pServer);

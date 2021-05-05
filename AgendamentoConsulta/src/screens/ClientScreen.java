@@ -6,24 +6,31 @@
 package screens;
 
 import java.awt.Color;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
  * @author Guilherme Ortiz
  */
-public class ClientScreen extends javax.swing.JFrame {
+public class ClientScreen extends JFrame {
     
-    public javax.swing.JLabel lTitle;
-    public javax.swing.JPanel pClient;
-    public javax.swing.JPanel pContent;
-    public javax.swing.JPanel pExit;
-    public javax.swing.JPanel pHeader;
-    public javax.swing.JPanel pLog;
-    public javax.swing.JPanel pcCenter;
-    public javax.swing.JPanel pcLeft;
-    public javax.swing.JPanel pcRight;
-    public javax.swing.JScrollPane spLog;
+    public JLabel lTitle;
+    public JPanel pClient;
+    public JPanel pContent;
+    public JPanel pExit;
+    public JPanel pHeader;
+    public JPanel pLog;
+    public JPanel pContentLog;
+    public JPanel pcCenter;
+    public JPanel pcLeft;
+    public JPanel pcRight;
+    public JScrollPane spLog;
     public JButton bExit;
 
     @SuppressWarnings("unchecked")
@@ -39,19 +46,20 @@ public class ClientScreen extends javax.swing.JFrame {
         pcRight = new javax.swing.JPanel();
         pcCenter = new javax.swing.JPanel();
         spLog = new javax.swing.JScrollPane();
-        pLog = new javax.swing.JPanel();
         bExit = new JButton();
+        pLog = new javax.swing.JPanel();
+        pContentLog = new JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 600));
-                
+        setMinimumSize(new java.awt.Dimension(900, 700));
+        
         bExit.setText("Sair");
         bExit.setBackground(Color.WHITE);
         bExit.setSize(70, 30);
 
         pClient.setBackground(new java.awt.Color(255, 255, 255));
-        pClient.setMinimumSize(new java.awt.Dimension(900, 600));
-        pClient.setPreferredSize(new java.awt.Dimension(900, 600));
+        pClient.setMinimumSize(new java.awt.Dimension(900, 700));
+        pClient.setPreferredSize(new java.awt.Dimension(900, 700));
         pClient.setLayout(new java.awt.BorderLayout());
 
         pHeader.setBackground(new java.awt.Color(204, 0, 204));
@@ -75,7 +83,7 @@ public class ClientScreen extends javax.swing.JFrame {
         );
         pExitLayout.setVerticalGroup(
             pExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pHeader.add(pExit, java.awt.BorderLayout.LINE_END);
@@ -86,8 +94,8 @@ public class ClientScreen extends javax.swing.JFrame {
         pContent.setLayout(new java.awt.BorderLayout());
 
         pcLeft.setBackground(new java.awt.Color(255, 255, 255));
-        pcLeft.setMinimumSize(new java.awt.Dimension(299, 330));
-        pcLeft.setPreferredSize(new java.awt.Dimension(299, 330));
+        pcLeft.setMinimumSize(new java.awt.Dimension(299, 400));
+        pcLeft.setPreferredSize(new java.awt.Dimension(299, 400));
 
         javax.swing.GroupLayout pcLeftLayout = new javax.swing.GroupLayout(pcLeft);
         pcLeft.setLayout(pcLeftLayout);
@@ -97,14 +105,14 @@ public class ClientScreen extends javax.swing.JFrame {
         );
         pcLeftLayout.setVerticalGroup(
             pcLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         pContent.add(pcLeft, java.awt.BorderLayout.LINE_START);
 
         pcRight.setBackground(new java.awt.Color(255, 255, 255));
-        pcRight.setMinimumSize(new java.awt.Dimension(299, 330));
-        pcRight.setPreferredSize(new java.awt.Dimension(299, 330));
+        pcRight.setMinimumSize(new java.awt.Dimension(299, 400));
+        pcRight.setPreferredSize(new java.awt.Dimension(299, 400));
 
         javax.swing.GroupLayout pcRightLayout = new javax.swing.GroupLayout(pcRight);
         pcRight.setLayout(pcRightLayout);
@@ -114,15 +122,15 @@ public class ClientScreen extends javax.swing.JFrame {
         );
         pcRightLayout.setVerticalGroup(
             pcRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         pContent.add(pcRight, java.awt.BorderLayout.LINE_END);
 
         pcCenter.setBackground(new java.awt.Color(255, 255, 255));
         pcCenter.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pcCenter.setMinimumSize(new java.awt.Dimension(299, 330));
-        pcCenter.setPreferredSize(new java.awt.Dimension(299, 330));
+        pcCenter.setMinimumSize(new java.awt.Dimension(299, 400));
+        pcCenter.setPreferredSize(new java.awt.Dimension(299, 400));
 
         javax.swing.GroupLayout pcCenterLayout = new javax.swing.GroupLayout(pcCenter);
         pcCenter.setLayout(pcCenterLayout);
@@ -132,33 +140,38 @@ public class ClientScreen extends javax.swing.JFrame {
         );
         pcCenterLayout.setVerticalGroup(
             pcCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
 
         pContent.add(pcCenter, java.awt.BorderLayout.CENTER);
-
         pClient.add(pContent, java.awt.BorderLayout.CENTER);
 
-        spLog.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        spLog.setMinimumSize(new java.awt.Dimension(900, 200));
-        spLog.setName(""); // NOI18N
-        spLog.setPreferredSize(new java.awt.Dimension(900, 200));
-        spLog.setRequestFocusEnabled(false);
-
         pLog.setBackground(new java.awt.Color(204, 0, 204));
+        pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
+        pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
+        
+        pContentLog.setBackground(new java.awt.Color(204, 0, 204));
+        pContentLog.add(pLog);
 
-        javax.swing.GroupLayout pLogLayout = new javax.swing.GroupLayout(pLog);
-        pLog.setLayout(pLogLayout);
-        pLogLayout.setHorizontalGroup(
-            pLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        /*javax.swing.GroupLayout pLog1Layout = new javax.swing.GroupLayout(pLog);
+        pLog.setLayout(pLog1Layout);
+        pLog1Layout.setHorizontalGroup(
+            pLog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 898, Short.MAX_VALUE)
         );
-        pLogLayout.setVerticalGroup(
-            pLogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
-        );
+        pLog1Layout.setVerticalGroup(
+            pLog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );*/
 
-        spLog.setViewportView(pLog);
+        spLog.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spLog.setMinimumSize(null);
+        spLog.setName(""); // NOI18N
+        spLog.setRequestFocusEnabled(false);
+        spLog.setViewportView(pContentLog);
+        spLog.setMinimumSize(new java.awt.Dimension(900, 200));
+        spLog.setPreferredSize(new java.awt.Dimension(900, 200));
+
 
         pClient.add(spLog, java.awt.BorderLayout.PAGE_END);
 
@@ -173,6 +186,7 @@ public class ClientScreen extends javax.swing.JFrame {
             .addComponent(pClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        setTitle("Client");
         pack();
         setLocationRelativeTo(null);
 

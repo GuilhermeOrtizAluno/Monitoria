@@ -16,16 +16,22 @@ import screens.ConnectionScreen;
  */
 public class ConnectionController extends ConnectionScreen{
 
-   public ConnectionController() {
+    public ConnectionController() {
         initComponents();
         continuationInitComponents();
+        cleanFields();
+    } 
+   
+    public void cleanFields(){
+        tfPort.setText("");
+        revalidate();
     } 
     
-   private boolean isInteger(String str) {
+    private boolean isInteger(String str) {
         return str != null && str.matches("[0-9]*");
     }
      
-   private void continuationInitComponents(){
+    private void continuationInitComponents(){
         bConnection.addActionListener((ActionEvent evt) -> {
             try {
                 hunldeConnection();
@@ -35,7 +41,7 @@ public class ConnectionController extends ConnectionScreen{
         }); 
    }
    
-   private void hunldeConnection() throws IOException{
+    private void hunldeConnection() throws IOException{
        // Read from interface
         String port = tfPort.getText();
         

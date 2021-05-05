@@ -15,5 +15,13 @@ public class ManagementMonitorController extends ManagementMonitorScreen{
 
     public ManagementMonitorController() {
         initComponents();
+        cleanFields();
     }
+    
+     public void cleanFields(){
+        tfUser.setText("");
+        tfPass.setText("");
+        tfName.setText("");
+        revalidate();
+    } 
 }

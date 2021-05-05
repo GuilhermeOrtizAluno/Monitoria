@@ -13,6 +13,7 @@ import static app.Program.socket;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import screens.RegisterScreen;
 
 /**
@@ -25,7 +26,15 @@ public class RegisterStudentController extends RegisterScreen{
     public RegisterStudentController() {
         initComponents();
         continuationInitComponents();
+        cleanFields();
     }
+    
+    public void cleanFields(){
+        tfUser.setText("");
+        tfPass.setText("");
+        tfName.setText("");
+        revalidate();
+    } 
 
     private void continuationInitComponents(){
         bSingUp.addActionListener((ActionEvent evt) -> {
@@ -47,6 +56,16 @@ public class RegisterStudentController extends RegisterScreen{
             String name = tfName.getText();
             String user = tfUser.getText();
             String pass = tfPass.getText();
+            
+            if("".equals(name) || "".equals(user) || "".equals(pass)){
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Invalid fields, please try again", 
+                    "Invalid field", 
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
 
             JSONObject route = new JSONObject();
             route.put("rota", "login.registro");

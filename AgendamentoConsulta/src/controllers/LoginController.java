@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import screens.LoginScreen;
 
 /**
@@ -22,10 +23,17 @@ import screens.LoginScreen;
  */
 public class LoginController extends LoginScreen{ 
     
-    public LoginController(){
+    public LoginController(){ 
         initComponents();
         continuationInitComponents();
+        cleanFields();
     }
+    
+    public void cleanFields(){
+        tfUser.setText("");
+        tfPass.setText("");
+        revalidate();
+    } 
     
     private void continuationInitComponents(){
         bSingIn.addActionListener((ActionEvent evt) -> {
@@ -50,6 +58,16 @@ public class LoginController extends LoginScreen{
             // Read from interface
             String user = tfUser.getText();
             String pass = tfPass.getText();
+            
+            if("".equals(user) || "".equals(pass)){
+                JOptionPane.showMessageDialog(
+                    null, 
+                    "Invalid fields, please try again", 
+                    "Invalid field", 
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
 
             JSONObject route = new JSONObject();
             route.put("rota", "login.login");
