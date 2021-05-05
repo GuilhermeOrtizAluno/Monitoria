@@ -36,7 +36,7 @@ public class UserDAO {
             stmt.setString(1, u.getUsuario());
             stmt.setString(2, u.getNome());
             stmt.setString(3, u.getSenha());
-            stmt.setBoolean(4, u.isIs_admin());
+            stmt.setBoolean(4, false);
             stmt.setBoolean(5, u.isIs_monitor());
 
             stmt.executeUpdate();
@@ -99,13 +99,11 @@ public class UserDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
-            //stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ? WHERE pk_usuario = ?");
-            //stmt.setString(1, u.getUsuario());
-            stmt.setString(1, u.getSenha());
-            //stmt.setBoolean(4, u.isIs_admin());
-            //stmt.setBoolean(5, u.isIs_monitor());
-            stmt.setString(2, u.getUsuario());
+            //stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
+            stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ?, nome = ? WHERE pk_usuario = ?");
+            stmt.setString(1, u.getUsuario());
+            stmt.setString(2, u.getSenha());
+            stmt.setString(3, u.getNome());
 
             stmt.executeUpdate();
 

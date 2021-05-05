@@ -23,13 +23,13 @@ import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
 import entities.Monitoring;
 import java.awt.Color;
+import java.util.List;
+import org.json.JSONArray;
 
 /**
  * Gerenciador do Servidor
- * @author Guilherme Ortiz
- * Consumir Json
- * Tomar Desição
- * Retorna Json 
+ *
+ * @author Guilherme Ortiz Consumir Json Tomar Desição Retorna Json
  */
 public class ManagerServer extends Thread {
 
@@ -67,95 +67,90 @@ public class ManagerServer extends Thread {
 
                 // Color legend show logs
                 legend = Color.GREEN;
-                
+
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
-                
+
                 // <editor-fold defaultstate="collapsed" desc="Cases">
                 switch (rRoute.getRota()) {
                     //Login
-                    case "login.login" ->
-                    {
+                    case "login.login" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         login(sRoute);
                     }
-                    case "login.logout" ->
-                    {
+                    case "login.logout" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         logout();
                     }
-                    case "login.registro" ->
-                    {
+                    case "login.registro" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         register(sRoute);
                     }
-                    case "login.update" ->
-                    {
+                    case "login.update" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         update(sRoute);
                     }
                     //Users
-                    case "usuario.delete" ->{
+                    case "usuario.delete" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
-                        delete();
+
+                        delete(sRoute);
                     }
                     //mensagem
-                    case "mensagem.mesagem" ->
-                    {
+                    case "mensagem.mesagem" -> {
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         mensagem();
                     }
                     //Client
-                    case "cliente.usuarios-ativos" ->{
-                     //Shows what came
+                    case "cliente.usuarios-ativos" -> {
+                        //Shows what came
                         showReceived(sRoute);
-                        
+
                         usersOn();
                         //monitores();
                     }
-                    case "cliente.usuarios" ->{
-                     //Shows what came
+                    case "cliente.usuarios" -> {
+                        //Shows what came
                         showReceived(sRoute);
-                        
+
                         usersAll();
                     }
                     // Monitoring
-                    case "monitoria.registro" ->{
+                    case "monitoria.registro" -> {
                         showReceived(sRoute);
-                        
+
                         registerdaoMonitoring(sRoute);
                     }
-                    case "monitoria.update" ->{
+                    case "monitoria.update" -> {
                         showReceived(sRoute);
-                        
+
                         updateMonitoring(sRoute);
                     }
-                    case "monitoria.listar" ->{
+                    case "monitoria.listar" -> {
                         showReceived(sRoute);
-                        
+
                         monitorings();
                     }
-                    case "monitoria.listar-monitor" ->{
+                    case "monitoria.listar-monitor" -> {
                         showReceived(sRoute);
-                        
+
                         monitors();
                     }
-                    case "monitoria.listar-aluno" ->{
+                    case "monitoria.listar-aluno" -> {
                         showReceived(sRoute);
-                        
+
                         students();
                     }
                     //Student
@@ -167,12 +162,11 @@ public class ManagerServer extends Thread {
                         showReceived(sRoute);
                         studentDelete();
                     }
-                    default ->
-                    {
+                    default -> {
                         legend = Color.RED;
                         //Shows what came
                         showReceived(sRoute);
-                        
+
                         errorRoute();
                     }
                 }// </editor-fold>  
@@ -191,9 +185,11 @@ public class ManagerServer extends Thread {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Fucntions">
+
+    //pronto
     private void login(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -203,7 +199,7 @@ public class ManagerServer extends Thread {
 
         // Search for user in the bank
         user = dUser.search(user);
-        
+
         boolean bUser = user.getUsuario() != null;
 
         JSONObject route = new JSONObject();
@@ -239,33 +235,34 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
+    //pronto
     private void logout() throws IOException, JSONException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
         route.put("erro", "false");
-        
+
         legend = Color.BLACK;
 
         // Shows what will be sent
         showSend(route.toString());
         int i = 0;
 
-        /*for (; i < usuariosAtivos.length(); i++) {
+        for (; i < usuariosAtivos.length(); i++) {
             if (usuariosAtivos.getString(i).equals(user.getNome())) {
                 break;
             }
-        }*/
-        //usuariosAtivos.remove(i);
+        }
+        usuariosAtivos.remove(i);
 
         // Send
         pr.println(route);
         pr.flush();
 
         usersOn();
-
         //pr.close();
     }
 
+    //pronto
     private void register(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -295,12 +292,15 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
+    //pronto
     private void update(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
         User rUser = gson.fromJson(string, User.class);
 
         user.setSenha(rUser.getSenha());
+        user.setNome(rUser.getNome());
+        user.setUsuario(rUser.getUsuario());
 
         // Search for user in the bank
         boolean bUser = dUser.update(user);
@@ -317,21 +317,26 @@ public class ManagerServer extends Thread {
             route.put("erro", "false");
         }
 
-        String str = gson.toJson(user);
-
         // Shows what will be sent
         showSend(route.toString());
+
         // Send
         pr.println(route);
         pr.flush();
         //pr.close();
     }
 
-    private void delete() throws IOException, JSONException {
+    //pronto
+    private void delete(String string) throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
+        boolean bUser;
 
-        // Search for user in the bank
-        boolean bUser = dUser.delete(user);
+        if (user.isIs_admin()) {
+            User userD = new Gson().fromJson(string, User.class);
+            bUser = dUser.delete(userD);
+        } else {
+            bUser = dUser.delete(user);
+        }
 
         JSONObject route = new JSONObject();
         route.put("rota", "usuario.delete");
@@ -342,14 +347,28 @@ public class ManagerServer extends Thread {
             route.put("erro", "Usuario nao deletado");
         } else {
             legend = Color.BLACK;
-            int i=0;
-            
-            for(; i < usuariosAtivos.length(); i++){
-                if(usuariosAtivos.getString(i).equals(user.getNome())){
-                    break;
+
+            if (user.isIs_admin()) {
+                int i = 0, j = 0;
+                for (; i < usuariosAtivos.length(); i++) {
+                    if (usuariosAtivos.getString(i).equals(user.getNome())) {
+                        j = 1;
+                        break;
+                    }
                 }
+                if (j == 1) {
+                    usuariosAtivos.remove(i);
+                }
+            } else {
+                int i = 0;
+
+                for (; i < usuariosAtivos.length(); i++) {
+                    if (usuariosAtivos.getString(i).equals(user.getNome())) {
+                        break;
+                    }
+                }
+                usuariosAtivos.remove(i);
             }
-            usuariosAtivos.remove(i);
 
             route.put("erro", "false");
 
@@ -360,16 +379,17 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-        
+
         usersOn();
 
         //pr.close();
     }
-    
+
     private void mensagem() {
 
     }
 
+    //NÃO MEXI
     private void errorRoute() throws JSONException, IOException {
         JOptionPane.showMessageDialog(
                 null,
@@ -385,16 +405,17 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-        
+
     }
-    
-    private void monitors() throws JSONException, IOException{
+
+    //mostrar monitores cadastrados APARENTEMENTE NAO VAI USAR
+    private void monitors() throws JSONException, IOException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
 
         // Search for user in the bank
         var monitores = dUser.read();
-        
+
         boolean bUser = monitores != null;
 
         JSONObject route = new JSONObject();
@@ -417,19 +438,19 @@ public class ManagerServer extends Thread {
         pr.flush();
 
     }
-    
-    private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException{
+    //NAO MEXI
+    private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
         // Convert Json String to User Object
         var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
-        
+
         boolean bMonitoring = daoMonitoring.create(monitoria);
 
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.registro");
-        
+
         if (!bMonitoring) {
             legend = Color.RED;
             route.put("erro", "Algo deu errado");
@@ -445,19 +466,19 @@ public class ManagerServer extends Thread {
         //pr.println(route);
         //pr.flush();
     }
-    
-    private void updateMonitoring(String sMonitoring) throws JSONException, IOException{
-         Gson gson = new Gson();
+    //NAO MEXI
+    private void updateMonitoring(String sMonitoring) throws JSONException, IOException {
+        Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
         // Convert Json String to User Object
         var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
-        
+
         boolean bMonitoring = daoMonitoring.update(monitoria);
 
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.update");
-        
+
         if (!bMonitoring) {
             legend = Color.RED;
             route.put("erro", "Algo deu errado");
@@ -473,17 +494,18 @@ public class ManagerServer extends Thread {
         //pr.println(route);
         //pr.flush();
     }
-    
-    private void monitorings() throws JSONException, IOException{
+
+    //APARENTEMENTE NÃO VAI UTILIZAR
+    private void monitorings() throws JSONException, IOException {
         MonitoringDAO daoMonitoring = new MonitoringDAO();
-        
+
         var monitorings = daoMonitoring.read();
-        
+
         boolean bMonitoring = monitorings != null;
 
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.listar");
-        
+
         if (!bMonitoring) {
             legend = Color.RED;
             route.put("erro", "Algo deu errado");
@@ -499,30 +521,51 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
     }
-    
-    private void usersAll(){}
-    
-    private void students(){}
-    
-    private void studentRegister(){}
-    
-    private void studentDelete(){}
-            
+
+    //TEM Q ARRUMAR PRA PASSAR LISTA PRA JSON, TEM QUE USAR O CLIENT DO MINARI Q DPS DE LUGAR TEM UM BOTAO "USUARIOS CONSOLE"
+    private void usersAll() throws JSONException, IOException {
+        List<User> list = new UserDAO().read();
+        JSONObject route = new JSONObject();
+
+        legend = Color.BLACK;
+
+        JSONArray jsArray = (JSONArray) list;
+        System.out.println(jsArray);
+        
+        route.put("rota", "cliente.usuarios");
+        route.put("usuarios", jsArray);
+
+        // Send
+        pr.println(route);
+        pr.flush();
+
+    }
+    //NAO MEXI
+    private void students() {
+    }
+    //NAO MEXI
+    private void studentRegister() {
+    }
+    //NAO MEXI
+    private void studentDelete() {
+    }
+
+    //ALTERAR ATUALIZAÇÃO USERS ONLINE NO SERVIDOR
     private void usersOn() throws JSONException, IOException {
         JSONObject route = new JSONObject();
-        route.put("rota", "cliente.usuarios");
+        route.put("rota", "cliente.usuarios-ativos"); //ALTEREI NOME DA ROTA DO BROADCAST, AGR TA IGUAL DA EP1
         route.put("usuarios", usuariosAtivos);
-        
+
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        serverController.includeLog("Send -> "+route.toString(), Color.BLACK, Color.PINK);
+        serverController.includeLog("Send -> " + route.toString(), Color.BLACK, Color.PINK);
 
         for (PrintWriter pw : listPw) {
             pw.println(route);
             pw.flush();
         }
-    }        
+    }
 
     // Shows what will be sent
     private void showSend(String send) throws IOException {
@@ -530,8 +573,8 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + send);
 
         //Iterface Log
-        serverController.includeLog("Send -> "+send, legend, Color.BLUE);
-        
+        serverController.includeLog("Send -> " + send, legend, Color.BLUE);
+
         //Log txt
         File fLog = new File("log.txt");
         try (FileWriter fwLog = new FileWriter(fLog, true)) {
@@ -546,8 +589,8 @@ public class ManagerServer extends Thread {
         System.out.println("Received <- " + received);
 
         //Iterface Log
-        serverController.includeLog("Received <- "+received, legend, Color.cyan);
-        
+        serverController.includeLog("Received <- " + received, legend, Color.cyan);
+
         //Log txt
         File fLog = new File("log.txt");
         try (FileWriter fwLog = new FileWriter(fLog, true)) {
@@ -555,7 +598,6 @@ public class ManagerServer extends Thread {
             fwLog.flush();
         }
     }
-    
-    // </editor-fold>  
 
+    // </editor-fold>  
 }
