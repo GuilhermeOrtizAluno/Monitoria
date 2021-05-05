@@ -13,7 +13,7 @@ import screens.ConnectionScreen;
 
 /**
  *
- * @author gui_o
+ * @author Guilherme Ortiz Santos
  */
 public class ConnectionController extends ConnectionScreen{
 

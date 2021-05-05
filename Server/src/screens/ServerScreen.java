@@ -3,12 +3,15 @@ package screens;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -21,8 +24,11 @@ public class ServerScreen extends JFrame {
     public JPanel pLog;
     public JPanel pServer;
     public JPanel pTitle;
+    public JPanel pLogContent;
     public JScrollPane spLog;
                       
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Components"> 
     public void initComponents() {
 
         lTitle = new JLabel();
@@ -31,6 +37,7 @@ public class ServerScreen extends JFrame {
         pContent = new JPanel();
         pLog = new JPanel();
         spLog = new JScrollPane();
+        pLogContent = new JPanel();
 
         pServer.setBackground(new Color(255, 255, 255));
 
@@ -58,10 +65,17 @@ public class ServerScreen extends JFrame {
 
         spLog.setBackground(new Color(204, 0, 204));
 
+        pLogContent.setBackground(new Color(204, 0, 204));
+        
         pLog.setBackground(new Color(204, 0, 204));
+        
+        pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
+        pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
+        
+        pLogContent.add(pLog);
 
-        GroupLayout pLogLayout = new GroupLayout(pLog);
-        pLog.setLayout(pLogLayout);
+        /*GroupLayout pLogLayout = new GroupLayout(pLogContent);
+        pLogContent.setLayout(pLogLayout);
         pLogLayout.setHorizontalGroup(
             pLogLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 684, Short.MAX_VALUE)
@@ -69,9 +83,9 @@ public class ServerScreen extends JFrame {
         pLogLayout.setVerticalGroup(
             pLogLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGap(0, 396, Short.MAX_VALUE)
-        );
+        );*/
 
-        spLog.setViewportView(pLog);
+        spLog.setViewportView(pLogContent);
 
         GroupLayout pServerLayout = new GroupLayout(pServer);
         pServer.setLayout(pServerLayout);
@@ -110,6 +124,6 @@ public class ServerScreen extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Server");
         pack();
-    }                       
+    } // </editor-fold>                    
                
 }

@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dice;
 
 import static app.Program.*;
 import entities.Route;
 import entities.User;
 import com.google.gson.Gson;
+import crud.MonitoringDAO;
 import crud.UserDAO;
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -25,11 +21,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
+import entities.Monitoring;
 import java.awt.Color;
 
 /**
- *
- * @author gui_o
+ * Gerenciador do Servidor
+ * @author Guilherme Ortiz
+ * Consumir Json
+ * Tomar Desição
+ * Retorna Json 
  */
 public class ManagerServer extends Thread {
 
@@ -65,12 +65,16 @@ public class ManagerServer extends Thread {
                 //Read String
                 String sRoute = bf.readLine();
 
+                // Color legend show logs
                 legend = Color.GREEN;
                 
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
+                
+                // <editor-fold defaultstate="collapsed" desc="Cases">
                 switch (rRoute.getRota()) {
+                    //Login
                     case "login.login" ->
                     {
                         //Shows what came
@@ -99,12 +103,14 @@ public class ManagerServer extends Thread {
                         
                         update(sRoute);
                     }
+                    //Users
                     case "usuario.delete" ->{
                         //Shows what came
                         showReceived(sRoute);
                         
                         delete();
                     }
+                    //mensagem
                     case "mensagem.mesagem" ->
                     {
                         //Shows what came
@@ -112,11 +118,54 @@ public class ManagerServer extends Thread {
                         
                         mensagem();
                     }
-                    case "monitor.listar" ->{
-                        //Shows what came
+                    //Client
+                    case "cliente.usuarios-ativos" ->{
+                     //Shows what came
                         showReceived(sRoute);
                         
-                        monitores();
+                        usersOn();
+                        //monitores();
+                    }
+                    case "cliente.usuarios" ->{
+                     //Shows what came
+                        showReceived(sRoute);
+                        
+                        usersAll();
+                    }
+                    // Monitoring
+                    case "monitoria.registro" ->{
+                        showReceived(sRoute);
+                        
+                        registerdaoMonitoring(sRoute);
+                    }
+                    case "monitoria.update" ->{
+                        showReceived(sRoute);
+                        
+                        updateMonitoring(sRoute);
+                    }
+                    case "monitoria.listar" ->{
+                        showReceived(sRoute);
+                        
+                        monitorings();
+                    }
+                    case "monitoria.listar-monitor" ->{
+                        showReceived(sRoute);
+                        
+                        monitors();
+                    }
+                    case "monitoria.listar-aluno" ->{
+                        showReceived(sRoute);
+                        
+                        students();
+                    }
+                    //Student
+                    case "aluno-monitoria.inscrever" -> {
+                        showReceived(sRoute);
+                        studentRegister();
+                    }
+                    case "aluno-monitoria.delete" -> {
+                        showReceived(sRoute);
+                        studentDelete();
                     }
                     default ->
                     {
@@ -126,7 +175,7 @@ public class ManagerServer extends Thread {
                         
                         errorRoute();
                     }
-                }
+                }// </editor-fold>  
             }
         } catch (EOFException e) {
             System.out.println("EOF:" + e.getMessage());
@@ -142,7 +191,9 @@ public class ManagerServer extends Thread {
             }
         }
     }
-
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Fucntions">
     private void login(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -183,7 +234,7 @@ public class ManagerServer extends Thread {
 
         if ("false".equals(route.getString("erro"))) {
 
-            sendToAll();
+            usersOn();
         }
         //pr.close();
     }
@@ -210,7 +261,7 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
 
-        sendToAll();
+        usersOn();
 
         //pr.close();
     }
@@ -310,7 +361,7 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
         
-        sendToAll();
+        usersOn();
 
         //pr.close();
     }
@@ -319,16 +370,25 @@ public class ManagerServer extends Thread {
 
     }
 
-    private void errorRoute() {
+    private void errorRoute() throws JSONException, IOException {
         JOptionPane.showMessageDialog(
                 null,
                 "No route found",
                 "Route error",
                 JOptionPane.ERROR_MESSAGE
         );
+        JSONObject route = new JSONObject();
+        route.put("rota", "erro");
+        route.put("erro", "mesagem_fora_do_padrao");
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+        
     }
     
-    private void monitores() throws JSONException, IOException{
+    private void monitors() throws JSONException, IOException{
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
 
@@ -357,6 +417,112 @@ public class ManagerServer extends Thread {
         pr.flush();
 
     }
+    
+    private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException{
+        Gson gson = new Gson();
+        MonitoringDAO daoMonitoring = new MonitoringDAO();
+
+        // Convert Json String to User Object
+        var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
+        
+        boolean bMonitoring = daoMonitoring.create(monitoria);
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitoria.registro");
+        
+        if (!bMonitoring) {
+            legend = Color.RED;
+            route.put("erro", "Algo deu errado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            //route.put("monitores", monitores);
+        }
+
+        // Shows what will be sent
+        //showSend(route.toString());
+        // Send
+        //pr.println(route);
+        //pr.flush();
+    }
+    
+    private void updateMonitoring(String sMonitoring) throws JSONException, IOException{
+         Gson gson = new Gson();
+        MonitoringDAO daoMonitoring = new MonitoringDAO();
+
+        // Convert Json String to User Object
+        var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
+        
+        boolean bMonitoring = daoMonitoring.update(monitoria);
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitoria.update");
+        
+        if (!bMonitoring) {
+            legend = Color.RED;
+            route.put("erro", "Algo deu errado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            //route.put("monitores", monitores);
+        }
+
+        // Shows what will be sent
+        //showSend(route.toString());
+        // Send
+        //pr.println(route);
+        //pr.flush();
+    }
+    
+    private void monitorings() throws JSONException, IOException{
+        MonitoringDAO daoMonitoring = new MonitoringDAO();
+        
+        var monitorings = daoMonitoring.read();
+        
+        boolean bMonitoring = monitorings != null;
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitoria.listar");
+        
+        if (!bMonitoring) {
+            legend = Color.RED;
+            route.put("erro", "Algo deu errado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            route.put("monitores", monitorings);
+        }
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+    }
+    
+    private void usersAll(){}
+    
+    private void students(){}
+    
+    private void studentRegister(){}
+    
+    private void studentDelete(){}
+            
+    private void usersOn() throws JSONException, IOException {
+        JSONObject route = new JSONObject();
+        route.put("rota", "cliente.usuarios");
+        route.put("usuarios", usuariosAtivos);
+        
+        System.out.println("Send -> " + route);
+
+        //Iterface Log
+        serverController.includeLog("Send -> "+route.toString(), Color.BLACK, Color.PINK);
+
+        for (PrintWriter pw : listPw) {
+            pw.println(route);
+            pw.flush();
+        }
+    }        
 
     // Shows what will be sent
     private void showSend(String send) throws IOException {
@@ -389,20 +555,7 @@ public class ManagerServer extends Thread {
             fwLog.flush();
         }
     }
+    
+    // </editor-fold>  
 
-    private void sendToAll() throws JSONException, IOException {
-        JSONObject route = new JSONObject();
-        route.put("rota", "cliente.usuarios-ativos");
-        route.put("usuarios", usuariosAtivos);
-        
-        System.out.println("Send -> " + route);
-
-        //Iterface Log
-        serverController.includeLog("Send -> "+route.toString(), Color.BLACK, Color.PINK);
-
-        for (PrintWriter pw : listPw) {
-            pw.println(route);
-            pw.flush();
-        }
-    }
 }

@@ -17,8 +17,10 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 
 /**
- *
+ * Gerenciador de Cliente
  * @author gui_o
+ * Receptor de conexão
+ * Encaminha para o serviço do servidor
  */
 public class TCPServer extends Thread{
       
@@ -42,6 +44,7 @@ public class TCPServer extends Thread{
     
     @Override
     public void run() {
+        serverController.includeLog("Aguardado primeira conexão...", Color.BLACK, Color.WHITE);
         while(true) {
             try {
                 clientSocket = listenSocket.accept();

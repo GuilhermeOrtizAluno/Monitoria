@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class StudentDAO {
     
     //Create
-    public void create(Student s) {
+    public boolean create(Student s) {
         
         Connection con = ConnectionFactory.getConnection();
         
@@ -28,12 +27,13 @@ public class StudentDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            ConnectionFactory.closeConnection(con, stmt);
+            
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
+            return false;
+        } 
 
     }
     
@@ -73,7 +73,7 @@ public class StudentDAO {
     }
 
     //Update
-    public void update(Student s) {
+    public boolean update(Student s) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -87,17 +87,20 @@ public class StudentDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
-        } finally {
             ConnectionFactory.closeConnection(con, stmt);
+            
+            return true;
+        } catch (SQLException ex) {
+           System.out.println(ex);
+           return false;
+        } finally {
+            
         }
 
     }
     
     //Delete
-    public void delete(Student s) {
+    public boolean delete(Student s) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -109,12 +112,12 @@ public class StudentDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
-        } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        }
-
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } 
     }
 }

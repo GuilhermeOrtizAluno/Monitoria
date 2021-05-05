@@ -43,14 +43,15 @@ public class UserDAO {
            
             //Gson gson = new Gson();
             //System.out.println(gson.toJson(u));
+            
+            ConnectionFactory.closeConnection(con, stmt);
+            return true;
            
         } catch (SQLException ex) {
             System.out.println(ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
+            return false;
+        } 
 
-        return true;
     }
 
     //Read

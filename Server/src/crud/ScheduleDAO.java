@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class ScheduleDAO {
     //Create
-    public void create(Schedule s) {
+    public boolean create(Schedule s) {
         
         Connection con = ConnectionFactory.getConnection();
         
@@ -26,13 +25,14 @@ public class ScheduleDAO {
             stmt.setInt(2, s.getFk_pk_monitoria());
             
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            
+            ConnectionFactory.closeConnection(con, stmt);
+            
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
+            return false;
+        } 
 
     }
     
@@ -72,7 +72,7 @@ public class ScheduleDAO {
     }
 
     //Update
-    public void update(Schedule s) {
+    public boolean update(Schedule s) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -86,17 +86,17 @@ public class ScheduleDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
-        } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        }
-
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } 
     }
     
     //Delete
-    public void delete(Schedule s) {
+    public boolean delete(Schedule s) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -108,12 +108,12 @@ public class ScheduleDAO {
 
             stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
-        } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        }
-
+            
+            return true;
+        } catch (SQLException ex) {
+             System.out.println(ex);
+            return false;
+        } 
     }
 }

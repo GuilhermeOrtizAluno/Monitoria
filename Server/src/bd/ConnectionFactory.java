@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Samuelson
+ * @author Guilherme Ortiz Santos
  */
 public class ConnectionFactory {
 

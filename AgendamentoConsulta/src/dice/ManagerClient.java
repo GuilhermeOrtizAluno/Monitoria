@@ -4,7 +4,6 @@ import entites.Route;
 import static app.Program.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -134,14 +133,14 @@ public class ManagerClient extends Thread{
                 clientController.pContentAdd("managementMonitor");
                 
                 JSONObject route = new JSONObject();
-                route.put("rota", "monitor.listar");
+                //route.put("rota", "monitor.listar");
                 
-                clientController.showSend(route.toString());
+                //clientController.showSend(route.toString());
                 
                 // Send
-                pr = new PrintWriter(ou);  
-                pr.println(route);
-                pr.flush();
+                //pr = new PrintWriter(ou);  
+                //pr.println(route);
+                //pr.flush();
                 
             }
             //case "monitor"  ->

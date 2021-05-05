@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package crud;
 
 import bd.ConnectionFactory;
@@ -15,14 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Guilherme Ortiz
  */
 public class MonitoringDAO {
-     public void create(Monitoring m) {
+    public boolean create(Monitoring m) {
         
         Connection con = ConnectionFactory.getConnection();
         
@@ -35,13 +29,13 @@ public class MonitoringDAO {
             stmt.setInt(3, m.getFk_pk_usuario());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            
+            ConnectionFactory.closeConnection(con, stmt);
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
+            return false;
+        } 
 
     }
     
@@ -81,7 +75,7 @@ public class MonitoringDAO {
     }
     
     //Update
-    public void update(Monitoring m) {
+    public boolean update(Monitoring m) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -95,18 +89,21 @@ public class MonitoringDAO {
             stmt.setInt(4, m.getPk_monitoria());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
-        } finally {
+            
             ConnectionFactory.closeConnection(con, stmt);
-        }
+             
+            return true;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            
+            return false;
+        } 
 
     }
     
     //Delete
-    public void delete(Monitoring m) {
+    public boolean delete(Monitoring m) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -117,13 +114,14 @@ public class MonitoringDAO {
             stmt.setInt(1, m.getPk_monitoria());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
-        } finally {
+            
             ConnectionFactory.closeConnection(con, stmt);
-        }
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } 
 
     }
 }

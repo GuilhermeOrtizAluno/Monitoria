@@ -27,30 +27,36 @@ public class Users extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pTitle = new javax.swing.JPanel();
         lTitle = new javax.swing.JLabel();
         spUsers = new javax.swing.JScrollPane();
         pUsers = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(230, 390));
 
-        jPanel1.setBackground(new java.awt.Color(204, 0, 204));
+        pTitle.setBackground(new java.awt.Color(204, 0, 204));
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lTitle.setForeground(new java.awt.Color(255, 255, 255));
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lTitle.setText("Usuarios");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pTitleLayout = new javax.swing.GroupLayout(pTitle);
+        pTitle.setLayout(pTitleLayout);
+        pTitleLayout.setHorizontalGroup(
+            pTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pTitleLayout.setVerticalGroup(
+            pTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
         );
+
+        spUsers.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spUsers.setPreferredSize(new java.awt.Dimension(210, 320));
+
+        pUsers.setPreferredSize(new java.awt.Dimension(208, 320));
 
         javax.swing.GroupLayout pUsersLayout = new javax.swing.GroupLayout(pUsers);
         pUsers.setLayout(pUsersLayout);
@@ -60,7 +66,7 @@ public class Users extends javax.swing.JPanel {
         );
         pUsersLayout.setVerticalGroup(
             pUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGap(0, 320, Short.MAX_VALUE)
         );
 
         spUsers.setViewportView(pUsers);
@@ -69,26 +75,26 @@ public class Users extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(spUsers)
+                .addComponent(spUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(spUsers, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                .addComponent(spUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lTitle;
+    public javax.swing.JPanel pTitle;
     private javax.swing.JPanel pUsers;
     private javax.swing.JScrollPane spUsers;
     // End of variables declaration//GEN-END:variables

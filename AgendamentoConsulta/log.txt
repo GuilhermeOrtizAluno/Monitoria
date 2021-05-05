@@ -977,3 +977,158 @@ Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
 Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"rota":"monitor.listar"}
 Received <- {"erro":"false","monitores":["User{pk_usuario=3, usuario=admin, nome=admin, senha=123, is_admin=true, is_monitor=false}","User{pk_usuario=13, usuario=a01, nome=aluno01, senha=123, is_admin=false, is_monitor=false}"],"rota":"monitor.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"monitor.listar"}
+Received <- {"usuarios":["admin","admin"],"rota":"cliente.usuarios"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"mesagem_fora_do_padrao","rota":"erro"}
+Received <- {"erro":"false","rota":"login.logout"}
+Received <- {"usuarios":["admin","admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"usuarios":["admin","admin"],"rota":"cliente.usuarios"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Received <- {"usuarios":["admin","admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}
+Received <- {"usuarios":["admin"],"rota":"cliente.usuarios"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"","usuario":"","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}

@@ -2,16 +2,18 @@ package controllers;
 
 import static app.Program.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import screens.ServerScreen;
 
 /**
  *
- * @author gui_o
+ * @author Guilherme Ortiz Santos
  */
 public class ServerController extends ServerScreen {
     
@@ -48,6 +50,7 @@ public class ServerController extends ServerScreen {
                 
         log = new JPanel();
         log.setSize(600,35);
+        //log.setMinimumSize(new Dimension(600, 35));
         //  log.setLayout(new FlowLayout());
         //log.setBorder(new EmptyBorder(10, 10, 10, 10));
         //log.setBorder(new LineBorder(Color.WHITE, 5, true));
@@ -59,6 +62,7 @@ public class ServerController extends ServerScreen {
         yLog += 40;
         
         pLog.add(log);
+        pLog.add(Box.createRigidArea(new Dimension(0,5)));
         pLog.repaint();
         pLog.validate();
         

@@ -26,6 +26,8 @@ public class ConnectionScreen extends JPanel {
     public JTextField tfIP;
     public JTextField tfPort;
                           
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Components">    
     public void initComponents() {
 
         pConection =    new JPanel();
