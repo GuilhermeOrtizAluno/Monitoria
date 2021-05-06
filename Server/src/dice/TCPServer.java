@@ -54,10 +54,8 @@ public class TCPServer extends Thread{
                 managerServer.Connection();
             } catch (IOException ex) {
                 Logger.getLogger(TCPServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-               
+            }    
         }
-    
     }
 }
 

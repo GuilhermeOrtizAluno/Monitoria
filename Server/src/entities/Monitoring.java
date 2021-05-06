@@ -9,6 +9,15 @@ public class Monitoring {
     private String nome;
     private String senha;
     private int fk_pk_usuario;
+    private String nomeUsuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
 
     public int getPk_monitoria() {
         return pk_monitoria;

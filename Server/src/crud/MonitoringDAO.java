@@ -23,10 +23,11 @@ public class MonitoringDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO monitoria (nome, senha, fk_pk_usuario)VALUES(?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO monitoria (nome, senha, nome_usuario)VALUES(?,?,?)");
             stmt.setString(1, m.getNome());
             stmt.setString(2, m.getSenha());
-            stmt.setInt(3, m.getFk_pk_usuario());
+          //stmt.setInt(3, m.getFk_pk_usuario());
+            stmt.setString(3, m.getNomeUsuario());
 
             stmt.executeUpdate();
             
@@ -36,7 +37,6 @@ public class MonitoringDAO {
             System.out.println(ex);
             return false;
         } 
-
     }
     
     //Read
@@ -61,6 +61,7 @@ public class MonitoringDAO {
                 monitoring.setFk_pk_usuario(rs.getInt("fk_pk_usuario"));
                 monitoring.setNome(rs.getString("nome"));
                 monitoring.setSenha(rs.getString("senha"));
+                monitoring.setNomeUsuario(rs.getString("nomeUsuario"));
                 monitorings.add(monitoring);
             }
 

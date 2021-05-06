@@ -23,6 +23,7 @@ import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
 import entities.Monitoring;
 import java.awt.Color;
+import org.json.JSONArray;
 
 /**
  * Gerenciador do Servidor
@@ -250,14 +251,10 @@ public class ManagerServer extends Thread {
 
         // Shows what will be sent
         showSend(route.toString());
-        int i = 0;
-
-        for (; i < usuariosAtivos.length(); i++) {
-            if (usuariosAtivos.getString(i).equals(user.getNome())) {
-                break;
-            }
-        }
-        usuariosAtivos.remove(i);
+        
+        removeUserOn(user.getUsuario());
+        
+        user = null;//pode dar ruim
 
         // Send
         pr.println(route);
@@ -336,10 +333,10 @@ public class ManagerServer extends Thread {
     //pronto
     private void delete(String string) throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
+        User userD = new Gson().fromJson(string, User.class);
         boolean bUser;
-
+        
         if (user.isIs_admin()) {
-            User userD = new Gson().fromJson(string, User.class);
             bUser = dUser.delete(userD);
         } else {
             bUser = dUser.delete(user);
@@ -356,26 +353,11 @@ public class ManagerServer extends Thread {
             legend = Color.BLACK;
 
             if (user.isIs_admin()) {
-                int i = 0, j = 0;
-                for (; i < usuariosAtivos.length(); i++) {
-                    if (usuariosAtivos.getString(i).equals(user.getNome())) {
-                        j = 1;
-                        break;
-                    }
-                }
-                if (j == 1) {
-                    usuariosAtivos.remove(i);
-                }
+                removeUserOn(userD.getUsuario());
             } else {
-                int i = 0;
-
-                for (; i < usuariosAtivos.length(); i++) {
-                    if (usuariosAtivos.getString(i).equals(user.getNome())) {
-                        break;
-                    }
-                }
-                usuariosAtivos.remove(i);
+                removeUserOn(user.getUsuario()); 
             }
+            user = null;
 
             route.put("erro", "false");
 
@@ -391,9 +373,22 @@ public class ManagerServer extends Thread {
 
         //pr.close();
     }
-
+  
+    //pronto
+    private void removeUserOn(String usuarioRemove) throws JSONException{
+        int i = 0;
+        
+        for(; i < usuariosAtivos.length(); i++){
+            if(usuarioRemove.equals(usuariosAtivos.getJSONObject(i).getString("usuario"))){
+                break;
+            }
+        }
+        usuariosAtivos.remove(i);
+    }
+    
+    //NÃO MEXI
     private void mensagem() {
-
+        
     }
 
     //NÃO MEXI
@@ -445,12 +440,13 @@ public class ManagerServer extends Thread {
         pr.flush();
 
     }
+    
     //NAO MEXI
     private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
-        // Convert Json String to User Object
+        // Convert Json String to Monitoring Object
         var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
 
         boolean bMonitoring = daoMonitoring.create(monitoria);
@@ -468,11 +464,12 @@ public class ManagerServer extends Thread {
         }
 
         // Shows what will be sent
-        //showSend(route.toString());
+        showSend(route.toString());
         // Send
-        //pr.println(route);
-        //pr.flush();
+        pr.println(route);
+        pr.flush();
     }
+    
     //NAO MEXI
     private void updateMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
@@ -528,6 +525,7 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
     }
+    
     //NAO MEXI
     private void students() {
     }
@@ -538,6 +536,7 @@ public class ManagerServer extends Thread {
     private void studentDelete() {
     }
     
+
     private void usersAll() throws JSONException, IOException{
         UserDAO dUser = new UserDAO();
 
