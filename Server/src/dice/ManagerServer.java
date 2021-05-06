@@ -184,9 +184,12 @@ public class ManagerServer extends Thread {
             Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
+                removeUserOn(user.getUsuario());
                 clientSocket.close();
             } catch (IOException e) {
                 /*close failed*/
+            } catch (JSONException ex) {
+                Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -194,7 +197,6 @@ public class ManagerServer extends Thread {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Functions">
 
-    //PRONTO
     private void login(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -245,7 +247,6 @@ public class ManagerServer extends Thread {
         }
     }
 
-    //PRONTO
     private void logout() throws IOException, JSONException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
@@ -263,12 +264,8 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-
-        usersOn();
-        //pr.close();
     }
 
-    //PRONTO
     private void register(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -298,7 +295,6 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //PRONTO
     private void update(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -320,6 +316,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Alteração nao realizada");
         } else {
+            removeUserOn(user.getUsuario());
             legend = Color.BLACK;
             route.put("erro", "false");
         }
@@ -333,7 +330,6 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //PRONTO
     private void delete(String string) throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
         User userD = new Gson().fromJson(string, User.class);
@@ -370,13 +366,10 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
 
-        usersOn();
-
         //pr.close();
     }
 
-    //PRONTO
-    private void removeUserOn(String usuarioRemove) throws JSONException {
+    private void removeUserOn(String usuarioRemove) throws JSONException, IOException {
         int i = 0, j = 0;
 
         for (; i < usuariosAtivos.length(); i++) {
@@ -388,6 +381,7 @@ public class ManagerServer extends Thread {
         if (j == 1) {
             usuariosAtivos.remove(i);
         }
+        usersOn();
     }
 
     //NÃO MEXI
@@ -414,7 +408,7 @@ public class ManagerServer extends Thread {
 
     }
 
-    //MOSTRAR MONITORIAS DO MONISTROR SELECIONADO
+    //MOSTRAR MONITORIAS DO MONITOR SELECIONADO
     private void monitors() throws JSONException, IOException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -503,7 +497,6 @@ public class ManagerServer extends Thread {
         //pr.flush();
     }
 
-    //PRONTO
     private void monitorings() throws JSONException, IOException {
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 

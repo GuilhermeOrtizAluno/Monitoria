@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
@@ -57,7 +58,6 @@ public class ManagerClient extends Thread{
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
-                clientController.showReceived(sRoute, Color.RED);
                 
                 if("false".equals(rRoute.getErro()))
                 {
@@ -180,15 +180,8 @@ public class ManagerClient extends Thread{
                 admin = true;
                 clientController.pContentAdd("registerMonitor");
                 clientController.pContentAdd("managementMonitor");
-                
-                JSONObject route = new JSONObject();
-                route.put("rota", "cliente.usuarios");
-                
-                clientController.showSend(route.toString());
-                
-                // Send
-                pr.println(route);
-                pr.flush();
+
+                usersAll();
                 
             }
             case "monitor"  ->{
@@ -207,9 +200,10 @@ public class ManagerClient extends Thread{
         clientController.pExit.remove(clientController.bExit);
         clientController.pContentClear();
         clientController.pContentAdd("login");
+        admin = false;
     }
 
-    private void register() throws IOException {
+    private void register() throws IOException, JSONException {
 
         if(!bRoute){ 
             JOptionPane.showMessageDialog(
@@ -232,6 +226,7 @@ public class ManagerClient extends Thread{
             clientController.pContentClear();
             clientController.pContentAdd("login");
         }else{
+            usersAll();
             registerMonitorController.cleanFields();
         }
 
@@ -250,13 +245,7 @@ public class ManagerClient extends Thread{
                 clientController.pContentAdd("login");
             }else {
                 managementMonitorController.cleanFields();
-                
-                JSONObject route = new JSONObject();
-                route.put("rota", "cliente.usuarios");
-                clientController.showSend(route.toString());
-                // Send
-                pr.println(route);
-                pr.flush();
+                usersAll();
             }
         }else JOptionPane.showMessageDialog(
                 null, 
@@ -278,14 +267,8 @@ public class ManagerClient extends Thread{
                 clientController.pContentClear();
                 clientController.pContentAdd("login");
             }else {
-                managementMonitorController.cleanFields();
-                
-                JSONObject route = new JSONObject();
-                route.put("rota", "cliente.usuarios");
-                clientController.showSend(route.toString());
-                // Send
-                pr.println(route);
-                pr.flush();
+                managementMonitorController.cleanFields();  
+                usersAll();
             }
         }else JOptionPane.showMessageDialog(
                 null, 
@@ -302,12 +285,14 @@ public class ManagerClient extends Thread{
         
         JSONArray users = joUsers.getJSONArray("usuarios");
         
-        String[] monitors = new String[users.length()];
+        //String[] monitors;
+        Vector<String> monitors = new Vector<>();
+        monitors.add("");
         
         for(int i = 0; i < users.length(); i++){
             JSONObject joMonitor = users.getJSONObject(i);
             if("monitor".equals(joMonitor.getString("tipo_usuario"))){
-                monitors[i] = joMonitor.getString("usuario");
+                monitors.add(joMonitor.getString("usuario"));
                 monitorsAll.put(joMonitor);
             }
             //monitors[i] = usuarios.getString(i);
@@ -333,6 +318,15 @@ public class ManagerClient extends Thread{
             "Route error", 
             JOptionPane.ERROR_MESSAGE
         );
+    }
+    
+    private void usersAll() throws JSONException, IOException{
+        JSONObject route = new JSONObject();
+        route.put("rota", "cliente.usuarios");
+        clientController.showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
     }
     // </editor-fold> 
 }
