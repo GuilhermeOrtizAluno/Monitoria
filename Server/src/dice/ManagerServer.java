@@ -158,6 +158,7 @@ public class ManagerServer extends Thread {
 
                         students();
                     }
+                    case "monitoria.delete" -> showReceived(sRoute);
                     //Student
                     case "aluno-monitoria.inscrever" -> {
                         showReceived(sRoute);
