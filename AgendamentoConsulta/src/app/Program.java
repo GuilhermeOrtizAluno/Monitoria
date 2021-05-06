@@ -6,6 +6,7 @@ import controllers.LoginController;
 import controllers.ManagementMonitorController;
 import controllers.RegisterStudentController;
 import controllers.RegisterMonitorController;
+import controllers.RegisterMonitoringController;
 import controllers.UpdateStudentController;
 import dice.ManagerClient;
 import java.net.Socket;
@@ -26,6 +27,7 @@ public class Program  {
     public static RegisterMonitorController registerMonitorController;
     public static ManagementMonitorController managementMonitorController;
     public static UpdateStudentController updateStudentController;
+    public static RegisterMonitoringController registerMonitoringController;
     public static JSONArray monitorsAll;
     public static boolean admin;
     public static String screen;
@@ -43,6 +45,7 @@ public class Program  {
         registerMonitorController = new RegisterMonitorController();
         managementMonitorController = new ManagementMonitorController();
         updateStudentController = new UpdateStudentController();
+        registerMonitoringController = new RegisterMonitoringController ();
         clientController.start();
     }
     

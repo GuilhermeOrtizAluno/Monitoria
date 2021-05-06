@@ -2244,3 +2244,31 @@ Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"rota":"cliente.usuarios"}
 Send -> {"rota":"login.logout"}
 Received <- {"erro":"false","rota":"login.logout"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"is_admin":false,"senha":"123","horarios":["1M2","1M3","1M4"],"usuario_monitor":"monitor1","is_monitor":true,"nome":"monotoria1","rota":"monitoria.registro"}
+Received <- {"erro":"Algo deu errado","rota":"monitoria.registro"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","horarios":["1M2","1M3","1M4"],"usuario_monitor":"monitor1","nome":"monitoria","rota":"monitoria.registro"}
+Received <- {"erro":"Algo deu errado","rota":"monitoria.registro"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","horarios":["1M2","1M3","1M4"],"usuario_monitor":"monitor1","nome":"monitoria","rota":"monitoria.registro"}
+Received <- {"erro":"false","rota":"monitoria.registro"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}

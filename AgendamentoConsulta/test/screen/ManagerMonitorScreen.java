@@ -9,7 +9,7 @@ package screen;
  *
  * @author Guilherme Ortiz
  */
-public class ManagementMonitorScreen extends javax.swing.JPanel {
+public class ManagerMonitorScreen extends javax.swing.JPanel {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -184,7 +184,7 @@ public class ManagerServer extends Thread {
             Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                removeUserOn(user.getUsuario());
+                if(user != null)removeUserOn(user.getUsuario());
                 clientSocket.close();
             } catch (IOException e) {
                 /*close failed*/
@@ -257,7 +257,7 @@ public class ManagerServer extends Thread {
         // Shows what will be sent
         showSend(route.toString());
 
-        removeUserOn(user.getUsuario());
+        if(user != null) removeUserOn(user.getUsuario());
 
         user = null;//pode dar ruim
 
@@ -316,7 +316,7 @@ public class ManagerServer extends Thread {
             legend = Color.ORANGE;
             route.put("erro", "Alteração nao realizada");
         } else {
-            removeUserOn(user.getUsuario());
+            if(user != null) removeUserOn(user.getUsuario());
             legend = Color.BLACK;
             route.put("erro", "false");
         }
@@ -353,9 +353,9 @@ public class ManagerServer extends Thread {
             route.put("erro", "false");
 
             if (user.isIs_admin()) {
-                removeUserOn(userD.getUsuario());
+                if(user != null)removeUserOn(userD.getUsuario());
             } else {
-                removeUserOn(user.getUsuario());
+                if(user != null) removeUserOn(user.getUsuario());
             }
             //user = null;
         }

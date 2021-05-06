@@ -113,6 +113,7 @@ public class ManagerClient extends Thread{
                         clientController.showReceived(sRoute, legend);
                     }
                     case "monitoria.registro" ->{
+                        registerMonitoringController.cleanFields();
                         clientController.showReceived(sRoute, legend);
                     }
                     case "monitoria.update" ->{
@@ -180,7 +181,7 @@ public class ManagerClient extends Thread{
                 admin = true;
                 clientController.pContentAdd("registerMonitor");
                 clientController.pContentAdd("managementMonitor");
-
+                clientController.pContentAdd("registerMonitoring");
                 usersAll();
                 
             }
@@ -189,7 +190,6 @@ public class ManagerClient extends Thread{
             case "aluno"    ->{
                 admin = false;
                 clientController.pContentAdd("updateStudent");
-                //clientController.pContentAdd("");
             }
         }
             //clientController.pContentAdd("login");
@@ -300,6 +300,7 @@ public class ManagerClient extends Thread{
         
         
         managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
+        registerMonitoringController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
     }
 
     private void users(String sRoute, boolean broadcast) throws IOException, JSONException {
