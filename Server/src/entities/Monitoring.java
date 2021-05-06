@@ -1,30 +1,41 @@
 package entities;
 
+import org.json.JSONArray;
+
 /**
  *
  * @author Guilherme Ortiz
  */
 public class Monitoring {
-    private int pk_monitoria;
+    private int id;
     private String nome;
     private String senha;
-    private int fk_pk_usuario;
-    private String nomeUsuario;
+    private int id_usuario;
+    private String usuario_monitor;
+    //private JSONArray horarios;
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    /*public JSONArray getHorarios() {
+        return horarios;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setHorarios(JSONArray horarios) {
+        this.horarios = horarios;
+    }*/
+
+    public String getUsuario_monitor() {
+        return usuario_monitor;
     }
 
-    public int getPk_monitoria() {
-        return pk_monitoria;
+    public void setUsuario_monitor(String usuario_monitor) {
+        this.usuario_monitor = usuario_monitor;
     }
 
-    public void setPk_monitoria(int pk_monitoria) {
-        this.pk_monitoria = pk_monitoria;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -43,12 +54,12 @@ public class Monitoring {
         this.senha = senha;
     }
 
-    public int getFk_pk_usuario() {
-        return fk_pk_usuario;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setFk_pk_usuario(int fk_pk_usuario) {
-        this.fk_pk_usuario = fk_pk_usuario;
+    public void setId_usuario(int fk_pk_usuario) {
+        this.id_usuario = fk_pk_usuario;
     }
     
     

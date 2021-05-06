@@ -2448,3 +2448,284 @@ Received <- {"rota":"cliente.usuarios"}
 Received <- {"usuario":"monitor001","rota":"usuario.delete"}
 Send -> {"erro":"false","rota":"usuario.delete"}
 Received <- {"rota":"cliente.usuarios"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"senha":"123","usuario":"aluno","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":false,"nome":"aluno","usuario":"aluno","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"senha":"123","usuario":"aluno","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"senha":"123","usuario":"monitor","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Received <- {"senha":"123","usuario":"monitor2","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Received <- {"novo_usuario":"aluno2","senha":"123","usuario":"aluno","nome":"aluno2","rota":"login.update"}
+Send -> {"erro":"false","rota":"login.update"}
+Received <- {"senha":"123","usuario":"aluno2","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor3","usuario":"monitor3","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"usuario":"monitor","rota":"usuario.delete"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"usuario":"monitor2","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"usuario":"monitor","rota":"usuario.delete"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"usuario":"monitor","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor","usuario":"monitor","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor","usuario":"monitor2","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"is_admin":false,"senha":"123","is_monitor":true,"nome":"monitor","usuario":"monitor3","rota":"login.registro"}
+Send -> {"erro":"false","rota":"login.registro"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"senha":"123","usuario":"monitor","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Received <- {"usuario":"monitor","rota":"usuario.delete"}
+Send -> {"erro":"false","rota":"usuario.delete"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.login","usuario":"MD","senha":"123"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"rota":"login.login","usuario":"aluno","senha":"123"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"rota":"login.login","usuario":"monitor","senha":"123"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"login.login","usuario":"ADM","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"senha":"123","usuario":"MD","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"123","usuario":"adm","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo Numérico","senha":"123","usuario_monitor":"idevandro","horarios":["2M2"]}
+Send -> {"erro":"Algo deu errado","rota":"monitoria.registro"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo Numérico","senha":"123","usuario_monitor":"idevandrodelas","horarios":["1M2"]}
+Send -> {"erro":"Algo deu errado","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo Numérico","senha":"123","usuario_monitor":"idevandrodelas","horarios":["1M2"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo numérico","senha":"123","usuario_monitor":"idevandro","horarios":["2M3"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo numérico","senha":"123","usuario_monitor":"idevandro","horarios":["2M3"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.registro","nome":"Calculo numérico","senha":"123","usuario_monitor":"idevandro","horarios":["2M3"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":["entities.Monitoring@292740e2","entities.Monitoring@33919a26","entities.Monitoring@3513f2d9","entities.Monitoring@24bbe0c2"],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"sdfas","senha":"saasdf","usuario_monitor":"sdfasdf","horarios":[]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":["entities.Monitoring@21b51c9b","entities.Monitoring@41cb9854","entities.Monitoring@610905ff","entities.Monitoring@a5aea0d","entities.Monitoring@3826e19"],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"dfg","senha":"sdfgsdg","usuario_monitor":"sdfgsd","horarios":["2M4"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"sadfasf","senha":"sadfasdf","usuario_monitor":"sdf","horarios":["2M2"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"},{"senha":"sadfasdf","usuario_monitor":"sdf","nome":"sadfasf"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"},{"senha":"sadfasdf","usuario_monitor":"sdf","nome":"sadfasf"}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[{"senha":"123","usuario_monitor":"idevandrodelas","nome":"Calculo Numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"123","usuario_monitor":"idevandro","nome":"Calculo numérico"},{"senha":"saasdf","usuario_monitor":"sdfasdf","nome":"sdfas"},{"senha":"sdfgsdg","usuario_monitor":"sdfgsd","nome":"dfg"},{"senha":"sadfasdf","usuario_monitor":"sdf","nome":"sadfasf"}],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"asdas","senha":"asd","usuario_monitor":"dasda","horarios":["4M4"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitores":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"Calculo Numérico","id":1}],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"Calculo Numérico","id":1},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"Calculo numérico","id":2},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"Calculo numérico","id":3},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"Calculo numérico","id":4},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"sdfas","id":5},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"dfg","id":6},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"sadfasf","id":7},{"horario":"[2M1, 3M2, 1M3]","nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[],"rota":"monitoria.listar"}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"Calculo Numérico","id":1},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"Calculo numérico","id":2},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"Calculo numérico","id":3},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"Calculo numérico","id":4},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"sdfas","id":5},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"dfg","id":6},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"sadfasf","id":7},{"horarioS":["1M2","2M2","3M2"],"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"saddfsd","senha":"sdfasdfdas","usuario_monitor":"monitor","horarios":["4M2"]}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"nome_monitor":"","nome":"Calculo Numérico","id":1},{"nome_monitor":"","nome":"Calculo numérico","id":2},{"nome_monitor":"","nome":"Calculo numérico","id":3},{"nome_monitor":"","nome":"Calculo numérico","id":4},{"nome_monitor":"","nome":"sdfas","id":5},{"nome_monitor":"","nome":"dfg","id":6},{"nome_monitor":"","nome":"sadfasf","id":7},{"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"asas","senha":"asa","usuario_monitor":"monitor","horarios":["5M2"]}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"nome_monitor":"","nome":"Calculo Numérico","id":1},{"nome_monitor":"","nome":"Calculo numérico","id":2},{"nome_monitor":"","nome":"Calculo numérico","id":3},{"nome_monitor":"","nome":"Calculo numérico","id":4},{"nome_monitor":"","nome":"sdfas","id":5},{"nome_monitor":"","nome":"dfg","id":6},{"nome_monitor":"","nome":"sadfasf","id":7},{"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"nome_monitor":"","nome":"Calculo Numérico","id":1},{"nome_monitor":"","nome":"Calculo numérico","id":2},{"nome_monitor":"","nome":"Calculo numérico","id":3},{"nome_monitor":"","nome":"Calculo numérico","id":4},{"nome_monitor":"","nome":"sdfas","id":5},{"nome_monitor":"","nome":"dfg","id":6},{"nome_monitor":"","nome":"sadfasf","id":7},{"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"nome_monitor":"","nome":"Calculo Numérico","id":1},{"nome_monitor":"","nome":"Calculo numérico","id":2},{"nome_monitor":"","nome":"Calculo numérico","id":3},{"nome_monitor":"","nome":"Calculo numérico","id":4},{"nome_monitor":"","nome":"sdfas","id":5},{"nome_monitor":"","nome":"dfg","id":6},{"nome_monitor":"","nome":"sadfasf","id":7},{"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"calculo","senha":"123","usuario_monitor":"monitor","horarios":["3M4"]}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"nome_monitor":"","nome":"Calculo Numérico","id":1},{"nome_monitor":"","nome":"Calculo numérico","id":2},{"nome_monitor":"","nome":"Calculo numérico","id":3},{"nome_monitor":"","nome":"Calculo numérico","id":4},{"nome_monitor":"","nome":"sdfas","id":5},{"nome_monitor":"","nome":"dfg","id":6},{"nome_monitor":"","nome":"sadfasf","id":7},{"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"GAAL","senha":"123","usuario_monitor":"monitor","horarios":["4M2"]}
+Received <- {"rota":"login.login","usuario":"adm","senha":"123"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Calculo Numérico","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Calculo numérico","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Calculo numérico","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Calculo numérico","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"sdfas","id":5},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"dfg","id":6},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"sadfasf","id":7},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"asdas","id":8}],"rota":"monitoria.listar"}
+Received <- {"rota":"monitoria.registro","nome":"GAAL","senha":"123","usuario_monitor":"monitor","horarios":["1M3"]}
+Send -> {"erro":"false","rota":"monitoria.registro"}

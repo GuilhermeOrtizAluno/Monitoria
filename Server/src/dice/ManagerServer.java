@@ -28,11 +28,9 @@ import org.json.JSONArray;
 /**
  * Gerenciador do Servidor
  *
- * @author Guilherme Ortiz 
- * 
- * Consumir Json 
- * Tomar Desição 
- * Retorna Json
+ * @author Guilherme Ortiz
+ *
+ * Consumir Json Tomar Desição Retorna Json
  */
 public class ManagerServer extends Thread {
 
@@ -74,7 +72,11 @@ public class ManagerServer extends Thread {
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
-
+                
+                if(rRoute == null){
+                    System.out.println("Erro grave: " + sRoute);
+                    return;
+                }
                 // <editor-fold defaultstate="collapsed" desc="Cases">
                 switch (rRoute.getRota()) {
                     //Login
@@ -192,7 +194,7 @@ public class ManagerServer extends Thread {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Functions">
 
-    //pronto
+    //PRONTO
     private void login(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -215,16 +217,16 @@ public class ManagerServer extends Thread {
             route.put("erro", "Usuario ou Senha invalido");
         } else {
             legend = Color.BLACK;
-            
+
             String sTypeUser = user.isIs_admin() ? "admin" : user.isIs_monitor() ? "monitor" : "aluno";
             route.put("erro", "false");
             route.put("tipo_usuario", sTypeUser);
-            
+
             joUser.put("usuario", user.getUsuario());
             joUser.put("nome", user.getNome());
             joUser.put("tipo_usuario", sTypeUser);
             usuariosAtivos.put(joUser);
-            
+
             // show client on
             usersController.includeClient(user.getUsuario());
         }
@@ -237,11 +239,13 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-        
-        if(bUser) usersOn();
+
+        if (bUser) {
+            usersOn();
+        }
     }
 
-    //pronto
+    //PRONTO
     private void logout() throws IOException, JSONException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
@@ -251,9 +255,9 @@ public class ManagerServer extends Thread {
 
         // Shows what will be sent
         showSend(route.toString());
-        
+
         removeUserOn(user.getUsuario());
-        
+
         user = null;//pode dar ruim
 
         // Send
@@ -264,7 +268,7 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //pronto
+    //PRONTO
     private void register(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -294,7 +298,7 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //pronto
+    //PRONTO
     private void update(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -304,7 +308,6 @@ public class ManagerServer extends Thread {
         user.setNome(rUser.getNome());
         user.setUsuario(rUser.getUsuario());
         user.setNovo_usuario(rUser.getNovo_usuario());
-        
 
         // Search for user in the bank
         boolean bUser = dUser.update(rUser);
@@ -330,12 +333,12 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //pronto
+    //PRONTO
     private void delete(String string) throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
         User userD = new Gson().fromJson(string, User.class);
         boolean bUser;
-        
+
         if (user.isIs_admin()) {
             bUser = dUser.delete(userD);
         } else {
@@ -351,16 +354,14 @@ public class ManagerServer extends Thread {
             route.put("erro", "Usuario nao deletado");
         } else {
             legend = Color.BLACK;
+            route.put("erro", "false");
 
             if (user.isIs_admin()) {
                 removeUserOn(userD.getUsuario());
             } else {
-                removeUserOn(user.getUsuario()); 
+                removeUserOn(user.getUsuario());
             }
-            user = null;
-
-            route.put("erro", "false");
-
+            //user = null;
         }
 
         // Shows what will be sent
@@ -373,22 +374,25 @@ public class ManagerServer extends Thread {
 
         //pr.close();
     }
-  
-    //pronto
-    private void removeUserOn(String usuarioRemove) throws JSONException{
-        int i = 0;
-        
-        for(; i < usuariosAtivos.length(); i++){
-            if(usuarioRemove.equals(usuariosAtivos.getJSONObject(i).getString("usuario"))){
+
+    //PRONTO
+    private void removeUserOn(String usuarioRemove) throws JSONException {
+        int i = 0, j = 0;
+
+        for (; i < usuariosAtivos.length(); i++) {
+            if (usuarioRemove.equals(usuariosAtivos.getJSONObject(i).getString("usuario"))) {
+                j = 1;
                 break;
             }
         }
-        usuariosAtivos.remove(i);
+        if (j == 1) {
+            usuariosAtivos.remove(i);
+        }
     }
-    
+
     //NÃO MEXI
     private void mensagem() {
-        
+
     }
 
     //NÃO MEXI
@@ -410,7 +414,7 @@ public class ManagerServer extends Thread {
 
     }
 
-    //mostrar monitores cadastrados APARENTEMENTE NAO VAI USAR
+    //MOSTRAR MONITORIAS DO MONISTROR SELECIONADO
     private void monitors() throws JSONException, IOException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -440,14 +444,14 @@ public class ManagerServer extends Thread {
         pr.flush();
 
     }
-    
-    //NAO MEXI
+
+    //PRONTO
     private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
         // Convert Json String to Monitoring Object
-        var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
+        Monitoring monitoria = gson.fromJson(sMonitoring, Monitoring.class);
 
         boolean bMonitoring = daoMonitoring.create(monitoria);
 
@@ -469,13 +473,13 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
     }
-    
+
     //NAO MEXI
     private void updateMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
-        // Convert Json String to User Object
+        // Convert Json String to Monitoring Object
         var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
 
         boolean bMonitoring = daoMonitoring.update(monitoria);
@@ -499,11 +503,11 @@ public class ManagerServer extends Thread {
         //pr.flush();
     }
 
-    //APARENTEMENTE NÃO VAI UTILIZAR
+    //PRONTO
     private void monitorings() throws JSONException, IOException {
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
-        var monitorings = daoMonitoring.read();
+        JSONArray monitorings = daoMonitoring.read();
 
         boolean bMonitoring = monitorings != null;
 
@@ -516,7 +520,7 @@ public class ManagerServer extends Thread {
         } else {
             legend = Color.BLACK;
             route.put("erro", "false");
-            route.put("monitores", monitorings);
+            route.put("monitorias", monitorings);
         }
 
         // Shows what will be sent
@@ -525,24 +529,25 @@ public class ManagerServer extends Thread {
         pr.println(route);
         pr.flush();
     }
-    
+
     //NAO MEXI
     private void students() {
     }
+
     //NAO MEXI
     private void studentRegister() {
     }
+
     //NAO MEXI
     private void studentDelete() {
     }
-    
 
-    private void usersAll() throws JSONException, IOException{
+    private void usersAll() throws JSONException, IOException {
         UserDAO dUser = new UserDAO();
 
         // Search for user in the bank
         var users = dUser.read();
-        
+
         boolean bUser = users != null;
 
         JSONObject route = new JSONObject();
@@ -552,7 +557,7 @@ public class ManagerServer extends Thread {
         if (!bUser) {
             legend = Color.ORANGE;
             route.put("erro", "Nenhum usuario encontrado");
-             showSend(route.toString());
+            showSend(route.toString());
         } else {
             legend = Color.BLACK;
             route.put("erro", "false");
@@ -560,12 +565,12 @@ public class ManagerServer extends Thread {
             serverController.includeLogUsers(route, false);
             System.out.println("Send -> " + route);
         }
-       
+
         // Send
         pr.println(route);
         pr.flush();
     }
-            
+
     private void usersOn() throws JSONException, IOException {
         JSONObject route = new JSONObject();
         route.put("rota", "cliente.usuarios-ativos");
@@ -574,8 +579,8 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        serverController.includeLogUsers(route ,true);
-        
+        serverController.includeLogUsers(route, true);
+
         for (PrintWriter pw : listPw) {
             pw.println(route);
             pw.flush();
@@ -613,7 +618,6 @@ public class ManagerServer extends Thread {
             fwLog.flush();
         }
     }
-    
 
     // </editor-fold>  
 }

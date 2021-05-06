@@ -1,14 +1,12 @@
 package entities;
 
-import java.util.Date;
-
 /**
  *
  * @author Guilherme Ortiz
  */
 public class Schedule {
     private int pk_horario_monitoria;
-    private Date horario;
+    private String horario;
     private int fk_pk_monitoria;
 
     public int getPk_horario_monitoria() {
@@ -19,11 +17,11 @@ public class Schedule {
         this.pk_horario_monitoria = pk_horario_monitoria;
     }
 
-    public Date getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(Date horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 

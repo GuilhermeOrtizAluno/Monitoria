@@ -21,7 +21,7 @@ public class ScheduleDAO {
 
         try {
             stmt = con.prepareStatement("INSERT INTO horario_monit(horario,fk_pk_monitoria)VALUES(?,?)");
-            //stmt.setDate(1, s.getHorario());
+            stmt.setString(1, s.getHorario());
             stmt.setInt(2, s.getFk_pk_monitoria());
             
             stmt.executeUpdate();
@@ -57,7 +57,7 @@ public class ScheduleDAO {
 
                 schedule.setPk_horario_monitoria(rset.getInt("pk_horario_monitoria"));
                 schedule.setFk_pk_monitoria(rset.getInt("fk_pk_monitoria"));
-                schedule.setHorario(rset.getDate("horario"));
+                schedule.setHorario(rset.getString("horario"));
 
                 schedules.add(schedule);
 
@@ -80,7 +80,7 @@ public class ScheduleDAO {
 
         try {
             stmt = con.prepareStatement("UPDATE horario_monit SET horario = ?, fk_pk_monitoria = ? WHERE pk_horario_monitoria = ?");
-            //stmt.setDate(1, s.getHorario());
+            stmt.setString(1, s.getHorario());
             stmt.setInt(2, s.getFk_pk_monitoria());
             stmt.setInt(3, s.getPk_horario_monitoria());
 

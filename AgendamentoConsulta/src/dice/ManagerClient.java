@@ -57,6 +57,7 @@ public class ManagerClient extends Thread{
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
+                clientController.showReceived(sRoute, Color.RED);
                 
                 if("false".equals(rRoute.getErro()))
                 {
