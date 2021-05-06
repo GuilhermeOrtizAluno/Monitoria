@@ -13,7 +13,7 @@ public class User {
     private String senha;
     private boolean is_admin;
     private boolean is_monitor;
-    
+
     public String getNovo_usuario() {
         return novo_usuario;
     }

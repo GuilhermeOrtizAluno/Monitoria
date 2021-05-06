@@ -9,6 +9,9 @@ import java.net.URL;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import screens.ServerScreen;
 
 /**
@@ -70,5 +73,13 @@ public class ServerController extends ServerScreen {
         spLog.validate();
         spLog.revalidate();
     }   
+    
+    public void teste(JSONObject jsonObj) throws JSONException{
+        JSONArray keys = jsonObj.getJSONArray("usuarios");
+        for(int i = 0; i < keys.length (); i++){
+            JSONObject o = keys.getJSONObject(i);
+            System.out.println(o.toString());
+        }
+    }
     
 }

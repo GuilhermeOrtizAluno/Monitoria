@@ -27,7 +27,11 @@ import java.awt.Color;
 /**
  * Gerenciador do Servidor
  *
- * @author Guilherme Ortiz Consumir Json Tomar Desição Retorna Json
+ * @author Guilherme Ortiz 
+ * 
+ * Consumir Json 
+ * Tomar Desição 
+ * Retorna Json
  */
 public class ManagerServer extends Thread {
 
@@ -105,7 +109,7 @@ public class ManagerServer extends Thread {
                         delete(sRoute);
                     }
                     //mensagem
-                    case "mensagem.mesagem" -> {
+                    case "mensagem.mensagem" -> {
                         //Shows what came
                         showReceived(sRoute);
 
@@ -116,7 +120,7 @@ public class ManagerServer extends Thread {
                         //Shows what came
                         showReceived(sRoute);
 
-                        usersOn();
+                        //usersOn();
                         //monitores();
                     }
                     case "cliente.usuarios" -> {
@@ -185,7 +189,7 @@ public class ManagerServer extends Thread {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Fucntions">
+    // <editor-fold defaultstate="collapsed" desc="Functions">
 
     //pronto
     private void login(String string) throws IOException, JSONException {
@@ -201,6 +205,7 @@ public class ManagerServer extends Thread {
         boolean bUser = user.getUsuario() != null;
 
         JSONObject route = new JSONObject();
+        JSONObject joUser = new JSONObject();
         route.put("rota", "login.login");
 
         // Valid user
@@ -209,10 +214,16 @@ public class ManagerServer extends Thread {
             route.put("erro", "Usuario ou Senha invalido");
         } else {
             legend = Color.BLACK;
+            
             String sTypeUser = user.isIs_admin() ? "admin" : user.isIs_monitor() ? "monitor" : "aluno";
-            usuariosAtivos.put(user.getUsuario());
             route.put("erro", "false");
             route.put("tipo_usuario", sTypeUser);
+            
+            joUser.put("usuario", user.getUsuario());
+            joUser.put("nome", user.getNome());
+            joUser.put("tipo_usuario", sTypeUser);
+            usuariosAtivos.put(joUser);
+            
             // show client on
             usersController.includeClient(user.getUsuario());
         }
@@ -225,12 +236,8 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-
-        if ("false".equals(route.getString("erro"))) {
-
-            usersOn();
-        }
-        //pr.close();
+        
+        if(bUser) usersOn();
     }
 
     //pronto
@@ -300,9 +307,10 @@ public class ManagerServer extends Thread {
         user.setNome(rUser.getNome());
         user.setUsuario(rUser.getUsuario());
         user.setNovo_usuario(rUser.getNovo_usuario());
+        
 
         // Search for user in the bank
-        boolean bUser = dUser.update(user);
+        boolean bUser = dUser.update(rUser);
 
         JSONObject route = new JSONObject();
         route.put("rota", "login.update");
@@ -529,7 +537,6 @@ public class ManagerServer extends Thread {
     //NAO MEXI
     private void studentDelete() {
     }
-
     
     private void usersAll() throws JSONException, IOException{
         UserDAO dUser = new UserDAO();
@@ -548,8 +555,9 @@ public class ManagerServer extends Thread {
             route.put("erro", "Nenhum usuario encontrado");
         } else {
             legend = Color.BLACK;
-            route.put("erro", "false");
             route.put("usuarios", users);
+            route.put("erro", "false");
+            serverController.teste(route);
         }
 
         // Shows what will be sent
@@ -606,6 +614,7 @@ public class ManagerServer extends Thread {
             fwLog.flush();
         }
     }
+    
 
     // </editor-fold>  
 }

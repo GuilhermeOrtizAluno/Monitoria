@@ -164,7 +164,6 @@ public class ClientScreen extends JFrame {
             .addGap(0, 220, Short.MAX_VALUE)
         );*/
 
-        spLog.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         spLog.setMinimumSize(null);
         spLog.setName(""); // NOI18N
         spLog.setRequestFocusEnabled(false);

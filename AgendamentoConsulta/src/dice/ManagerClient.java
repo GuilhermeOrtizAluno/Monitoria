@@ -16,8 +16,12 @@ import java.io.PrintWriter;
 import org.json.simple.JSONObject;
 
 /**
+ *Gerenciador do Cliente
  *
- * @author gui_o
+ * @author Guilherme Ortiz 
+ * 
+ * Consumir Json 
+ * Tomar Desição
  */
 public class ManagerClient extends Thread{
     private InputStreamReader in;
@@ -58,9 +62,10 @@ public class ManagerClient extends Thread{
                 }
                 else{ 
                     bRoute = false;
-                    legend = Color.YELLOW;
+                    legend = Color.ORANGE;
                 }
                 
+                // <editor-fold defaultstate="collapsed" desc="Cases">
                 switch (rRoute.getRota()) {
                     case "login.login" ->
                     {    
@@ -93,6 +98,7 @@ public class ManagerClient extends Thread{
                         users(sRoute);
                     }
                     case "cliente.usuarios" -> {
+                        legend = Color.GREEN;
                         clientController.showReceived(sRoute, legend);
                         users(sRoute);
                         if(admin)
@@ -129,7 +135,8 @@ public class ManagerClient extends Thread{
                         clientController.showReceived(sRoute, Color.RED);
                         errorRoute();
                     }
-                }
+                } // </editor-fold> 
+
             }
         } catch(EOFException e) {
              System.out.println("EOF:"+e.getMessage());
@@ -149,6 +156,7 @@ public class ManagerClient extends Thread{
     } 
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Function">
     private void login(String sTypeUser) throws IOException {
 
         //Valid Login
@@ -254,7 +262,7 @@ public class ManagerClient extends Thread{
     }
 
     private void users(String sRoute) {
-        System.out.println("Received <- "+sRoute);
+        
     }
 
     private void mensagem() {
@@ -269,5 +277,5 @@ public class ManagerClient extends Thread{
             JOptionPane.ERROR_MESSAGE
         );
     }
-    
+    // </editor-fold> 
 }
