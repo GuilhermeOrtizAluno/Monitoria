@@ -11,10 +11,13 @@ import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import screens.ClientScreen;
 
 /**
@@ -29,16 +32,7 @@ public class ClientController extends ClientScreen {
     private int yLog;
     private int yClient;
     private int x;
-    
-    private void continuationInitComponents(){
-        bExit.addActionListener((ActionEvent evt) -> {
-            try {
-                hundleLogout();
-            } catch (IOException ex) {
-                java.util.logging.Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-   }
+    private boolean logUsers;
 
     public void start() {
         initComponents();
@@ -47,11 +41,22 @@ public class ClientController extends ClientScreen {
         yLog = 5;
         yClient = 5;
         x = 5;
+        logUsers = false;
         setVisible(true);
     }
     
+    private void continuationInitComponents(){
+        bExit.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleLogout();
+            } catch (IOException | JSONException ex) {
+                java.util.logging.Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+   }
+    
     @SuppressWarnings("unchecked")
-    private void hundleLogout() throws IOException {
+    private void hundleLogout() throws IOException, JSONException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
         
@@ -95,7 +100,7 @@ public class ClientController extends ClientScreen {
         yLog += 40;
         
         pLog.add(log);
-        pLog.add(Box.createRigidArea(new Dimension(0,5)));
+        if(!logUsers) pLog.add(Box.createRigidArea(new Dimension(0,5)));
         pLog.repaint();
         pLog.validate();
         
@@ -103,7 +108,30 @@ public class ClientController extends ClientScreen {
         
     }   
     
-    public void includeClient(String sClient){
+    public void includeLogUsers(JSONObject routeAll, boolean broadcast) throws JSONException{
+        
+        logUsers = !logUsers;
+
+        String route = "{\"rota\":\"" + routeAll.getString("rota") + "\",";
+        if(!broadcast) route += "\"erro\":\"" + routeAll.getString("erro") + "\",";
+        
+        includeLog("Received <- "+route, Color.BLACK, !broadcast ? Color.CYAN : Color.PINK);
+        
+        includeLog("\"usuarios\":[", Color.BLACK, Color.WHITE);
+        
+        JSONArray usuarios = routeAll.getJSONArray("usuarios");
+        for(int i = 0; i < usuarios.length(); i++){
+            org.json.JSONObject user = usuarios.getJSONObject(i);
+             includeLog(i==0 ? "" + user.toString() : "," + user.toString(), Color.BLACK,  Color.WHITE);
+        }
+        
+        logUsers = !logUsers;
+        
+        includeLog("]}", Color.BLACK, Color.WHITE);
+        
+    }
+    
+    public void includeCliente(String sClient){
         lClient = new JLabel();
         lClient.setText(sClient);
         
@@ -126,7 +154,7 @@ public class ClientController extends ClientScreen {
         revalidate();
     }
     
-        // Shows what will be sent
+    // Shows what will be sent
     public void showSend(String send) throws IOException {
         //Terminal
         System.out.println("Send -> " + send);

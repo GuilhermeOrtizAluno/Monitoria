@@ -9,6 +9,7 @@ import controllers.RegisterMonitorController;
 import controllers.UpdateStudentController;
 import dice.ManagerClient;
 import java.net.Socket;
+import org.json.JSONArray;
 
 /**
  *
@@ -25,6 +26,7 @@ public class Program  {
     public static RegisterMonitorController registerMonitorController;
     public static ManagementMonitorController managementMonitorController;
     public static UpdateStudentController updateStudentController;
+    public static JSONArray monitorsAll;
     public static boolean admin;
     public static String screen;
     public static String usernameON;
@@ -32,6 +34,7 @@ public class Program  {
     public static void main(String[] args) {
         socket = null;
         admin = false;
+        monitorsAll = new JSONArray();
         clientController = new ClientController();
         connectionController = new ConnectionController();
         loginController = new LoginController();

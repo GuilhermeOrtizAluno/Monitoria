@@ -23,7 +23,8 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
-        bSingUp = new javax.swing.JButton();
+        bUpdate = new javax.swing.JButton();
+        bDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(230, 300));
@@ -59,11 +60,19 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
-        bSingUp.setBackground(new java.awt.Color(204, 0, 204));
-        bSingUp.setText("Editar");
-        bSingUp.addActionListener(new java.awt.event.ActionListener() {
+        bUpdate.setBackground(new java.awt.Color(204, 0, 204));
+        bUpdate.setText("Editar");
+        bUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSingUpActionPerformed(evt);
+                bUpdateActionPerformed(evt);
+            }
+        });
+
+        bDelete.setBackground(new java.awt.Color(255, 0, 51));
+        bDelete.setText("Deletar");
+        bDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDeleteActionPerformed(evt);
             }
         });
 
@@ -90,7 +99,8 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,18 +123,25 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bSingUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSingUpActionPerformed
+    private void bUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bSingUpActionPerformed
+    }//GEN-LAST:event_bUpdateActionPerformed
+
+    private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bSingUp;
+    private javax.swing.JButton bDelete;
+    private javax.swing.JButton bUpdate;
     private javax.swing.JComboBox<String> cbMonitor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lNome;

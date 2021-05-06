@@ -24,13 +24,15 @@ public class ServerController extends ServerScreen {
     private JPanel pType;
     private JPanel log;
     private int yLog, x;
-
+    private boolean logUsers;
+    
     public void start() {
         initComponents();
         setVisible(true);
         pContent.add(connectionController);
         yLog = 5;
         x = 5;
+        logUsers = false;
     }
     
     private void hundleGuilherme() throws MalformedURLException, IOException{
@@ -65,7 +67,7 @@ public class ServerController extends ServerScreen {
         yLog += 40;
         
         pLog.add(log);
-        pLog.add(Box.createRigidArea(new Dimension(0,5)));
+        if(!logUsers) pLog.add(Box.createRigidArea(new Dimension(0,5)));
         pLog.repaint();
         pLog.validate();
         
@@ -74,12 +76,27 @@ public class ServerController extends ServerScreen {
         spLog.revalidate();
     }   
     
-    public void teste(JSONObject jsonObj) throws JSONException{
-        JSONArray keys = jsonObj.getJSONArray("usuarios");
-        for(int i = 0; i < keys.length (); i++){
-            JSONObject o = keys.getJSONObject(i);
-            System.out.println(o.toString());
+    public void includeLogUsers(JSONObject routeAll, boolean broadcast) throws JSONException{
+        
+        logUsers = !logUsers;
+
+        String route = "{\"rota\":\"" + routeAll.getString("rota") + "\",";
+        if(!broadcast) route += "\"erro\":\"" + routeAll.getString("erro") + "\",";
+        
+        includeLog("Send -> "+route, Color.BLACK, !broadcast ? Color.BLUE : Color.PINK);
+        
+        includeLog("\"usuarios\":[", Color.BLACK, Color.WHITE);
+        
+        JSONArray usuarios = routeAll.getJSONArray("usuarios");
+        for(int i = 0; i < usuarios.length(); i++){
+            JSONObject user = usuarios.getJSONObject(i);
+             includeLog(i==0 ? "" + user.toString() : "," + user.toString(), Color.BLACK,  Color.WHITE);
         }
+        
+         logUsers = !logUsers;
+        
+        includeLog("]}", Color.BLACK, Color.WHITE);
+        
     }
     
 }
