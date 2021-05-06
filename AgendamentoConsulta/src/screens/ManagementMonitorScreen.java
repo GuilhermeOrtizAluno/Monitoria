@@ -7,7 +7,8 @@ package screens;
  */
 public class ManagementMonitorScreen extends javax.swing.JPanel {
     
-    public javax.swing.JButton bSingUp;
+    public javax.swing.JButton bUpdate;
+    public javax.swing.JButton bDelete;
     public javax.swing.JComboBox<String> cbMonitor;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel lNome;
@@ -29,12 +30,13 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
-        bSingUp = new javax.swing.JButton();
+        bUpdate = new javax.swing.JButton();
+        bDelete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(230, 300));
-        setMinimumSize(new java.awt.Dimension(230, 300));
-        setSize(new java.awt.Dimension(230, 330));
+        setMaximumSize(new java.awt.Dimension(230, 360));
+        setMinimumSize(new java.awt.Dimension(230, 360));
+        setSize(new java.awt.Dimension(230, 360));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -44,28 +46,31 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
         lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lNome.setText("Nome");
 
-        tfName.setEditable(false);
+        //tfName.setEditable(false);
         tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lUser.setText("Usuario");
 
-        tfUser.setEditable(false);
+        //tfUser.setEditable(false);
         tfUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfUser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lPass.setText("Senha");
 
-        tfPass.setEditable(false);
+        //tfPass.setEditable(false);
         tfPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
-        bSingUp.setBackground(new java.awt.Color(204, 0, 204));
-        bSingUp.setText("Editar");
+        bUpdate.setBackground(new java.awt.Color(204, 0, 204));
+        bUpdate.setText("Editar");
+
+        bDelete.setBackground(new java.awt.Color(255, 0, 51));
+        bDelete.setText("Deletar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,7 +95,8 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -113,8 +119,10 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
     }// </editor-fold>                                                                              
 }

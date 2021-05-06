@@ -553,15 +553,15 @@ public class ManagerServer extends Thread {
         if (!bUser) {
             legend = Color.ORANGE;
             route.put("erro", "Nenhum usuario encontrado");
+             showSend(route.toString());
         } else {
             legend = Color.BLACK;
-            route.put("usuarios", users);
             route.put("erro", "false");
-            serverController.teste(route);
+            route.put("usuarios", users);
+            serverController.includeLogUsers(route, false);
+            System.out.println("Send -> " + route);
         }
-
-        // Shows what will be sent
-        showSend(route.toString());
+       
         // Send
         pr.println(route);
         pr.flush();
@@ -575,8 +575,8 @@ public class ManagerServer extends Thread {
         System.out.println("Send -> " + route);
 
         //Iterface Log
-        serverController.includeLog("Send -> " + route.toString(), Color.BLACK, Color.PINK);
-
+        serverController.includeLogUsers(route ,true);
+        
         for (PrintWriter pw : listPw) {
             pw.println(route);
             pw.flush();

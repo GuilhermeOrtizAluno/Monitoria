@@ -4,7 +4,6 @@ import entites.Route;
 import static app.Program.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import entites.User;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -13,7 +12,11 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import org.json.simple.JSONObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *Gerenciador do Cliente
@@ -93,14 +96,10 @@ public class ManagerClient extends Thread{
                         delete();
                     }
                     case "cliente.usuarios-ativos" -> {
-                        legend = Color.GREEN;
-                        clientController.showReceived(sRoute, legend);
-                        users(sRoute);
+                        users(sRoute, true);
                     }
                     case "cliente.usuarios" -> {
-                        legend = Color.GREEN;
-                        clientController.showReceived(sRoute, legend);
-                        users(sRoute);
+                        users(sRoute, false);
                         if(admin)
                             monitores(sRoute);
                     }
@@ -145,6 +144,8 @@ public class ManagerClient extends Thread{
              //clientController("");
         } catch(JsonSyntaxException e){
             System.out.println(e);
+        } catch (JSONException ex) {
+            Logger.getLogger(ManagerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{ 
            try {
@@ -157,7 +158,7 @@ public class ManagerClient extends Thread{
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Function">
-    private void login(String sTypeUser) throws IOException {
+    private void login(String sTypeUser) throws IOException, JSONException {
 
         //Valid Login
         if(!bRoute) {
@@ -235,34 +236,89 @@ public class ManagerClient extends Thread{
 
     }
 
-    private void update() throws IOException {
+    private void update() throws IOException, JSONException {
         if(bRoute){ 
-            clientController.pContentClear();
-            clientController.pContentAdd("login");
-        }
+            JOptionPane.showMessageDialog(
+                null, 
+                "Update Success", 
+                "Manager User", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            if(!admin){
+                clientController.pContentClear();
+                clientController.pContentAdd("login");
+            }else {
+                managementMonitorController.cleanFields();
+                
+                JSONObject route = new JSONObject();
+                route.put("rota", "cliente.usuarios");
+                clientController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
+            }
+        }else JOptionPane.showMessageDialog(
+                null, 
+                "Error when trying to edit user", 
+                "Manager User", 
+                JOptionPane.WARNING_MESSAGE
+            );
     }
 
-    private void delete() throws IOException {
+    private void delete() throws IOException, JSONException {
         if(bRoute){ 
-            clientController.pContentClear();
-            clientController.pContentAdd("login");
-        }
+            JOptionPane.showMessageDialog(
+                null, 
+                "Delete Success", 
+                "Manager User", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            if(!admin){
+                clientController.pContentClear();
+                clientController.pContentAdd("login");
+            }else {
+                managementMonitorController.cleanFields();
+                
+                JSONObject route = new JSONObject();
+                route.put("rota", "cliente.usuarios");
+                clientController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
+            }
+        }else JOptionPane.showMessageDialog(
+                null, 
+                "Error when trying to edit user", 
+                "Manager User", 
+                JOptionPane.WARNING_MESSAGE
+            );
 
     }
     
-    private void monitores(String sMonitores){
-        Gson gson = new Gson();
-
-        // Convert Json String to User Object
-        User users = gson.fromJson(sMonitores, User.class);
+    private void monitores(String sUser) throws JSONException{
         
-        String[] monitors = new String[] {users.getUsuario()};
+        JSONObject joUsers = new JSONObject(sUser);
+        
+        JSONArray users = joUsers.getJSONArray("usuarios");
+        
+        String[] monitors = new String[users.length()];
+        
+        for(int i = 0; i < users.length(); i++){
+            JSONObject joMonitor = users.getJSONObject(i);
+            if("monitor".equals(joMonitor.getString("tipo_usuario"))){
+                monitors[i] = joMonitor.getString("usuario");
+                monitorsAll.put(joMonitor);
+            }
+            //monitors[i] = usuarios.getString(i);
+        }
+        
         
         managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
     }
 
-    private void users(String sRoute) {
-        
+    private void users(String sRoute, boolean broadcast) throws IOException, JSONException {
+        legend = Color.GREEN;
+        clientController.includeLogUsers(new JSONObject(sRoute), broadcast);
     }
 
     private void mensagem() {
