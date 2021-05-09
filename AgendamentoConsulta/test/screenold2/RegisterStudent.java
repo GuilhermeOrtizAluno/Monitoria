@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package screen;
+package screenold2;
 
 /**
  *
- * @author guilherme.santos
+ * @author Guilherme Ortiz
  */
-public class UpdateStudent extends javax.swing.JPanel {
+public class RegisterStudent extends javax.swing.JPanel {
 
     /**
-     * Creates new form UpdateStudent
+     * Creates new form Register
      */
-    public UpdateStudent() {
+    public RegisterStudent() {
         initComponents();
     }
 
@@ -35,12 +35,13 @@ public class UpdateStudent extends javax.swing.JPanel {
         bSingUp = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         lNome = new javax.swing.JLabel();
-        bDelete = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Alterar Aluno");
+        lTitle.setText("Cadastro Monitor");
 
         lUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lUser.setText("Usuario");
@@ -57,7 +58,7 @@ public class UpdateStudent extends javax.swing.JPanel {
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
         bSingUp.setBackground(new java.awt.Color(204, 0, 204));
-        bSingUp.setText("Editar");
+        bSingUp.setText("Cadastrar");
         bSingUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSingUpActionPerformed(evt);
@@ -70,14 +71,6 @@ public class UpdateStudent extends javax.swing.JPanel {
         lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lNome.setText("Nome");
 
-        bDelete.setBackground(new java.awt.Color(255, 0, 0));
-        bDelete.setText("Deletar");
-        bDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bDeleteActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,18 +78,19 @@ public class UpdateStudent extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bSingUp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lPass, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(lNome, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lUser, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lPass)
+                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lNome)
+                            .addComponent(lUser))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(bDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tfName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,11 +110,9 @@ public class UpdateStudent extends javax.swing.JPanel {
                 .addComponent(lPass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,13 +120,8 @@ public class UpdateStudent extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_bSingUpActionPerformed
 
-    private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bDeleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bDelete;
     private javax.swing.JButton bSingUp;
     private javax.swing.JLabel lNome;
     private javax.swing.JLabel lPass;

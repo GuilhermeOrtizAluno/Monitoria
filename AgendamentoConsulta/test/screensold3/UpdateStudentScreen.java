@@ -1,32 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package screens;
+package screensold3;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.Color;
 
 /**
  *
- * @author Guilherme Ortiz
+ * @author Guilherme Ortiz Santos
  */
-public class RegisterMonitorScreen extends JPanel {
-    
-    public JButton bSingUp;
-    public JLabel lNome;
-    public JLabel lPass;
-    public JLabel lTitle;
-    public JLabel lUser;
-    public JTextField tfName;
-    public JTextField tfPass;
-    public JTextField tfUser;
+public class UpdateStudentScreen extends javax.swing.JPanel {
+
+    public javax.swing.JButton bDelete;
+    public javax.swing.JButton bUpdate;
+    public javax.swing.JLabel lNome;
+    public javax.swing.JLabel lPass;
+    public javax.swing.JLabel lTitle;
+    public javax.swing.JLabel lUser;
+    public javax.swing.JTextField tfName;
+    public javax.swing.JTextField tfPass;
+    public javax.swing.JTextField tfUser;
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Component">                          
+    // <editor-fold defaultstate="collapsed" desc="Components">                          
     public void initComponents() {
 
         lTitle = new javax.swing.JLabel();
@@ -34,17 +27,15 @@ public class RegisterMonitorScreen extends JPanel {
         tfUser = new javax.swing.JTextField();
         lPass = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
-        bSingUp = new javax.swing.JButton();
+        bUpdate = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         lNome = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
-        setSize(230, 300);
+        bDelete = new javax.swing.JButton();
 
         lTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lTitle.setForeground(new java.awt.Color(204, 204, 204));
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Cadastro Monitor");
+        lTitle.setText("Alterar Aluno");
 
         lUser.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lUser.setText("Usuario");
@@ -60,14 +51,17 @@ public class RegisterMonitorScreen extends JPanel {
         tfPass.setToolTipText("");
         tfPass.setPreferredSize(new java.awt.Dimension(60, 23));
 
-        bSingUp.setBackground(new java.awt.Color(204, 0, 204));
-        bSingUp.setText("Cadastrar");
+        bUpdate.setBackground(new java.awt.Color(204, 0, 204));
+        bUpdate.setText("Editar");
 
         tfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lNome.setText("Nome");
+
+        bDelete.setBackground(new java.awt.Color(255, 0, 0));
+        bDelete.setText("Deletar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,19 +70,18 @@ public class RegisterMonitorScreen extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bSingUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lPass)
-                            .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lNome)
-                            .addComponent(lUser))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bUpdate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lPass, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(lNome, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lUser, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(tfName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(tfUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,10 +101,17 @@ public class RegisterMonitorScreen extends JPanel {
                 .addComponent(lPass)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(bSingUp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(18, 18, 18)
+                .addComponent(bUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-    }// </editor-fold>                                                              
-                  
+        
+        setBackground(Color.WHITE);
+        setSize(230, 350);
+        
+    }// </editor-fold>                        
+                                       
+                
 }

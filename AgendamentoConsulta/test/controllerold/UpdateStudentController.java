@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllerold;
 
 import static app.Program.*;
 import java.awt.event.ActionEvent;
@@ -13,14 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
-import screens.UpdateStudentScreen;
+import screensold3.UpdateStudentScreen;
 
 /**
  *
  * @author guilherme.santos
  */
 public class UpdateStudentController extends UpdateStudentScreen{
-
+/*
     public UpdateStudentController() {
         initComponents();
         continuationInitComponents();
@@ -99,5 +99,5 @@ public class UpdateStudentController extends UpdateStudentScreen{
         pr.println(route);
         pr.flush();
     }
-    
+    */
 }

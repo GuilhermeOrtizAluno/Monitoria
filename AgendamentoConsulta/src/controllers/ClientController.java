@@ -1,20 +1,16 @@
 package controllers;
 
-import static app.Program.*;
-import java.awt.Color;
-import java.awt.Dimension;
+import static dice.ManagerClient.*;
+import static java.awt.BorderLayout.*;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.FileWriter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import screens.ClientScreen;
@@ -25,34 +21,54 @@ import screens.ClientScreen;
  */
 public class ClientController extends ClientScreen {
     
-    private JLabel lLog, lClient;
-    private JPanel pType;
-    private JPanel log, client;
-    private int yLog;
-    private int yClient;
-    private int x;
-    private boolean logUsers;
+    private boolean maximized, minimized;
+    private String screen;
+    private static Point point;
 
     public void start() {
         initComponents();
         continuationInitComponents();
-        pContentAdd("connection");
-        yLog = 5;
-        yClient = 5;
-        x = 5;
-        logUsers = false;
+        initVariable();
+        pContentAdd("loginRegister");
         setVisible(true);
     }
     
+    private void initVariable(){
+        maximized = false;
+        minimized = false;
+        point = new Point();
+    }
+    
     private void continuationInitComponents(){
-        bExit.addActionListener((ActionEvent evt) -> {
-            try {
-                hundleLogout();
-            } catch (IOException | JSONException ex) {
-                java.util.logging.Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+        bClose.addActionListener((ActionEvent evt) -> {
+            System.exit(0);
+        });
+        bMaximize.addActionListener((ActionEvent evt) -> {
+            setExtendedState(maximized ? NORMAL : MAXIMIZED_BOTH);
+            maximized = !maximized;
+        });
+        bMaximize.addActionListener((ActionEvent evt) -> {
+            setExtendedState(ICONIFIED);
+        });
+        cbLog.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+               log();
             }
         });
-   }
+        addMouseListener(new MouseAdapter() {
+          public void mousePressed(MouseEvent e) {
+            point.x = e.getX();
+            point.y = e.getY();
+          }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+          public void mouseDragged(MouseEvent e) {
+            Point p = getLocation();
+            setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+          }
+        });
+    
+    }
     
     @SuppressWarnings("unchecked")
     private void hundleLogout() throws IOException, JSONException {
@@ -60,7 +76,7 @@ public class ClientController extends ClientScreen {
         route.put("rota", "login.logout");
         
         // Shows what will be sent
-        showSend(route.toString());
+        //showSend(route.toString());
         //Send
         PrintWriter pr = new PrintWriter(socket.getOutputStream());  
         pr.println(route);
@@ -73,123 +89,11 @@ public class ClientController extends ClientScreen {
         url.openConnection();
     }
     
-    public void includeLog(String sLog, Color legend, Color cType){
-        lLog = new JLabel();
-        lLog.setForeground(legend);
-        lLog.setText(sLog);
-        lLog.setLocation(26, 7);
-        //lLog.setAlignmentX(LEFT_ALIGNMENT);
-        
-        pType = new JPanel();
-        pType.setSize(20, 20);
-        //pType.setLocation(3, 7);
-        //pType.setAlignmentX(LEFT_ALIGNMENT);
-        pType.setBackground(cType);
-                
-        log = new JPanel();
-        log.setSize(600,35);
-        //  log.setLayout(new FlowLayout());
-        //log.setBorder(new EmptyBorder(10, 10, 10, 10));
-        //log.setBorder(new LineBorder(Color.WHITE, 5, true));
-        log.setBackground(Color.WHITE);
-        log.setLocation(x, yLog);
-        log.add(pType);
-        log.add(lLog);
-        
-        yLog += 40;
-        
-        pLog.add(log);
-        if(!logUsers) pLog.add(Box.createRigidArea(new Dimension(0,5)));
-        pLog.repaint();
-        pLog.validate();
-        
-        spLog.revalidate();
-        
-    }   
-    
-    public void includeLogUsers(JSONObject routeAll, boolean broadcast) throws JSONException{
-        
-        logUsers = !logUsers;
-
-        String route = "{\"rota\":\"" + routeAll.getString("rota") + "\",";
-        if(!broadcast) route += "\"erro\":\"" + routeAll.getString("erro") + "\",";
-        
-        includeLog("Received <- "+route, Color.BLACK, !broadcast ? Color.CYAN : Color.PINK);
-        
-        includeLog("\"usuarios\":[", Color.BLACK, Color.WHITE);
-        
-        JSONArray usuarios = routeAll.getJSONArray("usuarios");
-        for(int i = 0; i < usuarios.length(); i++){
-            org.json.JSONObject user = usuarios.getJSONObject(i);
-             includeLog(i==0 ? "" + user.toString() : "," + user.toString(), Color.BLACK,  Color.WHITE);
-        }
-        
-        logUsers = !logUsers;
-        
-        includeLog("]}", Color.BLACK, Color.WHITE);
-        
-    }
-    
-    public void includeCliente(String sClient){
-        lClient = new JLabel();
-        lClient.setText(sClient);
-        
-        pType = new JPanel();
-        pType.setSize(20, 20);
-        pType.setBackground(Color.GREEN);
-                
-        client = new JPanel();
-        client.setSize(300,35);
-        client.setLocation(x, yClient);
-        client.add(pType);
-        client.add(lClient);
-        
-        yClient += 40;
-        
-        pContent.add(client);
-        pContent.repaint();
-        pContent.validate();
-        
-        revalidate();
-    }
-    
-    // Shows what will be sent
-    public void showSend(String send) throws IOException {
-        //Terminal
-        System.out.println("Send -> " + send);
-
-        //Iterface Log
-        includeLog("Send -> "+send, Color.BLACK, Color.BLUE);
-        
-        //Log txt
-        File fLog = new File("log.txt");
-        try (FileWriter fwLog = new FileWriter(fLog, true)) {
-            fwLog.write("Send -> " + send + "\n");
-            fwLog.flush();
-        }
-    }
-
-    //Shows what came
-    public void showReceived(String received, Color legend) throws IOException {
-        //Terminal
-        System.out.println("Received <- " + received);
-
-        //Iterface Log
-        includeLog("Received <- "+received, legend, Color.CYAN);
-        
-        //Log txt
-        File fLog = new File("log.txt");
-        try (FileWriter fwLog = new FileWriter(fLog, true)) {
-            fwLog.write("Received <- " + received + "\n");
-            fwLog.flush();
-        }
-    }
-    
     public void pContentClear (){
         switch(screen){
-            case "connection"           -> pcCenter.remove(connectionController); 
-            case "login"                -> pcCenter.remove(loginController);
-            case "registerStudent"      -> pcCenter.remove(registerStudentController);
+            case "connection"           -> pContentAll.remove(connectionController); 
+            case "loginRegister"        -> pContentAll.remove(loginRegisterController);
+            /*
             case "registerMonitor"      -> {
                 pcLeft.remove(registerMonitorController);
                 pcCenter.remove(managementMonitorController);
@@ -205,18 +109,14 @@ public class ClientController extends ClientScreen {
                 pcCenter.remove(managementMonitorController);
                 pcRight.remove(registerMonitoringController);
             }
-
+*/
         }
-        pcCenter.repaint();
-        pcCenter.validate();
-        pcLeft.repaint();
-        pcLeft.validate();
-        pcRight.repaint();
-        pcRight.validate();
-        pExit.repaint();
-        pExit.validate();
-        pContent.revalidate();
-        pHeader.revalidate();
+        pContentAll.repaint();
+        pContentAll.validate();
+        pContentAll.revalidate();
+        repaint();
+        validate();
+        revalidate();
     }
     
     public void pContentAdd(String type){
@@ -224,19 +124,22 @@ public class ClientController extends ClientScreen {
             case "connection" -> 
             {
                 connectionController.cleanFields();
-                pcCenter.add(connectionController); 
+                pContentAll.add(connectionController); 
                 screen = "connection";
             }
-            case "login" -> {
-                loginController.cleanFields();
-                pcCenter.add(loginController); 
-                screen = "login";
+            case "loginRegister" -> {
+                loginRegisterController.cleanFields();
+                pContentAll.add(loginRegisterController, CENTER); 
+                screen = "loginRegister";
             }
-            case "registerStudent" -> {
-                registerStudentController.cleanFields();
-                pcCenter.add(registerStudentController);
-                screen = "registerStudent";
+            case "home" -> {
+                pContentAll.add(homeController, CENTER); 
+                screen = "home";
             }
+            case "admin" -> {
+                homeController.admin();
+            }
+            /*
             case "registerMonitor"  -> 
             {
                 registerMonitorController.cleanFields();
@@ -258,14 +161,32 @@ public class ClientController extends ClientScreen {
                 registerMonitoringController.cleanFields();
                 pcRight.add(registerMonitoringController);
                 screen = "registerMonitoring";
-            }
+            }*/
         }
-        pcCenter.repaint();
-        pcCenter.validate();
-        pcLeft.repaint();
-        pcLeft.validate();
-        pcRight.repaint();
-        pcRight.validate();
-        pContent.revalidate();
+        pContentAll.repaint();
+        pContentAll.validate();
+        pContentAll.revalidate();
+        repaint();
+        validate();
+        revalidate();
+    }
+    
+    public void log(){
+         if(!cbLog.isSelected()) {
+            pContentAll.remove(logController);
+            pContentAll.setSize(new java.awt.Dimension(900, 500));
+            setSize(new java.awt.Dimension(900, 500));
+        }
+        else {
+            pContentAll.add(logController, PAGE_END);
+            pContentAll.setSize(new java.awt.Dimension(900, 680));
+            setSize(new java.awt.Dimension(900, 680));
+        }
+        pContentAll.repaint();
+        pContentAll.validate();
+        pContentAll.revalidate();
+        repaint();
+        validate();
+        revalidate();
     }
 }

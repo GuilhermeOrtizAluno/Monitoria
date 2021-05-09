@@ -3,36 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllerold;
 
-import static app.Program.*;
-import java.io.IOException;
-import java.io.PrintWriter;
-import org.json.simple.JSONObject;
 import static app.Program.socket;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import screens.RegisterScreen;
+import org.json.simple.JSONObject;
+import screensold3.RegisterMonitorScreen;
 
 /**
- * FXML Controller class
  *
- * @author Maycon
+ * @author Guilherme Ortiz
  */
-public class RegisterStudentController extends RegisterScreen{
-
-    public RegisterStudentController() {
+public class RegisterMonitorController extends RegisterMonitorScreen{
+     /*
+    public RegisterMonitorController() {
         initComponents();
         continuationInitComponents();
         cleanFields();
     }
     
-    public void cleanFields(){
+     public void cleanFields(){
+        tfName.setText("");
         tfUser.setText("");
         tfPass.setText("");
-        tfName.setText("");
         revalidate();
     } 
 
@@ -43,9 +41,6 @@ public class RegisterStudentController extends RegisterScreen{
             } catch (IOException ex) {
                 Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }); 
-        bVoltar.addActionListener((ActionEvent evt) -> {
-            hundleExit();
         }); 
    }
 
@@ -73,7 +68,7 @@ public class RegisterStudentController extends RegisterScreen{
             route.put("usuario", user);
             route.put("senha", pass);
             route.put("is_admin", false);
-            route.put("is_monitor", false);
+            route.put("is_monitor", true);
 
             // Shows what will be sent
             clientController.showSend(route.toString());
@@ -85,10 +80,5 @@ public class RegisterStudentController extends RegisterScreen{
         }catch(Error e){
             
         }
-    }
-    
-    private void hundleExit(){
-        clientController.pContentClear();
-        clientController.pContentAdd("login");
-    }
+    }*/
 }

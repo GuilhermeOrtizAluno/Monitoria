@@ -3,35 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllerold;
 
-import static app.Program.clientController;
-import static app.Program.socket;
-import java.awt.event.ActionEvent;
+import static app.Program.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.json.simple.JSONObject;
+import static app.Program.socket;
+import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.json.simple.JSONObject;
-import screens.RegisterMonitorScreen;
+import screensold3.RegisterScreen;
 
 /**
+ * FXML Controller class
  *
- * @author Guilherme Ortiz
+ * @author Maycon
  */
-public class RegisterMonitorController extends RegisterMonitorScreen{
-     
-    public RegisterMonitorController() {
+public class RegisterStudentController extends RegisterScreen{
+/*
+    public RegisterStudentController() {
         initComponents();
         continuationInitComponents();
         cleanFields();
     }
     
-     public void cleanFields(){
-        tfName.setText("");
+    public void cleanFields(){
         tfUser.setText("");
         tfPass.setText("");
+        tfName.setText("");
         revalidate();
     } 
 
@@ -42,6 +43,9 @@ public class RegisterMonitorController extends RegisterMonitorScreen{
             } catch (IOException ex) {
                 Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }); 
+        bVoltar.addActionListener((ActionEvent evt) -> {
+            hundleExit();
         }); 
    }
 
@@ -69,7 +73,7 @@ public class RegisterMonitorController extends RegisterMonitorScreen{
             route.put("usuario", user);
             route.put("senha", pass);
             route.put("is_admin", false);
-            route.put("is_monitor", true);
+            route.put("is_monitor", false);
 
             // Shows what will be sent
             clientController.showSend(route.toString());
@@ -82,4 +86,9 @@ public class RegisterMonitorController extends RegisterMonitorScreen{
             
         }
     }
+    
+    private void hundleExit(){
+        clientController.pContentClear();
+        clientController.pContentAdd("login");
+    }*/
 }

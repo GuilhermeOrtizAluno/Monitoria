@@ -1,102 +1,138 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package screens;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
- * @author gui_o
+ * @author Guilherme Ortiz
  */
-public class ConnectionScreen extends JPanel {
-    
-    public JButton bConnection;
-    public JLabel lIP;
-    public JLabel lPass;
-    public JLabel lTitle;
-    public JTextField tfIP;
-    public JTextField tfPort;
+public class ConnectionScreen extends javax.swing.JFrame {
 
+    public javax.swing.JButton bConnect;
+    public javax.swing.JButton bClose;
+    public javax.swing.JTextField tfIP;
+    public javax.swing.JTextField tfPort;
+    private javax.swing.JLabel lTitle;
+    private javax.swing.JPanel pConnection;
+    private javax.swing.JPanel pFields;
+    private javax.swing.JPanel pHeader;  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
     public void initComponents() {
 
-        lTitle = new javax.swing.JLabel();
-        lIP = new javax.swing.JLabel();
+        pConnection = new javax.swing.JPanel();
+        pFields = new javax.swing.JPanel();
         tfIP = new javax.swing.JTextField();
-        lPass = new javax.swing.JLabel();
         tfPort = new javax.swing.JTextField();
-        bConnection = new javax.swing.JButton();
+        bConnect = new javax.swing.JButton();
+        pHeader = new javax.swing.JPanel();
+        bClose = new javax.swing.JButton();
+        lTitle = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(230, 270));
-        setMinimumSize(new java.awt.Dimension(230, 270));
-        setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(230, 270));
-        setSize(230, 270);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(240, 280));
+        setUndecorated(true);
 
-        lTitle.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        lTitle.setForeground(new java.awt.Color(204, 204, 204));
-        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Conectar com Servidor");
+        pConnection.setBackground(new java.awt.Color(255, 255, 255));
+        pConnection.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pConnection.setLayout(null);
 
-        lIP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lIP.setText("IP");
+        pFields.setBackground(new java.awt.Color(255, 255, 255));
 
-        tfIP.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfIP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfIP.setText("localhost");
+        tfIP.setBorder(javax.swing.BorderFactory.createTitledBorder("IP"));
 
-        lPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lPass.setText("Porta");
-
-        tfPort.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfPort.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        tfPort.setToolTipText("");
-        tfPort.setPreferredSize(new java.awt.Dimension(60, 23));
+        tfPort.setBorder(javax.swing.BorderFactory.createTitledBorder("Porta"));
 
-        bConnection.setBackground(new java.awt.Color(204, 0, 204));
-        bConnection.setText("Conectar");
+        bConnect.setBackground(new java.awt.Color(204, 0, 204));
+        bConnect.setForeground(new java.awt.Color(255, 255, 255));
+        bConnect.setText("Conectar");
         
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lPass, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lIP, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfIP, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPort, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bConnection, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+        javax.swing.GroupLayout pFieldsLayout = new javax.swing.GroupLayout(pFields);
+        pFields.setLayout(pFieldsLayout);
+        pFieldsLayout.setHorizontalGroup(
+            pFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFieldsLayout.createSequentialGroup()
+                .addGroup(pFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pFieldsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfIP, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfPort, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pFieldsLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(bConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pFieldsLayout.setVerticalGroup(
+            pFieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pFieldsLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(tfIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tfPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(bConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+
+        pConnection.add(pFields);
+        pFields.setBounds(20, 90, 200, 180);
+
+        pHeader.setBackground(new java.awt.Color(204, 0, 204));
+
+        bClose.setBackground(new java.awt.Color(255, 255, 255));
+        bClose.setForeground(new java.awt.Color(204, 0, 204));
+        bClose.setText("x");
+
+        lTitle.setFont(new java.awt.Font("MV Boli", 1, 18)); // NOI18N
+        lTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lTitle.setText("Conectar com Servidor");
+        lTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout pHeaderLayout = new javax.swing.GroupLayout(pHeader);
+        pHeader.setLayout(pHeaderLayout);
+        pHeaderLayout.setHorizontalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bClose)
+                .addContainerGap())
+            .addComponent(lTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pHeaderLayout.setVerticalGroup(
+            pHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHeaderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lIP)
-                .addGap(3, 3, 3)
-                .addComponent(tfIP, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lPass)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPort, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(bConnection, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(bClose)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("");
-    }// </editor-fold>                                                           
-                 
+        pConnection.add(pHeader);
+        pHeader.setBounds(0, 0, 240, 110);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pConnection, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+                
 }

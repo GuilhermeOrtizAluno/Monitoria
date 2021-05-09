@@ -1,9 +1,13 @@
 package dice;
 
 import entites.Route;
-import static app.Program.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import controllers.ClientController;
+import controllers.ConnectionController;
+import controllers.HomeController;
+import controllers.LogController;
+import controllers.LoginRegisterController;
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
@@ -12,6 +16,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +33,8 @@ import org.json.JSONObject;
  * Tomar Desição
  */
 public class ManagerClient extends Thread{
+    
+    private ClientController clientController; 
     private InputStreamReader in;
     private OutputStreamWriter ou;
     private PrintWriter pr;
@@ -35,15 +42,45 @@ public class ManagerClient extends Thread{
     private Color legend;
     private boolean bRoute;
     
-    public void startReceived() throws IOException{
+    public static ConnectionController connectionController;
+    public static LoginRegisterController loginRegisterController;
+    public static LogController logController;
+    public static HomeController homeController;
+    public static Socket socket;
+    public static JSONArray monitorsAll;
+    public static boolean admin;
+    public static String usernameON;
+
+    public ManagerClient() {
+        connectionController = new ConnectionController();
+        clientController = new ClientController();
+        loginRegisterController = new LoginRegisterController();
+        logController = new LogController();
+        homeController = new HomeController();
+        admin = false;
+        socket = new Socket();
+        monitorsAll = new JSONArray();
+    }
+    
+    public void socketClient() throws IOException{
         in = new InputStreamReader(socket.getInputStream());
         ou = new OutputStreamWriter(socket.getOutputStream());
         bf = new BufferedReader(in);
-        pr = new PrintWriter(ou);  
-        
-        // Opens screen Login
-        clientController.pContentAdd("login");
-
+        pr = new PrintWriter(ou);
+    }
+    
+    public void startProgram(){
+        connectionController.start();
+    }
+    
+    public void startClient() throws IOException{
+        socketClient();
+        connectionController.close();
+        startReceived();
+        clientController.start();
+    }
+    
+    public void startReceived(){
         this.start();
     }
     
@@ -73,28 +110,28 @@ public class ManagerClient extends Thread{
                 switch (rRoute.getRota()) {
                     case "login.login" ->
                     {    
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                         login(rRoute.getTipo_usuario());
                     }
                     case "login.logout" ->
                     {
-                        clientController.showReceived(sRoute, legend);
-                        logout();
+                        logController.showReceived(sRoute, legend);
+                        //logout();
                     }
                     case "login.registro" ->
                     {
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                         register();
                     }
                     case "login.update" -> 
                     {
-                        clientController.showReceived(sRoute, legend);
-                        update();
+                        logController.showReceived(sRoute, legend);
+                        //update();
                     }
                     case "usuario.delete" ->
                     {
-                        clientController.showReceived(sRoute, legend);
-                        delete();
+                        logController.showReceived(sRoute, legend);
+                        //delete();
                     }
                     case "cliente.usuarios-ativos" -> {
                         users(sRoute, true);
@@ -106,34 +143,34 @@ public class ManagerClient extends Thread{
                     }
                     case "mensagem.mesagem" -> 
                     {
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                         mensagem();
                     }
                     case "monitoria.listar-monitor" ->{
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.registro" ->{
-                        registerMonitoringController.cleanFields();
-                        clientController.showReceived(sRoute, legend);
+                        //registerMonitoringController.cleanFields();
+                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.update" ->{
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.listar" ->{
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.listar-aluno" ->{
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     case "aluno-monitoria.inscrever" -> {
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     case "aluno-monitoria.delete" -> {
-                        clientController.showReceived(sRoute, legend);
+                        logController.showReceived(sRoute, legend);
                     }
                     default -> 
                     {
-                        clientController.showReceived(sRoute, Color.RED);
+                        logController.showReceived(sRoute, Color.RED);
                         errorRoute();
                     }
                 } // </editor-fold> 
@@ -159,7 +196,7 @@ public class ManagerClient extends Thread{
     } 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Function">
+    // <editor-fold defaultstate="collapsed" desc="Functions">
     private void login(String sTypeUser) throws IOException, JSONException {
 
         //Valid Login
@@ -174,20 +211,17 @@ public class ManagerClient extends Thread{
         }
         
         clientController.pContentClear();
-        clientController.pExit.add(clientController.bExit);
+        clientController.pContentAdd("home");
         switch(sTypeUser){
             case "admin"    -> 
             {
+                clientController.pContentAdd("admin");
                 admin = true;
-                clientController.pContentAdd("registerMonitor");
-                clientController.pContentAdd("managementMonitor");
-                clientController.pContentAdd("registerMonitoring");
                 usersAll();
-                
             }
-            case "monitor"  ->{
+            case "monitor" ->{
             }
-            case "aluno"    ->{
+            case "aluno"   ->{
                 admin = false;
                 clientController.pContentAdd("updateStudent");
             }
@@ -197,9 +231,9 @@ public class ManagerClient extends Thread{
     }
 
     private void logout() throws IOException {
-        clientController.pExit.remove(clientController.bExit);
+        //clientController.pExit.remove(clientController.bExit);
         clientController.pContentClear();
-        clientController.pContentAdd("login");
+        clientController.pContentAdd("loginRegister");
         admin = false;
     }
 
@@ -222,17 +256,16 @@ public class ManagerClient extends Thread{
             JOptionPane.INFORMATION_MESSAGE
         );
         
-        if (!admin){
-            clientController.pContentClear();
-            clientController.pContentAdd("login");
-        }else{
+        loginRegisterController.cleanFields();
+        
+        if (admin){
             usersAll();
-            registerMonitorController.cleanFields();
+            //registerMonitorController.cleanFields();
         }
 
     }
 
-    private void update() throws IOException, JSONException {
+    /*private void update() throws IOException, JSONException {
         if(bRoute){ 
             JOptionPane.showMessageDialog(
                 null, 
@@ -277,7 +310,7 @@ public class ManagerClient extends Thread{
                 JOptionPane.WARNING_MESSAGE
             );
 
-    }
+    }*/
     
     private void monitores(String sUser) throws JSONException{
         
@@ -299,13 +332,13 @@ public class ManagerClient extends Thread{
         }
         
         
-        managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
-        registerMonitoringController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
+        //managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
+        //registerMonitoringController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
     }
 
     private void users(String sRoute, boolean broadcast) throws IOException, JSONException {
         legend = Color.GREEN;
-        clientController.includeLogUsers(new JSONObject(sRoute), broadcast);
+        logController.includeLogUsers(new JSONObject(sRoute), broadcast);
     }
 
     private void mensagem() {
@@ -324,10 +357,11 @@ public class ManagerClient extends Thread{
     private void usersAll() throws JSONException, IOException{
         JSONObject route = new JSONObject();
         route.put("rota", "cliente.usuarios");
-        clientController.showSend(route.toString());
+        logController.showSend(route.toString());
         // Send
         pr.println(route);
         pr.flush();
     }
     // </editor-fold> 
+
 }

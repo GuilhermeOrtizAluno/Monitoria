@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package controllerold;
 
 import static app.Program.*;
 import java.awt.event.ActionEvent;
@@ -13,14 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
-import screens.ManagementMonitorScreen;
+import screensold3.ManagementMonitorScreen;
 
 /**
  *
  * @author Guilherme Ortiz
  */
 public class ManagementMonitorController extends ManagementMonitorScreen{
-
+/*
     public ManagementMonitorController() {
         initComponents();
         continuationInitComponents();
@@ -114,5 +114,5 @@ public class ManagementMonitorController extends ManagementMonitorScreen{
         
     }
 
-     
+     */
 }

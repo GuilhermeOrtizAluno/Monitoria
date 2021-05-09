@@ -5,190 +5,97 @@
  */
 package screens;
 
-import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
 
 /**
  *
  * @author Guilherme Ortiz
  */
-public class ClientScreen extends JFrame {
-    
-    public JLabel lTitle;
-    public JPanel pClient;
-    public JPanel pContent;
-    public JPanel pExit;
-    public JPanel pHeader;
-    public JPanel pLog;
-    public JPanel pContentLog;
-    public JPanel pcCenter;
-    public JPanel pcLeft;
-    public JPanel pcRight;
-    public JScrollPane spLog;
-    public JButton bExit;
+public class ClientScreen extends javax.swing.JFrame {
 
+    public javax.swing.JButton bClose;
+    public javax.swing.JButton bMaximize;
+    public javax.swing.JButton bMinimize;
+    public javax.swing.JPanel pContentAll;
+    private javax.swing.JPanel pControllerPage;
+    public JCheckBox cbLog;
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
     public void initComponents() {
-        
-        pClient = new javax.swing.JPanel();
-        pHeader = new javax.swing.JPanel();
-        lTitle = new javax.swing.JLabel();
-        pExit = new javax.swing.JPanel();
-        pContent = new javax.swing.JPanel();
-        pcLeft = new javax.swing.JPanel();
-        pcRight = new javax.swing.JPanel();
-        pcCenter = new javax.swing.JPanel();
-        spLog = new javax.swing.JScrollPane();
-        bExit = new JButton();
-        pLog = new javax.swing.JPanel();
-        pContentLog = new JPanel();
+
+        pContentAll = new javax.swing.JPanel();
+        pControllerPage = new javax.swing.JPanel();
+        bClose = new javax.swing.JButton();
+        bMaximize = new javax.swing.JButton();
+        bMinimize = new javax.swing.JButton();
+        cbLog = new JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(900, 700));
+        setMaximumSize(new java.awt.Dimension(900, 680));
+        setMinimumSize(new java.awt.Dimension(900, 500));
+        setUndecorated(true);
+
+        pContentAll.setMaximumSize(new java.awt.Dimension(900, 680));
+        pContentAll.setMinimumSize(new java.awt.Dimension(900, 500));
+        pContentAll.setPreferredSize(new java.awt.Dimension(900, 500));
+        pContentAll.setLayout(new java.awt.BorderLayout());
+
+        pControllerPage.setBackground(new java.awt.Color(255, 255, 255));
+        pControllerPage.setPreferredSize(new java.awt.Dimension(900, 30));
+
+        bClose.setText("X");
+
+        bMaximize.setText("[]");
+
+        bMinimize.setText("-");
         
-        bExit.setText("Sair");
-        bExit.setBackground(Color.WHITE);
-        bExit.setSize(70, 30);
+        cbLog.setText("Log");
 
-        pClient.setBackground(new java.awt.Color(255, 255, 255));
-        pClient.setMinimumSize(new java.awt.Dimension(900, 700));
-        pClient.setPreferredSize(new java.awt.Dimension(900, 700));
-        pClient.setLayout(new java.awt.BorderLayout());
-
-        pHeader.setBackground(new java.awt.Color(204, 0, 204));
-        pHeader.setMinimumSize(new java.awt.Dimension(900, 70));
-        pHeader.setPreferredSize(new java.awt.Dimension(900, 70));
-        pHeader.setLayout(new java.awt.BorderLayout());
-
-        lTitle.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
-        lTitle.setForeground(new java.awt.Color(255, 255, 255));
-        lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Client");
-        pHeader.add(lTitle, java.awt.BorderLayout.CENTER);
-
-        pExit.setBackground(new java.awt.Color(204, 0, 204));
-
-        javax.swing.GroupLayout pExitLayout = new javax.swing.GroupLayout(pExit);
-        pExit.setLayout(pExitLayout);
-        pExitLayout.setHorizontalGroup(
-            pExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        javax.swing.GroupLayout pControllerPageLayout = new javax.swing.GroupLayout(pControllerPage);
+        pControllerPage.setLayout(pControllerPageLayout);
+        pControllerPageLayout.setHorizontalGroup(
+            pControllerPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pControllerPageLayout.createSequentialGroup()
+                .addContainerGap(761, Short.MAX_VALUE)
+                .addComponent(cbLog)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bMinimize)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bMaximize)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bClose)
+                .addContainerGap())
         );
-        pExitLayout.setVerticalGroup(
-            pExitLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        pControllerPageLayout.setVerticalGroup(
+            pControllerPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pControllerPageLayout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
+                .addGroup(pControllerPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bClose)
+                    .addComponent(bMaximize)
+                    .addComponent(bMinimize)
+                    .addComponent(cbLog)))
         );
 
-        pHeader.add(pExit, java.awt.BorderLayout.LINE_END);
-
-        pClient.add(pHeader, java.awt.BorderLayout.PAGE_START);
-
-        pContent.setBackground(new java.awt.Color(255, 255, 255));
-        pContent.setLayout(new java.awt.BorderLayout());
-
-        pcLeft.setBackground(new java.awt.Color(255, 255, 255));
-        pcLeft.setMinimumSize(new java.awt.Dimension(299, 400));
-        pcLeft.setPreferredSize(new java.awt.Dimension(299, 400));
-
-        javax.swing.GroupLayout pcLeftLayout = new javax.swing.GroupLayout(pcLeft);
-        pcLeft.setLayout(pcLeftLayout);
-        pcLeftLayout.setHorizontalGroup(
-            pcLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
-        );
-        pcLeftLayout.setVerticalGroup(
-            pcLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-
-        pContent.add(pcLeft, java.awt.BorderLayout.LINE_START);
-
-        pcRight.setBackground(new java.awt.Color(255, 255, 255));
-        pcRight.setMinimumSize(new java.awt.Dimension(299, 400));
-        pcRight.setPreferredSize(new java.awt.Dimension(299, 400));
-
-        javax.swing.GroupLayout pcRightLayout = new javax.swing.GroupLayout(pcRight);
-        pcRight.setLayout(pcRightLayout);
-        pcRightLayout.setHorizontalGroup(
-            pcRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
-        );
-        pcRightLayout.setVerticalGroup(
-            pcRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-
-        pContent.add(pcRight, java.awt.BorderLayout.LINE_END);
-
-        pcCenter.setBackground(new java.awt.Color(255, 255, 255));
-        pcCenter.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pcCenter.setMinimumSize(new java.awt.Dimension(299, 400));
-        pcCenter.setPreferredSize(new java.awt.Dimension(299, 400));
-
-        javax.swing.GroupLayout pcCenterLayout = new javax.swing.GroupLayout(pcCenter);
-        pcCenter.setLayout(pcCenterLayout);
-        pcCenterLayout.setHorizontalGroup(
-            pcCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
-        );
-        pcCenterLayout.setVerticalGroup(
-            pcCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-
-        pContent.add(pcCenter, java.awt.BorderLayout.CENTER);
-        pClient.add(pContent, java.awt.BorderLayout.CENTER);
-
-        pLog.setBackground(new java.awt.Color(204, 0, 204));
-        pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
-        pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
-        
-        pContentLog.setBackground(new java.awt.Color(204, 0, 204));
-        pContentLog.add(pLog);
-
-        /*javax.swing.GroupLayout pLog1Layout = new javax.swing.GroupLayout(pLog);
-        pLog.setLayout(pLog1Layout);
-        pLog1Layout.setHorizontalGroup(
-            pLog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 898, Short.MAX_VALUE)
-        );
-        pLog1Layout.setVerticalGroup(
-            pLog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );*/
-
-        spLog.setMinimumSize(null);
-        spLog.setName(""); // NOI18N
-        spLog.setRequestFocusEnabled(false);
-        spLog.setViewportView(pContentLog);
-        spLog.setMinimumSize(new java.awt.Dimension(900, 200));
-        spLog.setPreferredSize(new java.awt.Dimension(900, 200));
-
-
-        pClient.add(spLog, java.awt.BorderLayout.PAGE_END);
+        pContentAll.add(pControllerPage, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pContentAll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pContentAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setTitle("Client");
         pack();
         setLocationRelativeTo(null);
-
-    }// </editor-fold>                        
-                    
+    }// </editor-fold>                        y
 }
