@@ -17,10 +17,10 @@ public class MenuAdminController extends MenuAdminScreen{
     
      private void continuationInitComponents(){
         bMonitor.addActionListener((ActionEvent evt) -> {
-            homeController.adminManagementMonitor();
+            homeController.contentAdd("managementMonitor");
         }); 
         bMonitoria.addActionListener((ActionEvent evt) -> {
-            homeController.adminManagementMonitoring();
+            homeController.contentAdd("managementMonitoring");
         }); 
     }
     

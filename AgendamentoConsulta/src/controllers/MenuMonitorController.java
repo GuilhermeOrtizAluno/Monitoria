@@ -17,13 +17,13 @@ public class MenuMonitorController extends MenuMonitorScreen{
     
     private void continuationInitComponents(){
         bMonitoring.addActionListener((ActionEvent evt) -> {
-            homeController.adminManagementMonitor();
+            homeController.contentAdd("monitorManagement");
         }); 
         bHors.addActionListener((ActionEvent evt) -> {
-            homeController.adminManagementMonitoring();
+            homeController.contentAdd("managementMonitoring");
         });
         bChat.addActionListener((ActionEvent evt) -> {
-            homeController.adminManagementMonitoring();
+            homeController.contentAdd("managementMonitoring");
         });
     }
     

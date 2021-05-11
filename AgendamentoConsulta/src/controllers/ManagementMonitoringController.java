@@ -4,6 +4,8 @@ import static dice.ManagerClient.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -76,7 +78,7 @@ public class ManagementMonitoringController extends ManagementMonitoringScreen{
         try {
             // Read from interface
             String monitor = cbMonitor.getSelectedItem() == null ? "" : cbMonitor.getSelectedItem().toString();
-            var lHorarios = pHors.getSelectedValuesList() == null ? "" : pHors.getSelectedValuesList();
+            List lHorarios = pHors.getSelectedValuesList() == null ? null : pHors.getSelectedValuesList();
             String name = tfName.getText();
             String pass = tfPass.getText();
             

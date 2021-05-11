@@ -24,6 +24,9 @@ public class HomeController extends HomeScreen{
     public static MenuMonitorController menuMonitorController;
     public static ManagementMonitorController managementMonitorController;
     public static ManagementMonitoringController managementMonitoringController;
+    public static MonitoringManagementController monitoringManagementController;
+    
+    private String rScreen; 
 
     public HomeController() {
         instantiation();
@@ -32,10 +35,12 @@ public class HomeController extends HomeScreen{
     }
     
     public final void instantiation(){
+        rScreen = "managementMonitor";
         menuAdminController = new MenuAdminController();
         menuMonitorController = new MenuMonitorController();
         managementMonitorController = new ManagementMonitorController();
         managementMonitoringController = new ManagementMonitoringController();
+        monitoringManagementController = new MonitoringManagementController();
     }
     
     private void continuationInitComponents(){
@@ -64,38 +69,59 @@ public class HomeController extends HomeScreen{
     
     public void admin(){
         pMenu.add(menuAdminController, CENTER);
-        adminManagementMonitor();
+        contentAdd("managementMonitor");
     }
     
     public void monitor(){
         pMenu.add(menuMonitorController, CENTER);
-    }
-    
-    public void adminClear(boolean register){
-        managementMonitorController.cleanFields(register);
-    }
-    
-    public void adminManagementMonitor(){
-        switchScreen();
-        pContent.add(managementMonitorController);
-        reloadscreen();
-    }
-    
-    public void adminManagementMonitoring(){
-        switchScreen();
-        pContent.add(managementMonitoringController);
-        reloadscreen();
-    }
-    
-    public void switchScreen(){
-        pContent.remove(managementMonitoringController);
-        pContent.remove(managementMonitorController);
+        contentAdd("monitoringManagement");
     }
     
     public void reloadscreen(){
         validate();
         repaint();
         revalidate();
+    }
+    
+    public void contentAdd(String sScreen){
+        switch(sScreen){
+            case "managementMonitor" -> {
+                contentRemove();
+                pContent.add(managementMonitorController);
+                rScreen = "managementMonitor";
+                managementMonitorController.cleanFields(true);
+            }
+            case "managementMonitoring" -> {
+                contentRemove();
+                pContent.add(managementMonitoringController);
+                rScreen = "managementMonitoring";
+                managementMonitoringController.cleanFields();
+            }
+            case "monitoringManagement" -> {
+                contentRemove();
+                pContent.add(monitoringManagementController);
+                rScreen = "monitorManagement";
+                //monitoringManagementController.cleanFields();
+            }
+            
+        }
+        reloadscreen();
+    }
+    
+    public void contentRemove(){
+        switch(rScreen){
+            case "managementMonitor" -> {
+                pContent.remove(managementMonitorController);
+            }
+            case "managementMonitoring" -> {
+                pContent.remove(managementMonitoringController);
+            }
+            case "monitoringManagement" -> {
+                pContent.remove(monitoringManagementController);
+            }
+            
+        }
+        reloadscreen();
     }
     
     @SuppressWarnings("unchecked")
@@ -106,7 +132,6 @@ public class HomeController extends HomeScreen{
         managementMonitorController.pMonitors.setModel(mMonitors);
         managementMonitoringController.cbMonitor.setModel(new DefaultComboBoxModel<>(vMonitors));
         managementMonitoringController.rcbMonitor.setModel(new DefaultComboBoxModel<>(vMonitors));
-        //managementMonitoringController.pMonitors.setModel(mMonitors);
     }
     
     @SuppressWarnings("unchecked")

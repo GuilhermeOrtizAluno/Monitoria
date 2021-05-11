@@ -1,6 +1,5 @@
 package app;
 import dice.ManagerClient;
-import java.io.IOException;
 
 /**
  *

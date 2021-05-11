@@ -49,7 +49,7 @@ public class ManagerClient extends Thread{
     public static Socket socket;
     public static JSONArray monitorsAll;
     public static JSONArray monitoringsAll;
-    public static boolean admin;
+    public static String stUser;
     public static String usernameON;
 
     public ManagerClient() {
@@ -58,7 +58,7 @@ public class ManagerClient extends Thread{
         loginRegisterController = new LoginRegisterController();
         logController = new LogController();
         homeController = new HomeController();
-        admin = false;
+        stUser = "";
         socket = new Socket();
         monitorsAll = new JSONArray();
         monitoringsAll = new JSONArray();
@@ -128,19 +128,19 @@ public class ManagerClient extends Thread{
                     case "login.update" -> 
                     {
                         logController.showReceived(sRoute, legend);
-                        update();
+                        manager();
                     }
                     case "usuario.delete" ->
                     {
                         logController.showReceived(sRoute, legend);
-                        delete();
+                        manager();
                     }
                     case "cliente.usuarios-ativos" -> {
                         usersLog(sRoute, true);
                     }
                     case "cliente.usuarios" -> {
                         usersLog(sRoute, false);
-                        if(admin)
+                        if("admin".equals(stUser))
                             monitors(sRoute);
                     }
                     case "mensagem.mensagem" -> 
@@ -159,8 +159,7 @@ public class ManagerClient extends Thread{
                     }
                     case "monitoria.listar" ->{
                         monitoringsLog(sRoute);
-                        if(admin)
-                            monitorings(sRoute);
+                        monitorings(sRoute);
                     }
                     case "monitoria.listar-aluno" ->{
                         logController.showReceived(sRoute, legend);
@@ -215,11 +214,11 @@ public class ManagerClient extends Thread{
         
         clientController.pContentClear();
         clientController.pContentAdd("home");
+        stUser = sTypeUser;
         switch(sTypeUser){
             case "admin"    -> 
             {
                 clientController.pContentAdd("admin");
-                admin = true;
                 usersAll();
                 monitoringsAll();
             }
@@ -227,7 +226,6 @@ public class ManagerClient extends Thread{
                 clientController.pContentAdd("monitor");
             }
             case "aluno"   ->{
-                admin = false;
                 clientController.pContentAdd("updateStudent");
             }
         }
@@ -237,7 +235,7 @@ public class ManagerClient extends Thread{
     private void logout() throws IOException {
         clientController.pContentClear();
         clientController.pContentAdd("loginRegister");
-        admin = false;
+        stUser = "";
     }
 
     private void register() throws IOException, JSONException {
@@ -259,59 +257,32 @@ public class ManagerClient extends Thread{
             JOptionPane.INFORMATION_MESSAGE
         );
         
-        if (admin){
+        if (stUser == "admin"){
             usersAll();
-            homeController.adminClear(true);
         } else loginRegisterController.cleanFields();
 
     }
 
-    private void update() throws IOException, JSONException {
+    private void manager() throws IOException, JSONException {
         if(bRoute){ 
             JOptionPane.showMessageDialog(
                 null, 
-                "Update Success", 
+                "Manager Success", 
                 "Manager User", 
                 JOptionPane.INFORMATION_MESSAGE
             );
-            if(!admin){
+            if(!"admin".equals(stUser)){
                 clientController.pContentClear();
                 clientController.pContentAdd("loginRegister");
             }else {
-                homeController.adminClear(false);
                 usersAll();
             }
         }else JOptionPane.showMessageDialog(
                 null, 
-                "Error when trying to edit user", 
+                "Error when trying to manager user", 
                 "Manager User", 
                 JOptionPane.WARNING_MESSAGE
             );
-    }
-
-    private void delete() throws IOException, JSONException {
-        if(bRoute){ 
-            JOptionPane.showMessageDialog(
-                null, 
-                "Delete Success", 
-                "Manager User", 
-                JOptionPane.INFORMATION_MESSAGE
-            );
-            if(!admin){
-                clientController.pContentClear();
-                clientController.pContentAdd("loginRegister");
-            }else {
-                homeController.adminClear(false);
-                homeController.adminClear(true);
-                usersAll();
-            }
-        }else JOptionPane.showMessageDialog(
-                null, 
-                "Error when trying to edit user", 
-                "Manager User", 
-                JOptionPane.WARNING_MESSAGE
-            );
-
     }
     
     private void monitors(String sUser) throws JSONException{
