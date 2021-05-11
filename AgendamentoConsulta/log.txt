@@ -2453,3 +2453,23 @@ Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"rota":"cliente.usuarios"}
 Send -> {"senha":"teste","horarios":["1M2","1M3","1M4"],"usuario_monitor":"douglas","nome":"teste","rota":"monitoria.registro"}
 Received <- {"erro":"Algo deu errado","rota":"monitoria.registro"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"4999","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}

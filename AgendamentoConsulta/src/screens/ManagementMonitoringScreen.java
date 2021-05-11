@@ -1,5 +1,7 @@
 package screens;
 
+import javax.swing.ListSelectionModel;
+
 /**
  *
  * @author Guilherme Ortiz Santos
@@ -20,7 +22,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
     private javax.swing.JPanel pContentUpdate;
     private javax.swing.JPanel pDelete;
     public javax.swing.JList pHors;
-    private javax.swing.JPanel pMonitors;
+    public javax.swing.JList pMonitorings;
     private javax.swing.JPanel pRegister;
     private javax.swing.JPanel pTitle;
     private javax.swing.JPanel pUpdate;
@@ -34,6 +36,9 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
     public javax.swing.JTextField tfName;
     public javax.swing.JTextField tfPass;
     private javax.swing.JLabel ulTitle;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
@@ -66,7 +71,10 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         dlTitle = new javax.swing.JLabel();
         bDelete = new javax.swing.JButton();
         spMonitors = new javax.swing.JScrollPane();
-        pMonitors = new javax.swing.JPanel();
+        pMonitorings = new javax.swing.JList();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 470));
@@ -106,7 +114,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         pRegister.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         cbMonitor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cbMonitor.setBorder(javax.swing.BorderFactory.createTitledBorder("Monitor"));
+        cbMonitor.setBorder(null);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -125,13 +133,13 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         spHors.setBorder(javax.swing.BorderFactory.createTitledBorder("Horarios"));
 
         pHors.setBackground(new java.awt.Color(255, 255, 255));
-        pHors.setPreferredSize(new java.awt.Dimension(102, 90));
+        //pHors.setPreferredSize(new java.awt.Dimension(102, 90));
 
         javax.swing.GroupLayout pHorsLayout = new javax.swing.GroupLayout(pHors);
         pHors.setLayout(pHorsLayout);
         pHorsLayout.setHorizontalGroup(
             pHorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGap(0, 181, Short.MAX_VALUE)
         );
         pHorsLayout.setVerticalGroup(
             pHorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,6 +153,8 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         tfPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tfPass.setBorder(javax.swing.BorderFactory.createTitledBorder("Senha"));
 
+        jLabel2.setText("Monitor");
+
         javax.swing.GroupLayout pRegisterLayout = new javax.swing.GroupLayout(pRegister);
         pRegister.setLayout(pRegisterLayout);
         pRegisterLayout.setHorizontalGroup(
@@ -157,7 +167,8 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
                     .addComponent(tfName)
                     .addComponent(cbMonitor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(spHors)
-                    .addComponent(tfPass))
+                    .addComponent(tfPass)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pRegisterLayout.setVerticalGroup(
@@ -165,15 +176,17 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
             .addGroup(pRegisterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(cbMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(tfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(spHors, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(spHors, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(bRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -216,7 +229,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         bUpdate.setText("Editar");
 
         rcbMonitor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rcbMonitor.setBorder(javax.swing.BorderFactory.createTitledBorder("Monitor"));
+        rcbMonitor.setBorder(null);
 
         rtfName.setBackground(new java.awt.Color(255, 255, 255));
         rtfName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -227,7 +240,6 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         rspHors.setBorder(javax.swing.BorderFactory.createTitledBorder("Horarios"));
 
         rpHors.setBackground(new java.awt.Color(255, 255, 255));
-        rpHors.setPreferredSize(new java.awt.Dimension(102, 50));
 
         javax.swing.GroupLayout rpHorsLayout = new javax.swing.GroupLayout(rpHors);
         rpHors.setLayout(rpHorsLayout);
@@ -237,7 +249,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         );
         rpHorsLayout.setVerticalGroup(
             rpHorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 52, Short.MAX_VALUE)
+            .addGap(0, 61, Short.MAX_VALUE)
         );
 
         rspHors.setViewportView(rpHors);
@@ -248,7 +260,11 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         rtfPass.setBorder(javax.swing.BorderFactory.createTitledBorder("Senha"));
 
         cbMonitoring.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        cbMonitoring.setBorder(javax.swing.BorderFactory.createTitledBorder("Monitoria"));
+        cbMonitoring.setBorder(null);
+
+        jLabel3.setText("Monitor");
+
+        jLabel4.setText("Monitoria");
 
         javax.swing.GroupLayout pUpdateLayout = new javax.swing.GroupLayout(pUpdate);
         pUpdate.setLayout(pUpdateLayout);
@@ -263,7 +279,9 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
                     .addComponent(rspHors, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(rtfPass, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(rtfName)
-                    .addComponent(cbMonitoring, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbMonitoring, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pUpdateLayout.setVerticalGroup(
@@ -271,17 +289,21 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
             .addGroup(pUpdateLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ulTitle)
-                .addGap(18, 18, 18)
-                .addComponent(cbMonitoring, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rcbMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbMonitoring, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rcbMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rtfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
                 .addComponent(rtfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rspHors, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rspHors, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -324,10 +346,11 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
 
         spMonitors.setBackground(new java.awt.Color(255, 255, 255));
 
-        pMonitors.setBackground(new java.awt.Color(255, 255, 255));
+        pMonitorings.setBackground(new java.awt.Color(255, 255, 255));
+        pMonitorings.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        javax.swing.GroupLayout pMonitorsLayout = new javax.swing.GroupLayout(pMonitors);
-        pMonitors.setLayout(pMonitorsLayout);
+        javax.swing.GroupLayout pMonitorsLayout = new javax.swing.GroupLayout(pMonitorings);
+        pMonitorings.setLayout(pMonitorsLayout);
         pMonitorsLayout.setHorizontalGroup(
             pMonitorsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 204, Short.MAX_VALUE)
@@ -337,7 +360,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
             .addGap(0, 243, Short.MAX_VALUE)
         );
 
-        spMonitors.setViewportView(pMonitors);
+        spMonitors.setViewportView(pMonitorings);
 
         javax.swing.GroupLayout pDeleteLayout = new javax.swing.GroupLayout(pDelete);
         pDelete.setLayout(pDeleteLayout);
