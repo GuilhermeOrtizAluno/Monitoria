@@ -76,7 +76,6 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 470));
         setPreferredSize(new java.awt.Dimension(750, 470));
         setLayout(new java.awt.BorderLayout());
@@ -86,7 +85,7 @@ public class ManagementMonitoringScreen extends javax.swing.JPanel {
 
         lTitle.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Gerenciamento de Monitor");
+        lTitle.setText("Gerenciamento de Monitoria");
 
         javax.swing.GroupLayout pTitleLayout = new javax.swing.GroupLayout(pTitle);
         pTitle.setLayout(pTitleLayout);

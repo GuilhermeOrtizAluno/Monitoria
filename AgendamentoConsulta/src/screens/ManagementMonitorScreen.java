@@ -77,7 +77,6 @@ public class ManagementMonitorScreen extends javax.swing.JPanel {
         spMonitors = new javax.swing.JScrollPane();
         pMonitors = new JList();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 470));
         setPreferredSize(new java.awt.Dimension(750, 470));
         setLayout(new java.awt.BorderLayout());

@@ -136,6 +136,7 @@ public class ManagerClient extends Thread{
                         manager();
                     }
                     case "cliente.usuarios-ativos" -> {
+                        users(sRoute);
                         usersLog(sRoute, true);
                     }
                     case "cliente.usuarios" -> {
@@ -215,12 +216,12 @@ public class ManagerClient extends Thread{
         clientController.pContentClear();
         clientController.pContentAdd("home");
         stUser = sTypeUser;
+        usersRequest();
+        monitoringsRequest();
         switch(sTypeUser){
             case "admin"    -> 
             {
                 clientController.pContentAdd("admin");
-                usersAll();
-                monitoringsAll();
             }
             case "monitor" ->{
                 clientController.pContentAdd("monitor");
@@ -257,8 +258,8 @@ public class ManagerClient extends Thread{
             JOptionPane.INFORMATION_MESSAGE
         );
         
-        if (stUser == "admin"){
-            usersAll();
+        if ("admin".equals(stUser)){
+            usersRequest();
         } else loginRegisterController.cleanFields();
 
     }
@@ -275,7 +276,7 @@ public class ManagerClient extends Thread{
                 clientController.pContentClear();
                 clientController.pContentAdd("loginRegister");
             }else {
-                usersAll();
+                usersRequest();
             }
         }else JOptionPane.showMessageDialog(
                 null, 
@@ -286,7 +287,6 @@ public class ManagerClient extends Thread{
     }
     
     private void monitors(String sUser) throws JSONException{
-        
         JSONObject joUsers = new JSONObject(sUser);
         
         JSONArray users = joUsers.getJSONArray("usuarios");
@@ -304,6 +304,24 @@ public class ManagerClient extends Thread{
             //monitors[i] = usuarios.getString(i);
         }
         homeController.initCBMonitors(monitors);
+    }
+    
+    private void users(String sUser) throws JSONException{
+        
+        JSONObject joUsers = new JSONObject(sUser);
+        
+        JSONArray jaUsers = joUsers.getJSONArray("usuarios");
+        
+        //String[] monitors;
+        Vector<String> users = new Vector<>();
+        users.add("");
+        
+        for(int i = 0; i < jaUsers.length(); i++){
+            JSONObject joUser = jaUsers.getJSONObject(i);
+            users.add(joUser.getString("usuario"));
+            //monitors[i] = usuarios.getString(i);
+        }
+        homeController.initCBUsers(users);
     }
     
     private void monitorings(String sMonitorings)throws JSONException{
@@ -348,7 +366,7 @@ public class ManagerClient extends Thread{
         );
     }
     
-    private void usersAll() throws JSONException, IOException{
+    private void usersRequest() throws JSONException, IOException{
         JSONObject route = new JSONObject();
         route.put("rota", "cliente.usuarios");
         logController.showSend(route.toString());
@@ -357,7 +375,7 @@ public class ManagerClient extends Thread{
         pr.flush();
     }
     
-    private void monitoringsAll() throws JSONException, IOException{
+    private void monitoringsRequest() throws JSONException, IOException{
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.listar");
         logController.showSend(route.toString());

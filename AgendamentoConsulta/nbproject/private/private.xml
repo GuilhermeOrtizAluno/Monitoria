@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Guilherme%20Ortiz/Documents/UTFPR/Sistema%20Distribuido/Monitoria/AgendamentoConsulta/src/controllers/HomeController.java</file>
-            <file>file:/C:/Users/Guilherme%20Ortiz/Documents/UTFPR/Sistema%20Distribuido/Monitoria/AgendamentoConsulta/src/controllers/ClientController.java</file>
-            <file>file:/C:/Users/Guilherme%20Ortiz/Documents/UTFPR/Sistema%20Distribuido/Monitoria/AgendamentoConsulta/src/dice/ManagerClient.java</file>
-            <file>file:/C:/Users/Guilherme%20Ortiz/Documents/UTFPR/Sistema%20Distribuido/Monitoria/AgendamentoConsulta/src/screens/HomeScreen.java</file>
-        </group>
-        <group>
             <file>file:/D:/Documentos/UTFPR/6%20semestre/Sistema%20Distribuidos/Monitoria/AgendamentoConsulta/src/controllers/HomeController.java</file>
             <file>file:/D:/Documentos/UTFPR/6%20semestre/Sistema%20Distribuidos/Monitoria/AgendamentoConsulta/src/dice/ManagerClient.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/guilherme.santos/Documents/Guilherme/Monitoria/AgendamentoConsulta/src/controllers/ManagementMonitoringController.java</file>
+            <file>file:/C:/Users/guilherme.santos/Documents/Guilherme/Monitoria/AgendamentoConsulta/src/dice/ManagerClient.java</file>
+            <file>file:/C:/Users/guilherme.santos/Documents/Guilherme/Monitoria/AgendamentoConsulta/src/controllers/HomeController.java</file>
+            <file>file:/C:/Users/guilherme.santos/Documents/Guilherme/Monitoria/AgendamentoConsulta/test/screen/chatScreen.java</file>
+            <file>file:/C:/Users/guilherme.santos/Documents/Guilherme/Monitoria/AgendamentoConsulta/src/controllers/MenuMonitorController.java</file>
         </group>
     </open-files>
 </project-private>
