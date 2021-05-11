@@ -103,4 +103,12 @@ public class HomeController extends HomeScreen{
         //managementMonitoringController.pMonitors.setModel(mMonitors);
     }
     
+    @SuppressWarnings("unchecked")
+    public void initCBMonitorings(Vector<String> vMonitorings){
+        var mMonitorings = new DefaultListModel();
+        mMonitorings.addAll(vMonitorings);
+        managementMonitoringController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
+        managementMonitoringController.pMonitorings.setModel(mMonitorings);
+    }
+    
 }
