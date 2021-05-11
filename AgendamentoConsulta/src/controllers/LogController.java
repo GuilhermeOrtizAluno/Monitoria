@@ -96,6 +96,29 @@ public class LogController extends LogScreen{
         
     }
     
+    public void includeLogMonitorings(JSONObject routeAll) throws JSONException{
+        
+        logUsers = !logUsers;
+
+        String route = "{\"rota\":\"" + routeAll.getString("rota") + "\",";
+        route += "\"erro\":\"" + routeAll.getString("erro") + "\",";
+        
+        includeLog("Received <- "+route, Color.BLACK, Color.CYAN );
+        
+        includeLog("\"monitorias\":[", Color.BLACK, Color.WHITE);
+        
+        JSONArray monitorias = routeAll.getJSONArray("monitorias");
+        for(int i = 0; i < monitorias.length(); i++){
+            org.json.JSONObject monitoria = monitorias.getJSONObject(i);
+             includeLog(i==0 ? "" + monitoria.toString() : "," + monitoria.toString(), Color.BLACK,  Color.WHITE);
+        }
+        
+        logUsers = !logUsers;
+        
+        includeLog("]}", Color.BLACK, Color.WHITE);
+        
+    }
+    
     public void includeCliente(String sClient){
         lClient = new JLabel();
         lClient.setText(sClient);

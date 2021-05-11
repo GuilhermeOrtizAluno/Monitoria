@@ -2473,29 +2473,42 @@ Send -> {"rota":"cliente.usuarios"}
 Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
 Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"rota":"cliente.usuarios"}
-Send -> {"senha":"123","usuario":"aluno12","rota":"login.login"}
-Received <- {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Received <- {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Received <- {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
 Send -> {"rota":"login.logout"}
-Received <- {"erro":"false","rota":"login.logout"}
-Send -> {"senha":"12313","usuario":"monitor22","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"monitor1","usuario":"monitor1","rota":"login.login"}
 Received <- {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
 Send -> {"rota":"login.logout"}
 Received <- {"erro":"false","rota":"login.logout"}
-Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
-Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
-Send -> {"rota":"cliente.usuarios"}
-Send -> {"rota":"monitoria.listar"}
-Received <- {"erro":"false","monitorias":[{"horarios":["2M2","2N1"],"alunos":[],"usuario_monitor":"monitor4","nome_monitor":"monitor4","nome":"Linguagem de Programação Estruturada","id":"5"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Linguagem de Programação Estruturada","id":"6"},{"horarios":[],"alunos":[{"usuario":"aluno12","nome":"aluno12"}],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Banco de Dados","id":"8"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor3","nome_monitor":"monitor3","nome":"Programação Orientada a Objectos","id":"9"}],"rota":"monitoria.listar"}
-Send -> {"usuario":"monitor4","rota":"usuario.delete"}
-Send -> {"novo_usuario":"asdasdas","senha":"asdasdsad","usuario":"monitor12","nome":"asdasd","rota":"login.update"}
-Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
-Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
-Send -> {"rota":"cliente.usuarios"}
-Send -> {"rota":"monitoria.listar"}
-Received <- {"erro":"false","monitorias":[{"horarios":["2M2","2N1"],"alunos":[],"usuario_monitor":"monitor4","nome_monitor":"monitor4","nome":"Linguagem de Programação Estruturada","id":"5"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Linguagem de Programação Estruturada","id":"6"},{"horarios":[],"alunos":[{"usuario":"aluno12","nome":"aluno12"}],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Banco de Dados","id":"8"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor3","nome_monitor":"monitor3","nome":"Programação Orientada a Objectos","id":"9"}],"rota":"monitoria.listar"}
-Send -> {"novo_usuario":"asdasd","senha":"asdasd","usuario":"monitor12","nome":"asd","rota":"login.update"}
-Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
-Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
-Send -> {"rota":"cliente.usuarios"}
-Send -> {"rota":"monitoria.listar"}
-Received <- {"erro":"false","monitorias":[{"horarios":["2M2","2N1"],"alunos":[],"usuario_monitor":"monitor4","nome_monitor":"monitor4","nome":"Linguagem de Programação Estruturada","id":"5"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Linguagem de Programação Estruturada","id":"6"},{"horarios":[],"alunos":[{"usuario":"aluno12","nome":"aluno12"}],"usuario_monitor":"monitor10","nome_monitor":"monitorzao da massa","nome":"Banco de Dados","id":"8"},{"horarios":[],"alunos":[],"usuario_monitor":"monitor3","nome_monitor":"monitor3","nome":"Programação Orientada a Objectos","id":"9"}],"rota":"monitoria.listar"}

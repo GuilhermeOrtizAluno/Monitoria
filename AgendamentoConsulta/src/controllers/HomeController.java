@@ -21,6 +21,7 @@ import screens.HomeScreen;
 public class HomeController extends HomeScreen{
     
     public static MenuAdminController menuAdminController;
+    public static MenuMonitorController menuMonitorController;
     public static ManagementMonitorController managementMonitorController;
     public static ManagementMonitoringController managementMonitoringController;
 
@@ -32,6 +33,7 @@ public class HomeController extends HomeScreen{
     
     public final void instantiation(){
         menuAdminController = new MenuAdminController();
+        menuMonitorController = new MenuMonitorController();
         managementMonitorController = new ManagementMonitorController();
         managementMonitoringController = new ManagementMonitoringController();
     }
@@ -63,6 +65,10 @@ public class HomeController extends HomeScreen{
     public void admin(){
         pMenu.add(menuAdminController, CENTER);
         adminManagementMonitor();
+    }
+    
+    public void monitor(){
+        pMenu.add(menuMonitorController, CENTER);
     }
     
     public void adminClear(boolean register){

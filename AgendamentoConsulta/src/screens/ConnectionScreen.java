@@ -131,6 +131,7 @@ public class ConnectionScreen extends javax.swing.JFrame {
             .addComponent(pConnection, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        setTitle("Client");
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
