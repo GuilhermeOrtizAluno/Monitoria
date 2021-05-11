@@ -1,7 +1,5 @@
 package entities;
 
-import org.json.JSONArray;
-
 /**
  *
  * @author Guilherme Ortiz
@@ -10,15 +8,6 @@ public class Schedule {
     private int pk_horario_monitoria;
     private String horario;
     private int id_monitoria;
-    private String[] horarios;
-
-    public String[] getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(String[] horarios) {
-        this.horarios = horarios;
-    }
 
     public int getPk_horario_monitoria() {
         return pk_horario_monitoria;

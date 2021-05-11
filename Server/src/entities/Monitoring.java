@@ -7,11 +7,21 @@ import org.json.JSONArray;
  * @author Guilherme Ortiz
  */
 public class Monitoring {
-    private int id;
+    private String id;
     private String nome;
     private String senha;
     private int id_usuario;
     private String usuario_monitor;
+    private String usuario_aluno;
+
+    public String getUsuario_aluno() {
+        return usuario_aluno;
+    }
+
+    public void setUsuario_aluno(String usuario_aluno) {
+        this.usuario_aluno = usuario_aluno;
+    }
+    
     //private JSONArray horarios;
 
     /*public JSONArray getHorarios() {
@@ -30,11 +40,11 @@ public class Monitoring {
         this.usuario_monitor = usuario_monitor;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

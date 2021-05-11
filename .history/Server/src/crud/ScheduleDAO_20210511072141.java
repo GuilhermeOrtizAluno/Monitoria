@@ -13,16 +13,16 @@ import java.util.logging.Logger;
 
 public class ScheduleDAO {
     //Create
-    public boolean create(String horario, int id) {
+    public boolean create(Schedule s) {
         
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO horario_monit(horario, fk_pk_monitoria)VALUES(?,?)");
-            stmt.setString(1, horario);
-            stmt.setInt(2, id);
+            stmt = con.prepareStatement("INSERT INTO horario_monit(horario,fk_pk_monitoria)VALUES(?,?)");
+            stmt.setString(1, s.getHorario());
+            stmt.setInt(2, s.getFk_pk_monitoria());
             
             stmt.executeUpdate();
             
@@ -56,8 +56,8 @@ public class ScheduleDAO {
                 Schedule schedule = new Schedule();
 
                 schedule.setPk_horario_monitoria(rset.getInt("pk_horario_monitoria"));
-                schedule.setId_monitoria(rset.getInt("fk_pk_monitoria"));
-              //  schedule.setHorario(rset.getString("horario"));
+                schedule.setFk_pk_monitoria(rset.getInt("fk_pk_monitoria"));
+                schedule.setHorario(rset.getString("horario"));
 
                 schedules.add(schedule);
 
@@ -70,17 +70,41 @@ public class ScheduleDAO {
 
         return schedules;
     }
-    
-    //Delete
-    public boolean delete(int id) {
+
+    //Update
+    public boolean update(Schedule s) {
 
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM horario_monit WHERE fk_pk_monitoria = ?");
-            stmt.setInt(1, id);
+            stmt = con.prepareStatement("UPDATE horario_monit SET horario = ?, fk_pk_monitoria = ? WHERE pk_horario_monitoria = ?");
+            stmt.setString(1, s.getHorario());
+            stmt.setInt(2, s.getFk_pk_monitoria());
+            stmt.setInt(3, s.getPk_horario_monitoria());
+
+            stmt.executeUpdate();
+
+            ConnectionFactory.closeConnection(con, stmt);
+            
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        } 
+    }
+    
+    //Delete
+    public boolean delete(Schedule s) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM horario_monit WHERE pk_horario_monitoria = ?");
+            stmt.setInt(1, s.getPk_horario_monitoria());
 
             stmt.executeUpdate();
 

@@ -6,7 +6,6 @@ import entities.User;
 import com.google.gson.Gson;
 import crud.MonitoringDAO;
 import crud.ScheduleDAO;
-import crud.StudentDAO;
 import crud.UserDAO;
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -25,9 +24,7 @@ import static dice.TCPServer.listPw;
 import static dice.TCPServer.usuariosAtivos;
 import entities.Monitoring;
 import entities.Schedule;
-import entities.Student;
 import java.awt.Color;
-import java.sql.SQLException;
 import org.json.JSONArray;
 
 /**
@@ -77,8 +74,8 @@ public class ManagerServer extends Thread {
                 // Convert Json String to Route Object
                 Gson gson = new Gson();
                 Route rRoute = gson.fromJson(sRoute, Route.class);
-
-                if (rRoute == null) {
+                
+                if(rRoute == null){
                     System.out.println("Erro grave: " + sRoute);
                     return;
                 }
@@ -156,25 +153,21 @@ public class ManagerServer extends Thread {
                     case "monitoria.listar-monitor" -> {
                         showReceived(sRoute);
 
-                        monitors(sRoute);
+                        monitors();
                     }
                     case "monitoria.listar-aluno" -> {
                         showReceived(sRoute);
 
-                        students(sRoute);
-                    }
-                    case "monitoria.delete" -> {
-                        showReceived(sRoute);
-                        deleteMonitoring(sRoute);
+                        students();
                     }
                     //Student
                     case "aluno-monitoria.inscrever" -> {
                         showReceived(sRoute);
-                        studentRegister(sRoute);
+                        studentRegister();
                     }
                     case "aluno-monitoria.delete" -> {
                         showReceived(sRoute);
-                        studentDelete(sRoute);
+                        studentDelete();
                     }
                     default -> {
                         legend = Color.RED;
@@ -191,14 +184,12 @@ public class ManagerServer extends Thread {
             System.out.println("IO:" + e.getMessage());
         } catch (JSONException ex) {
             Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 removeUserOn(user.getUsuario());
                 clientSocket.close();
             } catch (IOException e) {
-                /*close failed*/
+                /close failed/
             } catch (JSONException ex) {
                 Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -208,7 +199,6 @@ public class ManagerServer extends Thread {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Functions">
 
-    //FINALIZADO - LOGIN DOS 3 USUARIOS
     private void login(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -259,7 +249,6 @@ public class ManagerServer extends Thread {
         }
     }
 
-    //FINALIZADO - LOGOUT DOS 3 USUARIOS
     private void logout() throws IOException, JSONException {
         JSONObject route = new JSONObject();
         route.put("rota", "login.logout");
@@ -279,7 +268,6 @@ public class ManagerServer extends Thread {
         pr.flush();
     }
 
-    //FINALIZADO - REGISTRO DE MONITOR E ALUNO
     private void register(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -309,7 +297,6 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //SEMI-FINALIZADO - ATUALIZAR DADOS DE MONITOR E ALUNO (FALTA AS CONSIDERAR QUANDO NÃO VEM TODOS OS DADOS), FALTA ALTERAR AS RELAÇOES Q DEPENDEM DOS DOIS
     private void update(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
@@ -345,7 +332,6 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //SEMI-FINALIZADO - DELETAR ALUNO E MONITOR - FALTA APAGAR AS RELAÇÕES QUE DEPENDEM DOS DOIS
     private void delete(String string) throws IOException, JSONException {
         UserDAO dUser = new UserDAO();
         User userD = new Gson().fromJson(string, User.class);
@@ -385,7 +371,6 @@ public class ManagerServer extends Thread {
         //pr.close();
     }
 
-    //FINALIZADO - REMOVE USUARIO LOGADO
     private void removeUserOn(String usuarioRemove) throws JSONException, IOException {
         int i = 0, j = 0;
 
@@ -425,7 +410,38 @@ public class ManagerServer extends Thread {
 
     }
 
-    //FINALIZADO - CADASTRA A MONITORIA C0M HORARIO
+    //MOSTRAR MONITORIAS DO MONITOR SELECIONADO
+    private void monitors() throws JSONException, IOException {
+        Gson gson = new Gson();
+        UserDAO dUser = new UserDAO();
+
+        // Search for user in the bank
+        var monitores = dUser.read();
+
+        boolean bUser = monitores != null;
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitoria.listar-monitor");
+
+        // Valid user
+        if (!bUser) {
+            legend = Color.ORANGE;
+            route.put("erro", "Nenhum monitor encontrado");
+        } else {
+            legend = Color.BLACK;
+            route.put("erro", "false");
+            route.put("monitores", monitores);
+        }
+
+        // Shows what will be sent
+        showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+
+    }
+
+    //PRONTO
     private void registerdaoMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
@@ -437,23 +453,24 @@ public class ManagerServer extends Thread {
 
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.registro");
-
+        
         ScheduleDAO sDao = new ScheduleDAO();
-        Schedule horario = gson.fromJson(sMonitoring, Schedule.class);
-
-        boolean bHora = sDao.delete(Integer.parseInt(monitoria.getId()));
-
-        String[] horarios = horario.getHorarios();
-
-        if (bHora == true) {
-            for (String hor : horarios) {
-                bHora = sDao.create(hor, Integer.parseInt(monitoria.getId()));
-                if (!bHora) {
-                    route.put("erro", "Erro ao salvar horário");
+        
+        Schedule hor = gson.fromJson(sMonitoring, Schedule.class);
+        
+        String json = hor.getHorarios();
+        
+        boolean bHora = sDao.delete(monitoria.getId());
+        
+        if(bHora == true){
+            for(int i=0; i<json.length() ; i++){
+                //bHora = sDao.create(json.toString(i), monitoria.getId());
+                if(!bHora){
+                    System.out.println("Algo deu errado");
                 }
             }
         }
-
+        
         if (!bMonitoring) {
             legend = Color.RED;
             route.put("erro", "Algo deu errado");
@@ -465,13 +482,12 @@ public class ManagerServer extends Thread {
 
         // Shows what will be sent
         showSend(route.toString());
-
         // Send
         pr.println(route);
         pr.flush();
     }
 
-    //SEMI-FINALIZADO - ALTERA DADOS DA MONITORIA (FALTA CONSIDERAR QUANDO VEM SÓ 1 OU 2 DADOS)
+    //NAO MEXI
     private void updateMonitoring(String sMonitoring) throws JSONException, IOException {
         Gson gson = new Gson();
         MonitoringDAO daoMonitoring = new MonitoringDAO();
@@ -480,26 +496,26 @@ public class ManagerServer extends Thread {
         var monitoria = gson.fromJson(sMonitoring, Monitoring.class);
 
         boolean bMonitoring = daoMonitoring.update(monitoria);
-
+        
         ScheduleDAO sDao = new ScheduleDAO();
-
-        Schedule horario = gson.fromJson(sMonitoring, Schedule.class);
-
-        boolean bHora = sDao.delete(Integer.parseInt(monitoria.getId()));
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "monitoria.update");
-
-        String[] horarios = horario.getHorarios();
-
-        if (bHora == true) {
-            for (String hor : horarios) {
-                bHora = sDao.create(hor, Integer.parseInt(monitoria.getId()));
-                if (!bHora) {
-                    route.put("erro", "Erro ao salvar horário");
+        
+        Schedule hor = gson.fromJson(sMonitoring, Schedule.class);
+        
+        String json = hor.getHorarios();
+        
+        boolean bHora = sDao.delete(monitoria.getId());
+        
+        if(bHora == true){
+            for(int i=0; i<json.length() ; i++){
+                //bHora = sDao.create(json.toString(i), monitoria.getId());
+                if(!bHora){
+                    System.out.println("Algo deu errado ruim");
                 }
             }
         }
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "monitoria.update");
 
         if (!bMonitoring) {
             legend = Color.RED;
@@ -517,7 +533,6 @@ public class ManagerServer extends Thread {
         pr.flush();
     }
 
-    //FINALIZADO - LISTAR MONITORIAS COM HORARIOS E ALUNOS
     private void monitorings() throws JSONException, IOException {
         MonitoringDAO daoMonitoring = new MonitoringDAO();
 
@@ -539,187 +554,24 @@ public class ManagerServer extends Thread {
 
         // Shows what will be sent
         showSend(route.toString());
-
+        
         // Send
         pr.println(route);
         pr.flush();
     }
 
-    //FINALIZADO - DELETAR MONITORIA 
-    private void deleteMonitoring(String sMonitoring) throws JSONException, IOException {
-        MonitoringDAO daoMonitoring = new MonitoringDAO();
-        Monitoring monitoring = new Gson().fromJson(sMonitoring, Monitoring.class);
-        boolean bMonitoring;
-
-        bMonitoring = daoMonitoring.delete(monitoring);
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "monitoria.delete");
-
-        // Valid user
-        if (!bMonitoring) {
-            legend = Color.ORANGE;
-            route.put("erro", "Usuario nao deletado");
-        } else {
-            legend = Color.BLACK;
-            route.put("erro", "false");
-        }
-
-        // Shows what will be sent
-        showSend(route.toString());
-        // Send
-        pr.println(route);
-        pr.flush();
-
+    //NAO MEXI
+    private void students() {
     }
 
-    //FINALIZADO - LISTAR MONITORIAS DO MONITOR
-    private void monitors(String string) throws JSONException, IOException {
-        MonitoringDAO daoMonitoring = new MonitoringDAO();
-        Gson gson = new Gson();
-
-        JSONArray monitorings = daoMonitoring.read();
-
-        Monitoring monitoring = gson.fromJson(string, Monitoring.class);
-
-        JSONArray monitoriasMonitor = monitoriasMonitor(monitorings, monitoring.getUsuario_monitor());
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "monitoria.listar-monitor");
-
-        route.put("erro", "false");
-        route.put("monitorias", monitoriasMonitor);
-
-        // Shows what will be sent
-        showSend(route.toString());
-
-        // Send
-        pr.println(route);
-        pr.flush();
-
+    //NAO MEXI
+    private void studentRegister() {
     }
 
-    //FINALIZADO - FILTRA MONITORIAS DO MONITOR
-    private JSONArray monitoriasMonitor(JSONArray monitorings, String usuario_monitor) throws JSONException {
-        JSONArray monitoriasMonitor = new JSONArray();
-
-        for (int i = 0; i < monitorings.length(); i++) {
-            JSONObject monitoria = monitorings.getJSONObject(i);
-
-            if (monitoria.getString("usuario_monitor").equals(usuario_monitor)) {
-                monitoriasMonitor.put(monitoria);
-            }
-        }
-
-        return monitoriasMonitor;
+    //NAO MEXI
+    private void studentDelete() {
     }
 
-    //FINALIZADO - LISTAR ALUNOS NA MONITORIA
-    private void students(String string) throws JSONException, IOException {
-        MonitoringDAO daoMonitoring = new MonitoringDAO();
-        Gson gson = new Gson();
-
-        JSONArray monitorings = daoMonitoring.read();
-
-        Monitoring monitoring = gson.fromJson(string, Monitoring.class);
-        JSONArray monitoriasAlunos = null;
-
-        if (monitoring != null) {
-            monitoriasAlunos = monitoriasAluno(monitorings, monitoring.getUsuario_aluno());
-        }
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "monitoria.listar-aluno");
-
-        route.put("erro", "false");
-        route.put("monitorias", monitoriasAlunos);
-
-        // Shows what will be sent
-        showSend(route.toString());
-
-        // Send
-        pr.println(route);
-        pr.flush();
-    }
-
-    //FINALIZADO - FILTRA MONITORIAS DO MONITOR
-    private JSONArray monitoriasAluno(JSONArray monitorings, String usuario_aluno) throws JSONException {
-        JSONArray monitoriasAluno = new JSONArray();
-
-        for (int i = 0; i < monitorings.length(); i++) {
-            JSONObject monitoriaAluno = monitorings.getJSONObject(i);
-            JSONArray alunos = monitoriaAluno.getJSONArray("alunos");
-
-            for (int j = 0; j < alunos.length(); j++) {
-                JSONObject aluno = alunos.getJSONObject(j);
-                if (aluno.getString("usuario").equals(usuario_aluno)) {
-                    monitoriasAluno.put(monitoriaAluno);
-                    break;
-                }
-            }
-        }
-        return monitoriasAluno;
-    }
-
-    //FINALIZADO - REGISTRAR ALUNO NA MONITORIA
-    private void studentRegister(String sMonitoring) throws JSONException, SQLException, IOException {
-        Gson gson = new Gson();
-        MonitoringDAO daoMonitoring = new MonitoringDAO();
-
-        // Convert Json String to Monitoring Object
-        Monitoring monitoria = gson.fromJson(sMonitoring, Monitoring.class);
-
-        boolean bMonitoring = daoMonitoring.search(monitoria);
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "aluno-monitoria.inscrever");
-
-        if (bMonitoring) {
-            StudentDAO sDao = new StudentDAO();
-            Student student = gson.fromJson(sMonitoring, Student.class);
-
-            if (sDao.create(student)) {
-                route.put("erro", "false");
-            } else {
-                route.put("erro", "Erro ao inscrever aluno");
-            }
-        } else {
-            route.put("erro", "Erro ao inscrever aluno");
-        }
-
-        // Shows what will be sent
-        showSend(route.toString());
-
-        // Send
-        pr.println(route);
-        pr.flush();
-    }
-
-    //TERMINANDO - REMOVER ALUNO DA MONITORIA
-    private void studentDelete(String string) throws JSONException, IOException {
-        Gson gson = new Gson();
-
-        JSONObject route = new JSONObject();
-        route.put("rota", "aluno-monitoria.delete");
-
-        StudentDAO sDao = new StudentDAO();
-        Student student = gson.fromJson(string, Student.class);
-
-        if (sDao.delete(student)) {
-            route.put("erro", "false");
-        } else {
-            route.put("erro", "Erro ao inscrever aluno");
-        }
-
-        // Shows what will be sent
-        showSend(route.toString());
-
-        // Send
-        pr.println(route);
-        pr.flush();
-    }
-
-    //FINALIZADO - LISTAR TODOS OS USUARIOS
     private void usersAll() throws JSONException, IOException {
         UserDAO dUser = new UserDAO();
 
@@ -749,7 +601,6 @@ public class ManagerServer extends Thread {
         pr.flush();
     }
 
-    //FINALIZADO - LISTAR TODOS OS USUARIOS LOGADOS
     private void usersOn() throws JSONException, IOException {
         JSONObject route = new JSONObject();
         route.put("rota", "cliente.usuarios-ativos");
@@ -766,7 +617,7 @@ public class ManagerServer extends Thread {
         }
     }
 
-    //FINALIZADO - MOSTRAR CONTEUDO ENVIADO
+    // Shows what will be sent
     private void showSend(String send) throws IOException {
         //Terminal
         System.out.println("Send -> " + send);
@@ -782,7 +633,7 @@ public class ManagerServer extends Thread {
         }
     }
 
-    //FINALIZADO - MOSTRAR CONTEUDO RECEBIDO
+    //Shows what came
     private void showReceived(String received) throws IOException {
         //Terminal
         System.out.println("Received <- " + received);

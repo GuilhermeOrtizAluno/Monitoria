@@ -34,7 +34,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `aluno_monit` (
   `pk_aluno_monitoria` int(11) NOT NULL,
   `fk_pk_monitoria` int(11) NOT NULL,
-  `usuario_aluno` varchar(255) NOT NULL
+  `fk_pk_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -112,7 +112,7 @@ INSERT INTO `usuario` (`pk_usuario`, `usuario`, `nome`, `senha`, `is_admin`, `is
 ALTER TABLE `aluno_monit`
   ADD PRIMARY KEY (`pk_aluno_monitoria`),
   ADD KEY `fk_pk_monitoria` (`fk_pk_monitoria`),
-  ADD KEY `usuario_aluno` (`usuario_aluno`);
+  ADD KEY `fk_pk_usuario` (`fk_pk_usuario`);
 
 --
 -- Índices para tabela `horario_monit`

@@ -6,8 +6,8 @@ package entities;
  */
 public class Student {
     private int pk_aluno_monitoria;
-    private int fk_pk_monitoria;
-    private int fk_pk_usuario;
+    private String id;
+    private String usuario_aluno;
 
     public int getPk_aluno_monitoria() {
         return pk_aluno_monitoria;
@@ -17,21 +17,19 @@ public class Student {
         this.pk_aluno_monitoria = pk_aluno_monitoria;
     }
 
-    public int getFk_pk_monitoria() {
-        return fk_pk_monitoria;
+    public String getId() {
+        return id;
     }
 
-    public void setFk_pk_monitoria(int fk_pk_monitoria) {
-        this.fk_pk_monitoria = fk_pk_monitoria;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getFk_pk_usuario() {
-        return fk_pk_usuario;
+    public String getUsuario_aluno() {
+        return usuario_aluno;
     }
 
-    public void setFk_pk_usuario(int fk_pk_usuario) {
-        this.fk_pk_usuario = fk_pk_usuario;
-    }
-    
-    
+    public void setUsuario_aluno(String usuario_aluno) {
+        this.usuario_aluno = usuario_aluno;
+    }   
 }
