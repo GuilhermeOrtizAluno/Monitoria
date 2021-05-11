@@ -28,11 +28,9 @@ public JPanel pLog;
 
         setMinimumSize(new java.awt.Dimension(900, 180));
 
-        pLog.setBackground(new java.awt.Color(214, 180, 240));
         pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
         pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
         
-        pContentLog.setBackground(new java.awt.Color(214, 180, 240));
         pContentLog.add(pLog);
 
         spLog.setMinimumSize(null);

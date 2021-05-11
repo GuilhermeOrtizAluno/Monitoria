@@ -6,14 +6,14 @@ package screens;
  */
 public class MonitoringManagementScreen extends javax.swing.JPanel {
 
-    private javax.swing.JButton bUpdate;
+    public javax.swing.JButton bUpdate;
     public javax.swing.JComboBox<String> cbMonitoring;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lTitle;
     private javax.swing.JPanel pContent;
     private javax.swing.JPanel pTitle;
     private javax.swing.JPanel pUpdate;
-    private javax.swing.JPanel rpHors;
+    public javax.swing.JList rpHors;
     private javax.swing.JScrollPane spHors;
     public javax.swing.JTextField tfName;
     public javax.swing.JTextField tfPass;
@@ -31,12 +31,11 @@ public class MonitoringManagementScreen extends javax.swing.JPanel {
         bUpdate = new javax.swing.JButton();
         tfName = new javax.swing.JTextField();
         spHors = new javax.swing.JScrollPane();
-        rpHors = new javax.swing.JPanel();
+        rpHors = new javax.swing.JList();
         tfPass = new javax.swing.JTextField();
         cbMonitoring = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(750, 470));
         setPreferredSize(new java.awt.Dimension(750, 470));
         setLayout(new java.awt.BorderLayout());
@@ -46,7 +45,7 @@ public class MonitoringManagementScreen extends javax.swing.JPanel {
 
         lTitle.setFont(new java.awt.Font("MV Boli", 0, 24)); // NOI18N
         lTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lTitle.setText("Gerenciamento de Monitor");
+        lTitle.setText("Gerenciamento do Monitor");
 
         javax.swing.GroupLayout pTitleLayout = new javax.swing.GroupLayout(pTitle);
         pTitle.setLayout(pTitleLayout);
@@ -77,7 +76,6 @@ public class MonitoringManagementScreen extends javax.swing.JPanel {
         bUpdate.setBackground(new java.awt.Color(204, 0, 204));
         bUpdate.setText("Editar");
 
-        tfName.setEditable(false);
         tfName.setBackground(new java.awt.Color(255, 255, 255));
         tfName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -87,7 +85,6 @@ public class MonitoringManagementScreen extends javax.swing.JPanel {
         spHors.setBorder(javax.swing.BorderFactory.createTitledBorder("Horarios"));
 
         rpHors.setBackground(new java.awt.Color(255, 255, 255));
-        rpHors.setPreferredSize(new java.awt.Dimension(102, 50));
 
         javax.swing.GroupLayout rpHorsLayout = new javax.swing.GroupLayout(rpHors);
         rpHors.setLayout(rpHorsLayout);
@@ -102,7 +99,6 @@ public class MonitoringManagementScreen extends javax.swing.JPanel {
 
         spHors.setViewportView(rpHors);
 
-        tfPass.setEditable(false);
         tfPass.setBackground(new java.awt.Color(255, 255, 255));
         tfPass.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfPass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
