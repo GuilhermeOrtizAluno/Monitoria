@@ -2473,3 +2473,42 @@ Send -> {"rota":"cliente.usuarios"}
 Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
 Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Send -> {"rota":"cliente.usuarios"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Received <- {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Received <- {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Send -> {"rota":"login.logout"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"123","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"admin","usuario":"admin","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"senha":"monitor1","usuario":"monitor1","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Send -> {"rota":"login.logout"}
+Received <- {"erro":"false","rota":"login.logout"}

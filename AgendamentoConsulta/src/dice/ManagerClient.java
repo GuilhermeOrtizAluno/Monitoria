@@ -61,6 +61,7 @@ public class ManagerClient extends Thread{
         admin = false;
         socket = new Socket();
         monitorsAll = new JSONArray();
+        monitoringsAll = new JSONArray();
     }
     
     public void socketClient() throws IOException{
@@ -135,10 +136,10 @@ public class ManagerClient extends Thread{
                         delete();
                     }
                     case "cliente.usuarios-ativos" -> {
-                        users(sRoute, true);
+                        usersLog(sRoute, true);
                     }
                     case "cliente.usuarios" -> {
-                        users(sRoute, false);
+                        usersLog(sRoute, false);
                         if(admin)
                             monitors(sRoute);
                     }
@@ -157,7 +158,7 @@ public class ManagerClient extends Thread{
                         logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.listar" ->{
-                        logController.showReceived(sRoute, legend);
+                        monitoringsLog(sRoute);
                         if(admin)
                             monitorings(sRoute);
                     }
@@ -223,6 +224,7 @@ public class ManagerClient extends Thread{
                 monitoringsAll();
             }
             case "monitor" ->{
+                clientController.pContentAdd("monitor");
             }
             case "aluno"   ->{
                 admin = false;
@@ -350,9 +352,16 @@ public class ManagerClient extends Thread{
         homeController.initCBMonitorings(monitorings);
     }
 
-    private void users(String sRoute, boolean broadcast) throws IOException, JSONException {
+    private void usersLog(String sRoute, boolean broadcast) throws IOException, JSONException {
+        System.out.println("Received <- "+sRoute);
         legend = Color.GREEN;
         logController.includeLogUsers(new JSONObject(sRoute), broadcast);
+    }
+    
+    private void monitoringsLog(String sRoute) throws IOException, JSONException {
+        System.out.println("Received <- "+sRoute);
+        legend = Color.GREEN;
+        logController.includeLogMonitorings(new JSONObject(sRoute));
     }
 
     private void mensagem() {

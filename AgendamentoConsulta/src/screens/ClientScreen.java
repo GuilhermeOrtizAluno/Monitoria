@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package screens;
 
 import javax.swing.JCheckBox;
@@ -94,6 +89,7 @@ public class ClientScreen extends javax.swing.JFrame {
             .addComponent(pContentAll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        setTitle("Client");
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        y

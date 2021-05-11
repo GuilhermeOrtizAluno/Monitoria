@@ -3099,3 +3099,45 @@ Received <- {"rota":"cliente.usuarios"}
 Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
 Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
 Received <- {"rota":"cliente.usuarios"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"123","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"Usuario ou Senha invalido","rota":"login.login"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"admin","usuario":"admin","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"admin","rota":"login.login"}
+Received <- {"rota":"cliente.usuarios"}
+Received <- {"rota":"monitoria.listar"}
+Send -> {"erro":"false","monitorias":[{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Algoritmos","id":1},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Estrutura de Dados","id":2},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Sistemas Distribuidos","id":3},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"Banco de Dados","id":4},{"horario":["1M2","1M2","1M2"],"nome_monitor":"","nome":"monitoria","id":5}],"rota":"monitoria.listar"}
+Received <- {"senha":"monitor1","usuario":"monitor1","rota":"login.login"}
+Send -> {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Received <- {"rota":"login.logout"}
+Send -> {"erro":"false","rota":"login.logout"}
