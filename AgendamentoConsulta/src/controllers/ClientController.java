@@ -8,11 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.json.JSONException;
-import org.json.JSONObject;
 import screens.ClientScreen;
 
 /**
@@ -44,44 +41,30 @@ public class ClientController extends ClientScreen {
             System.exit(0);
         });
         bMaximize.addActionListener((ActionEvent evt) -> {
-            setExtendedState(maximized ? NORMAL : MAXIMIZED_BOTH);
-            maximized = !maximized;
+            //setExtendedState(maximized ? NORMAL : MAXIMIZED_BOTH);
+            //maximized = !maximized;
         });
         bMaximize.addActionListener((ActionEvent evt) -> {
-            setExtendedState(ICONIFIED);
+            //setExtendedState(ICONIFIED);
         });
-        cbLog.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-               log();
-            }
+        cbLog.addItemListener((java.awt.event.ItemEvent evt) -> {
+            log();
         });
         addMouseListener(new MouseAdapter() {
+          @Override
           public void mousePressed(MouseEvent e) {
             point.x = e.getX();
             point.y = e.getY();
           }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
+          @Override
           public void mouseDragged(MouseEvent e) {
             Point p = getLocation();
             setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
           }
         });
     
-    }
-    
-    @SuppressWarnings("unchecked")
-    private void hundleLogout() throws IOException, JSONException {
-        JSONObject route = new JSONObject();
-        route.put("rota", "login.logout");
-        
-        // Shows what will be sent
-        //showSend(route.toString());
-        //Send
-        PrintWriter pr = new PrintWriter(socket.getOutputStream());  
-        pr.println(route);
-        pr.flush();
-        
     }
     
     private void hundleGuilherme() throws MalformedURLException, IOException{
@@ -93,6 +76,7 @@ public class ClientController extends ClientScreen {
         switch(screen){
             case "connection"           -> pContentAll.remove(connectionController); 
             case "loginRegister"        -> pContentAll.remove(loginRegisterController);
+            case "home"                 -> pContentAll.remove(homeController);
             /*
             case "registerMonitor"      -> {
                 pcLeft.remove(registerMonitorController);

@@ -1,31 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controllerold;
+package controllers;
 
-import static app.Program.socket;
+import static dice.ManagerClient.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
-import org.json.simple.JSONObject;
-import screensold3.RegisterMonitoringScreen;
+import org.json.JSONException;
+import org.json.JSONObject;
+import screens.ManagementMonitoringScreen;
 
 /**
  *
- * @author guilherme.santos
+ * @author Guilherme Ortiz
  */
-public class RegisterMonitoringController extends RegisterMonitoringScreen{
-/*
-    public RegisterMonitoringController() {
+public class ManagementMonitoringController extends ManagementMonitoringScreen{
+
+    public ManagementMonitoringController() {
         initComponents();
         continuationInitComponents();
-        cleanFields();
+        initVariables();
     }
     
     public void cleanFields(){
@@ -40,19 +37,30 @@ public class RegisterMonitoringController extends RegisterMonitoringScreen{
                 hundleRegistrar();
             } catch (IOException ex) {
                 Logger.getLogger(ConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JSONException ex) {
+                Logger.getLogger(ManagementMonitoringController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }); 
    }
     
     @SuppressWarnings("unchecked")
-    private void hundleRegistrar() throws IOException{
+    private void initVariables(){
+        String sHors[] = {"1M1","1M2","1M3","1M4","1M5","1T1","1T2","1T3","1T4","1T5","1N1","1N2","1N3","1N4","1N5"};
+        var mHors = new DefaultListModel();
+        mHors.addElement(sHors);
+        //pHors.setModel(mHors);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void hundleRegistrar() throws IOException, JSONException{
         try {
             // Read from interface
             String monitor = cbMonitor.getSelectedItem() == null ? "" : cbMonitor.getSelectedItem().toString();
+            var lHorarios = pHors.getSelectedValuesList() == null ? "" : pHors.getSelectedValuesList();
             String name = tfName.getText();
             String pass = tfPass.getText();
             
-            if("".equals(name) || "".equals(pass) || "".equals(monitor)){
+            if("".equals(name) || "".equals(pass) || "".equals(monitor)|| "".equals(lHorarios)){
                 JOptionPane.showMessageDialog(
                     null, 
                     "Invalid fields, please try again", 
@@ -74,7 +82,7 @@ public class RegisterMonitoringController extends RegisterMonitoringScreen{
             route.put("horarios", horarios);
 
             // Shows what will be sent
-            clientController.showSend(route.toString());
+            logController.showSend(route.toString());
             // Send
             PrintWriter pr = new PrintWriter(socket.getOutputStream());  
             pr.println(route);
@@ -84,5 +92,5 @@ public class RegisterMonitoringController extends RegisterMonitoringScreen{
             
         }
     }
-    */
+    
 }

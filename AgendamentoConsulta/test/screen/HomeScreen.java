@@ -71,18 +71,7 @@ public class HomeScreen extends javax.swing.JPanel {
         pHome.add(pMenu, java.awt.BorderLayout.LINE_START);
 
         pContent.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout pContentLayout = new javax.swing.GroupLayout(pContent);
-        pContent.setLayout(pContentLayout);
-        pContentLayout.setHorizontalGroup(
-            pContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
-        );
-        pContentLayout.setVerticalGroup(
-            pContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-
+        pContent.setLayout(new java.awt.BorderLayout());
         pHome.add(pContent, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

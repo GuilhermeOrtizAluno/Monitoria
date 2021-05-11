@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
  */
 public class LogScreen extends javax.swing.JPanel {
 
-    public JPanel pLog;
+public JPanel pLog;
     public JPanel pContentLog;
     public JScrollPane spLog;
 
@@ -28,11 +28,11 @@ public class LogScreen extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(900, 180));
 
-        pLog.setBackground(new java.awt.Color(0, 0, 0));
+        pLog.setBackground(new java.awt.Color(214, 180, 240));
         pLog.setBorder(new EmptyBorder(10, 10, 10, 10));
         pLog.setLayout(new BoxLayout(pLog, BoxLayout.Y_AXIS));
         
-        pContentLog.setBackground(new java.awt.Color(0, 0, 0));
+        pContentLog.setBackground(new java.awt.Color(214, 180, 240));
         pContentLog.add(pLog);
 
         spLog.setMinimumSize(null);

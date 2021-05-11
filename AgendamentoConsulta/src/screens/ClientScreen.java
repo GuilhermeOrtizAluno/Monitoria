@@ -6,9 +6,6 @@
 package screens;
 
 import javax.swing.JCheckBox;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 
 /**
  *
@@ -44,9 +41,11 @@ public class ClientScreen extends javax.swing.JFrame {
         pContentAll.setMinimumSize(new java.awt.Dimension(900, 500));
         pContentAll.setPreferredSize(new java.awt.Dimension(900, 500));
         pContentAll.setLayout(new java.awt.BorderLayout());
+        pContentAll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         pControllerPage.setBackground(new java.awt.Color(255, 255, 255));
         pControllerPage.setPreferredSize(new java.awt.Dimension(900, 30));
+        pControllerPage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         bClose.setText("X");
 

@@ -34,7 +34,7 @@ import org.json.JSONObject;
  */
 public class ManagerClient extends Thread{
     
-    private ClientController clientController; 
+    public final ClientController clientController; 
     private InputStreamReader in;
     private OutputStreamWriter ou;
     private PrintWriter pr;
@@ -116,7 +116,7 @@ public class ManagerClient extends Thread{
                     case "login.logout" ->
                     {
                         logController.showReceived(sRoute, legend);
-                        //logout();
+                        logout();
                     }
                     case "login.registro" ->
                     {
@@ -126,12 +126,12 @@ public class ManagerClient extends Thread{
                     case "login.update" -> 
                     {
                         logController.showReceived(sRoute, legend);
-                        //update();
+                        update();
                     }
                     case "usuario.delete" ->
                     {
                         logController.showReceived(sRoute, legend);
-                        //delete();
+                        delete();
                     }
                     case "cliente.usuarios-ativos" -> {
                         users(sRoute, true);
@@ -139,9 +139,9 @@ public class ManagerClient extends Thread{
                     case "cliente.usuarios" -> {
                         users(sRoute, false);
                         if(admin)
-                            monitores(sRoute);
+                            monitors(sRoute);
                     }
-                    case "mensagem.mesagem" -> 
+                    case "mensagem.mensagem" -> 
                     {
                         logController.showReceived(sRoute, legend);
                         mensagem();
@@ -226,12 +226,10 @@ public class ManagerClient extends Thread{
                 clientController.pContentAdd("updateStudent");
             }
         }
-            //clientController.pContentAdd("login");
         
     }
 
     private void logout() throws IOException {
-        //clientController.pExit.remove(clientController.bExit);
         clientController.pContentClear();
         clientController.pContentAdd("loginRegister");
         admin = false;
@@ -256,16 +254,14 @@ public class ManagerClient extends Thread{
             JOptionPane.INFORMATION_MESSAGE
         );
         
-        loginRegisterController.cleanFields();
-        
         if (admin){
             usersAll();
-            //registerMonitorController.cleanFields();
-        }
+            homeController.adminClear(true);
+        } else loginRegisterController.cleanFields();
 
     }
 
-    /*private void update() throws IOException, JSONException {
+    private void update() throws IOException, JSONException {
         if(bRoute){ 
             JOptionPane.showMessageDialog(
                 null, 
@@ -275,9 +271,9 @@ public class ManagerClient extends Thread{
             );
             if(!admin){
                 clientController.pContentClear();
-                clientController.pContentAdd("login");
+                clientController.pContentAdd("loginRegister");
             }else {
-                managementMonitorController.cleanFields();
+                homeController.adminClear(false);
                 usersAll();
             }
         }else JOptionPane.showMessageDialog(
@@ -298,9 +294,10 @@ public class ManagerClient extends Thread{
             );
             if(!admin){
                 clientController.pContentClear();
-                clientController.pContentAdd("login");
+                clientController.pContentAdd("loginRegister");
             }else {
-                managementMonitorController.cleanFields();  
+                homeController.adminClear(false);
+                homeController.adminClear(true);
                 usersAll();
             }
         }else JOptionPane.showMessageDialog(
@@ -310,9 +307,9 @@ public class ManagerClient extends Thread{
                 JOptionPane.WARNING_MESSAGE
             );
 
-    }*/
+    }
     
-    private void monitores(String sUser) throws JSONException{
+    private void monitors(String sUser) throws JSONException{
         
         JSONObject joUsers = new JSONObject(sUser);
         
@@ -329,11 +326,9 @@ public class ManagerClient extends Thread{
                 monitorsAll.put(joMonitor);
             }
             //monitors[i] = usuarios.getString(i);
+            homeController.initCBMonitors(monitors);
         }
         
-        
-        //managementMonitorController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
-        //registerMonitoringController.cbMonitor.setModel(new javax.swing.DefaultComboBoxModel<>(monitors));
     }
 
     private void users(String sRoute, boolean broadcast) throws IOException, JSONException {

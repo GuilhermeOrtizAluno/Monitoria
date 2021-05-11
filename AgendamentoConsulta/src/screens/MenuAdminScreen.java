@@ -6,8 +6,8 @@ package screens;
  */
 public class MenuAdminScreen extends javax.swing.JPanel {
 
-    private javax.swing.JButton bMonitor;
-    private javax.swing.JButton bMonitoria;  
+    public javax.swing.JButton bMonitor;
+    public javax.swing.JButton bMonitoria;  
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
