@@ -21,16 +21,6 @@ public class Monitoring {
     public void setUsuario_aluno(String usuario_aluno) {
         this.usuario_aluno = usuario_aluno;
     }
-    
-    //private JSONArray horarios;
-
-    /*public JSONArray getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(JSONArray horarios) {
-        this.horarios = horarios;
-    }*/
 
     public String getUsuario_monitor() {
         return usuario_monitor;

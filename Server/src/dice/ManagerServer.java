@@ -440,9 +440,8 @@ public class ManagerServer extends Thread {
 
         ScheduleDAO sDao = new ScheduleDAO();
         Schedule horario = gson.fromJson(sMonitoring, Schedule.class);
-
-        boolean bHora = sDao.delete(Integer.parseInt(monitoria.getId()));
-
+        boolean bHora = false;
+        
         String[] horarios = horario.getHorarios();
 
         if (bHora == true) {
