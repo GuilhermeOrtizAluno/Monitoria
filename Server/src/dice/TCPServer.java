@@ -6,6 +6,7 @@
 package dice;
 
 import static app.Program.*;
+import entities.Connection;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,7 +29,7 @@ public class TCPServer extends Thread{
     private ServerSocket listenSocket;
     private Socket clientSocket;
     private ManagerServer managerServer;
-    public static ArrayList<PrintWriter> listPw;
+    public static ArrayList<Connection> listConnected;
     public static JSONArray usuariosAtivos;
 
     public TCPServer(int serverPort) {
@@ -37,7 +38,7 @@ public class TCPServer extends Thread{
     
     public void StartConnection() throws IOException  {
         listenSocket = new ServerSocket(serverPort);
-        listPw = new ArrayList<>();
+        listConnected = new ArrayList<>();
         usuariosAtivos = new JSONArray();
         start();
     }

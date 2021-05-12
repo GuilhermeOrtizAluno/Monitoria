@@ -40,17 +40,16 @@ public class UserDAO {
             stmt.setBoolean(5, u.isIs_monitor());
 
             stmt.executeUpdate();
-           
+
             //Gson gson = new Gson();
             //System.out.println(gson.toJson(u));
-            
             ConnectionFactory.closeConnection(con, stmt);
             return true;
-           
+
         } catch (SQLException ex) {
             System.out.println(ex);
             return false;
-        } 
+        }
 
     }
 
@@ -62,7 +61,7 @@ public class UserDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        JSONArray  users = new JSONArray();
+        JSONArray users = new JSONArray();
 
         try {
             stmt = con.prepareStatement("SELECT * FROM usuario");
@@ -75,9 +74,9 @@ public class UserDAO {
                 user.put("usuario", rs.getString("usuario"));
                 user.put("nome", rs.getString("nome"));
                 user.put("tipo_usuario",
-                                        rs.getBoolean("is_admin")   ? "admin" : 
-                                        rs.getBoolean("is_monitor") ? "monitor" :
-                                                                      "aluno"
+                        rs.getBoolean("is_admin") ? "admin"
+                        : rs.getBoolean("is_monitor") ? "monitor"
+                        : "aluno"
                 );
                 users.put(user);
             }
@@ -100,16 +99,50 @@ public class UserDAO {
         PreparedStatement stmt = null;
 
         try {
-            //stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
-            stmt = con.prepareStatement("UPDATE usuario SET usuario = ?, senha = ?, nome = ? WHERE usuario = ?");
-            stmt.setString(1, u.getNovo_usuario());
-            stmt.setString(2, u.getSenha());
-            stmt.setString(3, u.getNome());
-            stmt.setString(4, u.getUsuario());
 
-            stmt.executeUpdate();
+            if (u.getNovo_usuario() != null) {
+                stmt = con.prepareStatement("UPDATE usuario SET usuario = ? WHERE usuario = ?");
+                stmt.setString(1, u.getNovo_usuario());
+                stmt.setString(2, u.getUsuario());
+                
+                stmt.executeUpdate();
+                
+                stmt = con.prepareStatement("UPDATE aluno_monit SET usuario_aluno = ? WHERE usuario_aluno = ?");
+                stmt.setString(1, u.getNovo_usuario());
+                stmt.setString(2, u.getUsuario());
 
-            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+                stmt.executeUpdate();
+
+                stmt = con.prepareStatement("UPDATE monitoria SET usuario_monitor = ? WHERE usuario_monitor = ?");
+                stmt.setString(1, u.getNovo_usuario());
+                stmt.setString(2, u.getUsuario());
+
+                stmt.executeUpdate();
+            }
+            
+            if(u.getNome() != null){
+                stmt = con.prepareStatement("UPDATE usuario SET nome = ? WHERE usuario = ?");
+                stmt.setString(1, u.getNome());
+                if(u.getNovo_usuario() == null){
+                    stmt.setString(2, u.getUsuario());
+                }else{
+                    stmt.setString(2, u.getNovo_usuario());
+                }
+                
+                stmt.executeUpdate();
+            }
+
+            if(u.getSenha() != null){
+                stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE usuario = ?");
+                stmt.setString(1, u.getSenha());
+                if(u.getNovo_usuario() == null){
+                    stmt.setString(2, u.getUsuario());
+                }else{
+                    stmt.setString(2, u.getNovo_usuario());
+                }
+                stmt.executeUpdate();
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
             ConnectionFactory.closeConnection(con, stmt);
@@ -133,6 +166,19 @@ public class UserDAO {
             stmt.setString(1, u.getUsuario());
 
             stmt.executeUpdate();
+
+            if (u.getUsuario() != null) {
+                stmt = con.prepareStatement("DELETE from aluno_monit WHERE usuario_aluno = ?");
+                stmt.setString(1, u.getUsuario());
+
+                stmt.executeUpdate();
+
+                stmt = con.prepareStatement("UPDATE monitoria SET usuario_monitor = ? WHERE usuario_monitor = ?");
+                stmt.setString(1, "");
+                stmt.setString(2, u.getUsuario());
+
+                stmt.executeUpdate();
+            }
 
             //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
         } catch (SQLException ex) {

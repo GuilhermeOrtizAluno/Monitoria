@@ -136,24 +136,30 @@ public class MonitoringDAO {
 
         try {
             if (m.getNome() != null) {
-                stmt = con.prepareStatement("UPDATE monitoria SET nome = ?, senha = ?, usuario_monitor = ? WHERE pk_monitoria = ?");
+                stmt = con.prepareStatement("UPDATE monitoria SET nome = ? WHERE pk_monitoria = ?");
                 stmt.setString(1, m.getNome());
-                stmt.setString(2, m.getSenha());
-                stmt.setString(3, m.getUsuario_monitor());
-                stmt.setInt(4, Integer.parseInt(m.getId()));
-            } else if (m.getUsuario_monitor() != null) {
-                stmt = con.prepareStatement("UPDATE monitoria SET senha = ?, usuario_monitor = ? WHERE pk_monitoria = ?");
-                stmt.setString(1, m.getSenha());
-                stmt.setString(2, m.getUsuario_monitor());
-                stmt.setInt(3, Integer.parseInt(m.getId()));
-            } else {
+                stmt.setInt(2, Integer.parseInt(m.getId()));  
+                
+                stmt.executeUpdate();
+            } 
+            
+            if (m.getUsuario_monitor() != null) {
+                stmt = con.prepareStatement("UPDATE monitoria SET usuario_monitor = ? WHERE pk_monitoria = ?");
+                stmt.setString(1, m.getUsuario_monitor());
+                stmt.setInt(2, Integer.parseInt(m.getId()));
+                
+                stmt.executeUpdate();
+            }
+            
+            if(m.getSenha() != null){
                 stmt = con.prepareStatement("UPDATE monitoria SET senha = ? WHERE pk_monitoria = ?");
                 stmt.setString(1, m.getSenha());
                 stmt.setInt(2, Integer.parseInt(m.getId()));
+                
+                stmt.executeUpdate();
             }
 
-            stmt.executeUpdate();
-
+            
             ConnectionFactory.closeConnection(con, stmt);
 
             return true;

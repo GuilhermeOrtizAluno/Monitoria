@@ -21,8 +21,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.JSONException;
 import org.json.JSONObject;
-import static dice.TCPServer.listPw;
+import static dice.TCPServer.listConnected;
 import static dice.TCPServer.usuariosAtivos;
+import entities.Connection;
 import entities.Monitoring;
 import entities.Schedule;
 import entities.Student;
@@ -43,6 +44,7 @@ public class ManagerServer extends Thread {
     private BufferedReader bf;
     private PrintWriter pr;
     private final Socket clientSocket;
+    private Connection conn;
     private User user;
     private Color legend;
 
@@ -55,7 +57,10 @@ public class ManagerServer extends Thread {
             in = new InputStreamReader(clientSocket.getInputStream());
             bf = new BufferedReader(in);
             pr = new PrintWriter(clientSocket.getOutputStream());
-            listPw.add(pr);
+            conn = new Connection(pr);
+            listConnected.add(conn);
+            int pos = listConnected.size() - 1;
+            conn = listConnected.get(pos);
 
             this.start();
         } catch (IOException e) {
@@ -67,7 +72,6 @@ public class ManagerServer extends Thread {
     public void run() {
         try { // an echo server
             while (true) {
-
                 //Read String
                 String sRoute = bf.readLine();
 
@@ -169,14 +173,13 @@ public class ManagerServer extends Thread {
                         showReceived(sRoute);
                         studentDelete(sRoute);
                     }
-                    case "chat.mensagem-enviar" ->{
-                         showReceived(sRoute);
-                         messageReceived();
-                         messageSend(sRoute);
+                    case "chat.mensagem-enviar" -> {
+                        showReceived(sRoute);
+                        messageReceived();
+                        messageSend(sRoute);
                     }
-                    
-                    case "chat.mensagem-recebida" ->{
-                         showReceived(sRoute);
+                    case "chat.mensagem-recebida" -> {
+                        showReceived(sRoute);
                     }
                     default -> {
                         legend = Color.RED;
@@ -191,13 +194,17 @@ public class ManagerServer extends Thread {
             System.out.println("EOF:" + e.getMessage());
         } catch (IOException e) {
             System.out.println("IO:" + e.getMessage());
-        } catch (JSONException ex) {
-            Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (JSONException | SQLException ex) {
             Logger.getLogger(ManagerServer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                removeUserOn(user.getUsuario());
+                if (user != null) {
+                    if (user.getUsuario() != null) {
+                        removeUserOn(user.getUsuario());
+                    }
+                    user = null;
+                }
+                conn.setUser(user);
                 clientSocket.close();
             } catch (IOException e) {
                 /*close failed*/
@@ -220,6 +227,7 @@ public class ManagerServer extends Thread {
 
         // Search for user in the bank
         user = dUser.search(user);
+        conn.setUser(user);
 
         boolean bUser = user.getUsuario() != null;
 
@@ -272,6 +280,7 @@ public class ManagerServer extends Thread {
         removeUserOn(user.getUsuario());
 
         user = null;//pode dar ruim
+        conn.setUser(user);
 
         // Send
         pr.println(route);
@@ -282,20 +291,37 @@ public class ManagerServer extends Thread {
     private void register(String string) throws IOException, JSONException {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
-
-        // Convert Json String to User Object
-        user = gson.fromJson(string, User.class);
-
         JSONObject route = new JSONObject();
         route.put("rota", "login.registro");
+        boolean bUser = false;
+        User nUser;
+
+        if (user == null) {
+            // Convert Json String to User Object
+            nUser = gson.fromJson(string, User.class);
+
+            if (verificaUsuario(nUser.getUsuario())) {
+                legend = Color.ORANGE;
+                route.put("erro", "usuario_indisponivel_para_cadastro");
+            } else {
+
+                if (!nUser.isIs_monitor()) {
+                    bUser = dUser.create(nUser);
+                }
+            }
+        } else if (user.isIs_admin()) {
+            nUser = gson.fromJson(string, User.class);
+
+            if (!nUser.isIs_admin()) {
+                bUser = dUser.create(nUser);
+            }
+        } else if (user.isIs_monitor()) {
+            legend = Color.ORANGE;
+            route.put("erro", "permissao_negada");
+        }
 
         // Create User in the bank
-        boolean bUser = dUser.create(user);
-
-        if (!bUser) {
-            legend = Color.ORANGE;
-            route.put("erro", "Cadastro não efetuado!");
-        } else {
+        if (bUser) {
             legend = Color.BLACK;
             route.put("erro", "false");
         }
@@ -313,26 +339,46 @@ public class ManagerServer extends Thread {
         Gson gson = new Gson();
         UserDAO dUser = new UserDAO();
         User rUser = gson.fromJson(string, User.class);
-
-        user.setSenha(rUser.getSenha());
-        user.setNome(rUser.getNome());
-        user.setUsuario(rUser.getUsuario());
-        user.setNovo_usuario(rUser.getNovo_usuario());
-
-        // Search for user in the bank
-        boolean bUser = dUser.update(rUser);
-
         JSONObject route = new JSONObject();
+        boolean bUser = false;
+
         route.put("rota", "login.update");
 
-        // Valid user
-        if (!bUser) {
-            legend = Color.ORANGE;
-            route.put("erro", "Alteração nao realizada");
+        if (rUser.getNome() == null && rUser.getNovo_usuario() == null && rUser.getSenha() == null) {
+            route.put("erro", "nenhum_campo_para_alterar");
         } else {
-            removeUserOn(user.getUsuario());
+
+            if (rUser.getNovo_usuario() != null) {
+                boolean vUser = verificaUsuario(rUser.getNovo_usuario());
+
+                if (!vUser) {
+                    // Search for user in the bank
+                    bUser = dUser.update(rUser);
+                } else {
+                    legend = Color.ORANGE;
+                    route.put("erro", "usuario_indisponivel_para_cadastro");
+                }
+            }else{
+                bUser = dUser.update(rUser);
+            }
+        }
+        
+        if (bUser) {
             legend = Color.BLACK;
             route.put("erro", "false");
+
+            if (!user.isIs_admin()) {
+                if (rUser.getNome() != null) {
+                    user.setNome(rUser.getNome());
+                }
+                if (rUser.getSenha() != null) {
+                    user.setSenha(rUser.getSenha());
+                }
+                if (rUser.getNovo_usuario() != null) {
+                    user.setUsuario(rUser.getNovo_usuario());
+                }
+            }
+
         }
 
         // Shows what will be sent
@@ -341,7 +387,21 @@ public class ManagerServer extends Thread {
         // Send
         pr.println(route);
         pr.flush();
-        //pr.close();
+    }
+
+    private boolean verificaUsuario(String user) throws JSONException {
+        UserDAO daoUser = new UserDAO();
+
+        JSONArray users = daoUser.read();
+
+        for (int i = 0; i < users.length(); i++) {
+            JSONObject oUser = users.getJSONObject(i);
+            if (oUser.getString("usuario").equals(user)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //SEMI-FINALIZADO - DELETAR ALUNO E MONITOR - FALTA APAGAR AS RELAÇÕES QUE DEPENDEM DOS DOIS
@@ -371,8 +431,10 @@ public class ManagerServer extends Thread {
                 removeUserOn(userD.getUsuario());
             } else {
                 removeUserOn(user.getUsuario());
+                user = null;
+                conn.setUser(user);
             }
-            //user = null;
+
         }
 
         // Shows what will be sent
@@ -440,7 +502,7 @@ public class ManagerServer extends Thread {
         ScheduleDAO sDao = new ScheduleDAO();
         Schedule horario = gson.fromJson(sMonitoring, Schedule.class);
         boolean bHora = false;
-        
+
         String[] horarios = horario.getHorarios();
 
         if (bHora == true) {
@@ -693,7 +755,7 @@ public class ManagerServer extends Thread {
         pr.flush();
     }
 
-    //TERMINANDO - REMOVER ALUNO DA MONITORIA
+    //FINALIZADO - REMOVER ALUNO DA MONITORIA
     private void studentDelete(String string) throws JSONException, IOException {
         Gson gson = new Gson();
 
@@ -754,15 +816,15 @@ public class ManagerServer extends Thread {
         route.put("usuarios", usuariosAtivos);
 
         System.out.println("Send -> " + route);
-        
+
         usersController.includeClient();
-        
+
         //Iterface Log
         serverController.includeLogUsers(route, true);
 
-        for (PrintWriter pw : listPw) {
-            pw.println(route);
-            pw.flush();
+        for (Connection con : listConnected) {
+            con.getPw().println(route);
+            con.getPw().flush();
         }
     }
 
@@ -782,7 +844,7 @@ public class ManagerServer extends Thread {
         }
     }
 
-    //FINALIZADO - MOSTRAR CONTEUDO RECEBIDO
+    //FINALIZADO - MOSTRAR MENSAGEM RECEBIDA
     private void showReceived(String received) throws IOException {
         //Terminal
         System.out.println("Received <- " + received);
@@ -797,36 +859,43 @@ public class ManagerServer extends Thread {
             fwLog.flush();
         }
     }
-    
-    private void messageReceived() throws JSONException, IOException{
-        
+
+    //FINALIZADO - MOSTRAR CONTEUDO RECEBIDO
+    private void messageReceived() throws JSONException, IOException {
+
         JSONObject route = new JSONObject();
         route.put("rota", "chat.mensagem-enviar");
         route.put("erro", "false");
-        
+
         showSend(route.toString());
-        
+
         // Send
         pr.println(route);
         pr.flush();
     }
-    
-    private void messageSend(String sMessage) throws JSONException, IOException{
-        
+
+    //FINALIZADO - MOSTRAR CONTEUDO RECEBIDO
+    private void messageSend(String sMessage) throws JSONException, IOException {
+
         JSONObject joMonitorings = new JSONObject(sMessage);
         String destUser = joMonitorings.getString("usuario_destino");
         String message = joMonitorings.getString("mensagem");
-        
+
         JSONObject route = new JSONObject();
         route.put("rota", "chat.mensagem-recebida");
-        route.put("usuario_origem", destUser);
+        route.put("usuario_origem", user.getUsuario());
         route.put("mensagem", message);
-        
+
         showSend(route.toString());
-        
-        for (PrintWriter pw : listPw) {
-            pw.println(route);
-            pw.flush();
+
+        for (Connection con : listConnected) {
+            if (con.getUser() != null) {
+                if (con.getUser().getUsuario().equals(destUser)) {
+                    con.getPw().println(route);
+                    con.getPw().flush();
+                    break;
+                }
+            }
         }
     }
 
