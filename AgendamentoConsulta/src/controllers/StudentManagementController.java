@@ -44,7 +44,13 @@ public class StudentManagementController extends StudentManagementScreen{
             } catch (IOException | JSONException ex) {
                 Logger.getLogger(StudentManagementController.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+        }); 
+        bDelete.addActionListener((ActionEvent evt) -> {
+            try {
+                hundleDelete();
+            } catch (IOException | JSONException ex) {
+                Logger.getLogger(StudentManagementController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }); 
    }
     
@@ -119,4 +125,43 @@ public class StudentManagementController extends StudentManagementScreen{
         pr.println(route);
         pr.flush();
     }
+    
+    @SuppressWarnings("unchecked")
+    private void hundleDelete() throws IOException, JSONException {
+        // Read from interface
+        
+        String monitoria = dcbMonitoring.getSelectedItem() == null ? "" : dcbMonitoring.getSelectedItem().toString();
+        
+        if("".equals(monitoria)){
+            JOptionPane.showMessageDialog(
+                null, 
+                "Invalid fields, please try again", 
+                "Invalid field", 
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+        
+        String monitoring = "1";
+            
+        for(var i = 0; i < monitoringsAll.length(); i++){
+            JSONObject joMonitoring = monitoringsAll.getJSONObject(i);
+            if(joMonitoring.getString("nome").equals(monitoria))
+                monitoring = joMonitoring.getString("id");
+        }
+
+        JSONObject route = new JSONObject();
+        route.put("rota", "aluno-monitoria.delete");
+        route.put("usuario_aluno", usernameON);
+        route.put("id", monitoring);
+
+        // Shows what will be sent
+        logController.showSend(route.toString());
+        // Send
+        PrintWriter pr = new PrintWriter(socket.getOutputStream());  
+        pr.println(route);
+        pr.flush();
+    }
+    
+    
 }

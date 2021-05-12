@@ -49,6 +49,7 @@ public class ManagerClient extends Thread{
     public static Socket socket;
     public static JSONArray monitorsAll;
     public static JSONArray monitoringsAll;
+    public static JSONArray monitoringsStudetns;
     public static String stUser;
     public static String usernameON;
 
@@ -62,6 +63,7 @@ public class ManagerClient extends Thread{
         socket = new Socket();
         monitorsAll = new JSONArray();
         monitoringsAll = new JSONArray();
+        monitoringsStudetns = new JSONArray();
     }
     
     public void socketClient() throws IOException{
@@ -169,6 +171,7 @@ public class ManagerClient extends Thread{
                     }
                     case "monitoria.listar-aluno" ->{
                         logController.showReceived(sRoute, legend);
+                        students(sRoute);
                     }
                     case "aluno-monitoria.inscrever" -> {
                         logController.showReceived(sRoute, legend);
@@ -250,6 +253,13 @@ public class ManagerClient extends Thread{
             }
             case "aluno"   ->{
                 clientController.pContentAdd("student");
+                JSONObject route = new JSONObject();
+                route.put("rota", "monitoria.listar-aluno");
+                route.put("usuario_aluno", usernameON);
+                logController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
             }
         }
         
@@ -308,6 +318,22 @@ public class ManagerClient extends Thread{
            );
     }
     
+    private void students(String sMonitorings) throws JSONException{
+        JSONObject joMonitorings = new JSONObject(sMonitorings);
+        
+        JSONArray jaMonitorings = joMonitorings.getJSONArray("monitorias");
+        
+        Vector<String> monitorings = new Vector<>();
+        monitorings.add("");
+        
+        for(int i = 0; i < jaMonitorings.length(); i++){
+            JSONObject joMonitoring = jaMonitorings.getJSONObject(i);
+            monitorings.add(joMonitoring.getString("nome"));
+            monitoringsStudetns.put(joMonitoring);
+        }
+        homeController.initCBMonitorings1(monitorings);
+    }
+    
     private void monitors(String sUser) throws JSONException{
         JSONObject joUsers = new JSONObject(sUser);
         
@@ -340,7 +366,8 @@ public class ManagerClient extends Thread{
         
         for(int i = 0; i < jaUsers.length(); i++){
             JSONObject joUser = jaUsers.getJSONObject(i);
-            users.add(joUser.getString("usuario"));
+            if(!joUser.getString("usuario").equals(usernameON))
+                users.add(joUser.getString("usuario"));
             //monitors[i] = usuarios.getString(i);
         }
         homeController.initCBUsers(users);
