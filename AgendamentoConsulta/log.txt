@@ -3268,3 +3268,24 @@ Received <- {"erro":"false","rota":"chat.mensagem-enviar"}
 Send -> {"erro":"false","rota":"chat.mensagem-recebida"}
 Received <- {"usuario_origem":"monitor1","mensagem":"teste","rota":"chat.mensagem-recebida"}
 Received <- {"usuario_origem":"monitor1","mensagem":"teste","rota":"chat.mensagem-recebida"}
+Send -> {"senha":"123","usuario":"monitor1","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"monitor","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"usuario_monitor":"monitor1","rota":"monitoria.listar-monitor"}
+Send -> {"senha":"123","usuario":"aluno1","rota":"login.login"}
+Received <- {"erro":"false","tipo_usuario":"aluno","rota":"login.login"}
+Send -> {"rota":"cliente.usuarios"}
+Send -> {"rota":"monitoria.listar"}
+Send -> {"usuario_aluno":"aluno1","rota":"monitoria.listar-aluno"}
+Received <- {"erro":"false","monitorias":[{"horarios":["3M2","4N1"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor2","nome_monitor":"monitor2","nome":"Banco de Dados 1","id":"2"},{"horarios":["1T1"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor1","nome_monitor":"monitor1","nome":"Estrutura de Dados 1","id":"4"},{"horarios":["2T2","3T1"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor2","nome_monitor":"monitor2","nome":"Algoritmos","id":"5"},{"horarios":["4T2"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor3","nome_monitor":"monitor3","nome":"Estrutura de Dados 2","id":"6"},{"horarios":["5T1"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor1","nome_monitor":"monitor1","nome":"Lógica de Programação","id":"7"},{"horarios":["1M5"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor2","nome_monitor":"monitor2","nome":"Banco de Dados 2","id":"8"},{"horarios":["2N3"],"alunos":[{"usuario":"aluno1","nome":"aluno"},{"usuario":"aluno2","nome":"aluno"},{"usuario":"aluno3","nome":"aluno"}],"usuario_monitor":"monitor3","nome_monitor":"monitor3","nome":"Matemática Discreta","id":"9"}],"rota":"monitoria.listar-aluno"}
+Send -> {"usuario_destino":"aluno1","mensagem":"teste","rota":"chat.mensagem-enviar"}
+Received <- {"erro":"false","rota":"chat.mensagem-enviar"}
+Send -> {"erro":"false","rota":"chat.mensagem-recebida"}
+Received <- {"usuario_origem":"aluno1","mensagem":"teste","rota":"chat.mensagem-recebida"}
+Received <- {"usuario_origem":"aluno1","mensagem":"teste","rota":"chat.mensagem-recebida"}
+Send -> {"usuario_destino":"monitor1","mensagem":"oi","rota":"chat.mensagem-enviar"}
+Received <- {"erro":"false","rota":"chat.mensagem-enviar"}
+Send -> {"erro":"false","rota":"chat.mensagem-recebida"}
+Received <- {"usuario_origem":"monitor1","mensagem":"oi","rota":"chat.mensagem-recebida"}
+Received <- {"usuario_origem":"monitor1","mensagem":"oi","rota":"chat.mensagem-recebida"}
