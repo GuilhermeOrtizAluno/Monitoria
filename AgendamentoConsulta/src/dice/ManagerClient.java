@@ -150,12 +150,22 @@ public class ManagerClient extends Thread{
                         mensagem();
                     }
                     case "monitoria.listar-monitor" ->{
-                        logController.showReceived(sRoute, legend);
+                        monitoringsLog(sRoute);
+                        monitorings(sRoute);
                     }
                     case "monitoria.registro" ->{
+                        notification();
+                        monitoringsRequest();
                         logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.update" ->{
+                        notification();
+                        monitoringsRequest();
+                        logController.showReceived(sRoute, legend);
+                    }
+                    case "monitoria.delete"->{
+                        notification();
+                        monitoringsRequest();
                         logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.listar" ->{
@@ -166,9 +176,11 @@ public class ManagerClient extends Thread{
                         logController.showReceived(sRoute, legend);
                     }
                     case "aluno-monitoria.inscrever" -> {
+                        notification();
                         logController.showReceived(sRoute, legend);
                     }
                     case "aluno-monitoria.delete" -> {
+                        notification();
                         logController.showReceived(sRoute, legend);
                     }
                     default -> 
@@ -177,7 +189,7 @@ public class ManagerClient extends Thread{
                         errorRoute();
                     }
                 } // </editor-fold> 
-
+                if(bRoute) homeController.cleanFields();
             }
         } catch(EOFException e) {
              System.out.println("EOF:"+e.getMessage());
@@ -225,6 +237,13 @@ public class ManagerClient extends Thread{
             }
             case "monitor" ->{
                 clientController.pContentAdd("monitor");
+                JSONObject route = new JSONObject();
+                route.put("rota", "monitoria.listar-monitor");
+                route.put("usuario_monitor", usernameON);
+                logController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
             }
             case "aluno"   ->{
                 clientController.pContentAdd("updateStudent");
@@ -283,7 +302,7 @@ public class ManagerClient extends Thread{
                 "Error when trying to manager user", 
                 "Manager User", 
                 JOptionPane.WARNING_MESSAGE
-            );
+           );
     }
     
     private void monitors(String sUser) throws JSONException{
@@ -355,6 +374,22 @@ public class ManagerClient extends Thread{
 
     private void mensagem() {
 
+    }
+    
+    private void notification(){
+        if(bRoute){ 
+            JOptionPane.showMessageDialog(
+                null, 
+                "Success", 
+                "Message", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }else JOptionPane.showMessageDialog(
+                null, 
+                "Something went wrong!", 
+                "Error", 
+                JOptionPane.WARNING_MESSAGE
+           );
     }
 
     private void errorRoute() {

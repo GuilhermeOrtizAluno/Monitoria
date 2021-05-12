@@ -1,5 +1,7 @@
 package screens;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -24,17 +26,8 @@ public class ChatScreen extends javax.swing.JPanel {
         pPosts = new javax.swing.JPanel();
 
         bSend.setText("Enviar");
-
-        javax.swing.GroupLayout pPostsLayout = new javax.swing.GroupLayout(pPosts);
-        pPosts.setLayout(pPostsLayout);
-        pPostsLayout.setHorizontalGroup(
-            pPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 728, Short.MAX_VALUE)
-        );
-        pPostsLayout.setVerticalGroup(
-            pPostsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
-        );
+        
+        pPosts.setBackground(Color.WHITE);
 
         spPosts.setViewportView(pPosts);
 

@@ -30,6 +30,8 @@ public class ManagementMonitoringController extends ManagementMonitoringScreen{
     public void cleanFields(){
         tfName.setText("");
         tfPass.setText("");
+        rtfName.setText("");
+        rtfPass.setText("");
         revalidate();
     } 
 
@@ -115,17 +117,17 @@ public class ManagementMonitoringController extends ManagementMonitoringScreen{
     private void hundleUpdate() throws IOException, JSONException{
         try {
             // Read from interface
-            String monitor = rcbMonitor.getSelectedItem() == null ? "" : cbMonitor.getSelectedItem().toString();
-            String monitoria = cbMonitoring.getSelectedItem() == null ? "" : cbMonitoring.getSelectedItem().toString();
-            var lHorarios = rpHors.getSelectedValuesList() == null ? "" : pHors.getSelectedValuesList();
+            String monitor = rcbMonitor.getSelectedItem() == null ? "" : rcbMonitor.getSelectedItem().toString();
+            String sMonitoria = cbMonitoring.getSelectedItem() == null ? "" : cbMonitoring.getSelectedItem().toString();
+            List lHorarios = rpHors.getSelectedValuesList() == null ? null : rpHors.getSelectedValuesList();
             String name = rtfName.getText();
             String pass = rtfPass.getText();
             
             if("".equals(name) || 
                "".equals(pass) || 
                "".equals(monitor) || 
-               "".equals(monitoria) || 
-               "".equals(lHorarios)
+               "".equals(sMonitoria) || 
+               lHorarios == null
             ){
                 JOptionPane.showMessageDialog(
                     null, 
@@ -134,6 +136,23 @@ public class ManagementMonitoringController extends ManagementMonitoringScreen{
                     JOptionPane.WARNING_MESSAGE
                 );
                 return;
+            }
+            
+            var respost = JOptionPane.showConfirmDialog(
+                null, 
+                "Do you really want to update this monitoring?", 
+                "Update Monitorings", 
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if(respost == 1) return;
+            
+            String monitoria = "1";
+            
+            for(var i = 0; i < monitoringsAll.length(); i++){
+                JSONObject joMonitoring = monitoringsAll.getJSONObject(i);
+                if(joMonitoring.getString("nome").equals(sMonitoria))
+                    monitoria = joMonitoring.getString("id");
             }
 
             JSONObject route = new JSONObject();
@@ -180,10 +199,18 @@ public class ManagementMonitoringController extends ManagementMonitoringScreen{
             );
 
             if(respost == 1) return;
+            
+             String monitoria = "1";
+            
+            for(var i = 0; i < monitoringsAll.length(); i++){
+                JSONObject joMonitoring = monitoringsAll.getJSONObject(i);
+                if(joMonitoring.getString("nome").equals(monitoring))
+                    monitoria = joMonitoring.getString("id");
+            }
 
             JSONObject route = new JSONObject();
             route.put("rota", "monitoria.delete");
-            route.put("usuario", monitoring);
+            route.put("id", monitoria);
 
             // Shows what will be sent
             logController.showSend(route.toString());

@@ -4,6 +4,7 @@ import static dice.ManagerClient.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -46,19 +47,24 @@ public class MonitoringManagementController extends MonitoringManagementScreen{
         }); 
    }
     
+    public void cleanFields(){
+        tfName.setText("");
+        tfPass.setText("");
+        revalidate();
+    } 
+    
     @SuppressWarnings("unchecked")
     private void hundleUpdate() throws IOException, JSONException{
         try {
             // Read from interface[
             String monitoria = cbMonitoring.getSelectedItem() == null ? "" : cbMonitoring.getSelectedItem().toString();
-            var lHorarios = rpHors.getSelectedValuesList() == null ? "" : rpHors.getSelectedValuesList();
+            List lHorarios = rpHors.getSelectedValuesList() == null ? null : rpHors.getSelectedValuesList();
             String name = tfName.getText();
             String pass = tfPass.getText();
             
             if("".equals(name) || 
                "".equals(pass) || 
-               "".equals(monitoria) || 
-               "".equals(lHorarios)
+               "".equals(monitoria)
             ){
                 JOptionPane.showMessageDialog(
                     null, 
@@ -68,12 +74,29 @@ public class MonitoringManagementController extends MonitoringManagementScreen{
                 );
                 return;
             }
+            
+            var respost = JOptionPane.showConfirmDialog(
+                null, 
+                "Do you really want to update this monitoring?", 
+                "Update Monitorings", 
+                JOptionPane.YES_NO_OPTION
+            );
+
+            if(respost == 1) return;
+            
+            String monitoring = "1";
+            
+            for(var i = 0; i < monitoringsAll.length(); i++){
+                JSONObject joMonitoring = monitoringsAll.getJSONObject(i);
+                if(joMonitoring.getString("nome").equals(monitoria))
+                    monitoring = joMonitoring.getString("id");
+            }
 
             JSONObject route = new JSONObject();
             route.put("rota", "monitoria.update");
             route.put("nome", name);
             route.put("senha", pass);
-            route.put("id", monitoria);
+            route.put("id", monitoring);
             route.put("horarios", new JSONArray(lHorarios));
 
             // Shows what will be sent

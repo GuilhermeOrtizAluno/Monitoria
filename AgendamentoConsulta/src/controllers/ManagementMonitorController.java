@@ -22,16 +22,13 @@ public class ManagementMonitorController extends ManagementMonitorScreen{
         continuationInitComponents();
     }
     
-    public void cleanFields(boolean register){
-        if(register){
+    public void cleanFields( ){
             rtfName.setText("");
             rtfUser.setText("");
             rtfPass.setText("");
-        }else{
             utfName.setText("");
             utfUser.setText("");
             utfPass.setText("");
-        }
     }
     
     private void continuationInitComponents(){
@@ -166,7 +163,7 @@ public class ManagementMonitorController extends ManagementMonitorScreen{
         );
         
         if(respost == 1) {
-            cleanFields(false);
+            cleanFields();
             return;
         }
 

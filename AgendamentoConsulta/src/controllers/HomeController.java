@@ -98,7 +98,7 @@ public class HomeController extends HomeScreen{
                 contentRemove();
                 pContent.add(managementMonitorController);
                 rScreen = "managementMonitor";
-                managementMonitorController.cleanFields(true);
+                managementMonitorController.cleanFields();
             }
             case "managementMonitoring" -> {
                 contentRemove();
@@ -139,6 +139,12 @@ public class HomeController extends HomeScreen{
             
         }
         reloadscreen();
+    }
+    
+    public void cleanFields(){
+        managementMonitorController.cleanFields();
+        managementMonitoringController.cleanFields();
+        monitoringManagementController.cleanFields();
     }
     
     @SuppressWarnings("unchecked")
