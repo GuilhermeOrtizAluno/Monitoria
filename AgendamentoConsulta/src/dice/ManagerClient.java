@@ -402,7 +402,7 @@ public class ManagerClient extends Thread{
         logController.includeLogMonitorings(new JSONObject(sRoute));
     }
     
-    private void notification(){
+    private void notification() throws JSONException, IOException{
         if(bRoute){ 
             JOptionPane.showMessageDialog(
                 null, 
@@ -410,6 +410,27 @@ public class ManagerClient extends Thread{
                 "Message", 
                 JOptionPane.INFORMATION_MESSAGE
             );
+            
+            switch(stUser){
+            case "monitor" ->{
+                JSONObject route = new JSONObject();
+                route.put("rota", "monitoria.listar-monitor");
+                route.put("usuario_monitor", usernameON);
+                logController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
+            }
+            case "aluno"   ->{
+                JSONObject route = new JSONObject();
+                route.put("rota", "monitoria.listar-aluno");
+                route.put("usuario_aluno", usernameON);
+                logController.showSend(route.toString());
+                // Send
+                pr.println(route);
+                pr.flush();
+            }
+        }
         }else JOptionPane.showMessageDialog(
                 null, 
                 "Something went wrong!", 
