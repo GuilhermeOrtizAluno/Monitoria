@@ -116,13 +116,6 @@ public class ManagerServer extends Thread {
 
                         delete(sRoute);
                     }
-                    //mensagem
-                    case "mensagem.mensagem" -> {
-                        //Shows what came
-                        showReceived(sRoute);
-
-                        mensagem();
-                    }
                     //Client
                     case "cliente.usuarios-ativos" -> {
                         //Shows what came
@@ -175,6 +168,15 @@ public class ManagerServer extends Thread {
                     case "aluno-monitoria.delete" -> {
                         showReceived(sRoute);
                         studentDelete(sRoute);
+                    }
+                    case "chat.mensagem-enviar" ->{
+                         showReceived(sRoute);
+                         messageReceived();
+                         messageSend(sRoute);
+                    }
+                    
+                    case "chat.mensagem-recebida" ->{
+                         showReceived(sRoute);
                     }
                     default -> {
                         legend = Color.RED;
@@ -240,9 +242,6 @@ public class ManagerServer extends Thread {
             joUser.put("nome", user.getNome());
             joUser.put("tipo_usuario", sTypeUser);
             usuariosAtivos.put(joUser);
-
-            // show client on
-            usersController.includeClient(user.getUsuario());
         }
 
         //Send User
@@ -537,7 +536,7 @@ public class ManagerServer extends Thread {
         }
 
         // Shows what will be sent
-        showSend(route.toString());
+        serverController.includeLogMonitorings(route);
 
         // Send
         pr.println(route);
@@ -590,7 +589,7 @@ public class ManagerServer extends Thread {
         route.put("monitorias", monitoriasMonitor);
 
         // Shows what will be sent
-        showSend(route.toString());
+        serverController.includeLogMonitorings(route);
 
         // Send
         pr.println(route);
@@ -755,7 +754,9 @@ public class ManagerServer extends Thread {
         route.put("usuarios", usuariosAtivos);
 
         System.out.println("Send -> " + route);
-
+        
+        usersController.includeClient();
+        
         //Iterface Log
         serverController.includeLogUsers(route, true);
 
@@ -794,6 +795,38 @@ public class ManagerServer extends Thread {
         try (FileWriter fwLog = new FileWriter(fLog, true)) {
             fwLog.write("Received <- " + received + "\n");
             fwLog.flush();
+        }
+    }
+    
+    private void messageReceived() throws JSONException, IOException{
+        
+        JSONObject route = new JSONObject();
+        route.put("rota", "chat.mensagem-enviar");
+        route.put("erro", "false");
+        
+        showSend(route.toString());
+        
+        // Send
+        pr.println(route);
+        pr.flush();
+    }
+    
+    private void messageSend(String sMessage) throws JSONException, IOException{
+        
+        JSONObject joMonitorings = new JSONObject(sMessage);
+        String destUser = joMonitorings.getString("usuario_destino");
+        String message = joMonitorings.getString("mensagem");
+        
+        JSONObject route = new JSONObject();
+        route.put("rota", "chat.mensagem-recebida");
+        route.put("usuario_origem", destUser);
+        route.put("mensagem", message);
+        
+        showSend(route.toString());
+        
+        for (PrintWriter pw : listPw) {
+            pw.println(route);
+            pw.flush();
         }
     }
 

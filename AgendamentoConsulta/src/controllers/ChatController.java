@@ -1,6 +1,8 @@
 package controllers;
 
 import static dice.ManagerClient.*;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import org.json.JSONException;
 import org.json.JSONObject;
 import screens.ChatScreen;
@@ -67,15 +70,43 @@ public class ChatController extends ChatScreen{
      
      public void includeMessageSend(String sMessage){
         JLabel lMessage = new JLabel();
-        lMessage.setText("Send -> "+sMessage);
+        lMessage.setText(usernameON+": "+sMessage);
         
-        pPosts.add(lMessage);
-        pPosts.repaint();
-        pPosts.validate();
+        JPanel pMessage = new JPanel();
+        pMessage.setSize(300, HEIGHT);
+        pMessage.setBackground(Color.white);
+        pMessage.add(lMessage);
+        
+        pPost.add(pMessage);
+        pPost.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pPost.repaint();
+        pPost.validate();
         
         tfMessage.setText("");
         
         revalidate();
      }
-    
+     
+     public void includeMessageReceveid(JSONObject joMessage) throws JSONException{
+         
+         String userChat = joMessage.getString("usuario_origem");
+         String messageChat = joMessage.getString("mensagem");
+         
+        JLabel lMessage = new JLabel();
+        lMessage.setText(userChat+": "+messageChat);
+        
+        JPanel pMessage = new JPanel();
+        pMessage.setSize(300, HEIGHT);
+        pMessage.setBackground(Color.white);
+        pMessage.add(lMessage);
+        
+        pPost.add(pMessage);
+        pPost.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        pPost.repaint();
+        pPost.validate();
+        
+        tfMessage.setText("");
+        
+        revalidate();
+     }
 }

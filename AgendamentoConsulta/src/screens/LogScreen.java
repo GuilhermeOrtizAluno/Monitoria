@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
  */
 public class LogScreen extends javax.swing.JPanel {
 
-public JPanel pLog;
+    public JPanel pLog;
     public JPanel pContentLog;
     public JScrollPane spLog;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Components">                          
     public void initComponents() {
-;
+
         spLog = new javax.swing.JScrollPane();
         pLog = new javax.swing.JPanel();
         pContentLog = new JPanel();
@@ -39,8 +39,6 @@ public JPanel pLog;
         spLog.setViewportView(pContentLog);
         spLog.setMinimumSize(new java.awt.Dimension(900, 180));
         spLog.setPreferredSize(new java.awt.Dimension(900, 180));
-
-        spLog.setViewportView(pContentLog);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

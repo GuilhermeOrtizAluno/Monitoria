@@ -84,11 +84,11 @@ public class StudentManagementController extends StudentManagementScreen{
     @SuppressWarnings("unchecked")
     private void hundleRegister() throws IOException, JSONException {
         // Read from interface
-        String user = utfUser.getText();
-        String pass = utfPass.getText();
-        String name = utfName.getText();
         
-        if("".equals(name) || "".equals(user) || "".equals(pass)){
+        String monitoria = cbMonitoring.getSelectedItem() == null ? "" : cbMonitoring.getSelectedItem().toString();
+        String pass = tfPass.getText();
+        
+        if("".equals(pass) || "".equals(monitoria)){
             JOptionPane.showMessageDialog(
                 null, 
                 "Invalid fields, please try again", 
@@ -97,13 +97,20 @@ public class StudentManagementController extends StudentManagementScreen{
             );
             return;
         }
+        
+        String monitoring = "1";
+            
+        for(var i = 0; i < monitoringsAll.length(); i++){
+            JSONObject joMonitoring = monitoringsAll.getJSONObject(i);
+            if(joMonitoring.getString("nome").equals(monitoria))
+                monitoring = joMonitoring.getString("id");
+        }
 
         JSONObject route = new JSONObject();
-        route.put("rota", "login.update");
-        route.put("usuario", usernameON);
-        route.put("novo_usuario", user);
+        route.put("rota", "aluno-monitoria.inscrever");
         route.put("senha", pass);
-        route.put("nome", name);
+        route.put("usuario_aluno", usernameON);
+        route.put("id", monitoring);
 
         // Shows what will be sent
         logController.showSend(route.toString());

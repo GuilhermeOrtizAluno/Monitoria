@@ -1,6 +1,8 @@
 package screens;
 
 import java.awt.Color;
+import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
 
 
 /**
@@ -12,6 +14,7 @@ public class ChatScreen extends javax.swing.JPanel {
     public javax.swing.JButton bSend;
     public javax.swing.JComboBox<String> cbUser;
     public javax.swing.JPanel pPosts;
+    public javax.swing.JPanel pPost;
     public javax.swing.JScrollPane spPosts;
     public javax.swing.JTextField tfMessage;
     
@@ -24,8 +27,15 @@ public class ChatScreen extends javax.swing.JPanel {
         bSend = new javax.swing.JButton();
         spPosts = new javax.swing.JScrollPane();
         pPosts = new javax.swing.JPanel();
+        pPost = new javax.swing.JPanel();
 
         bSend.setText("Enviar");
+        
+        pPost.setBorder(new EmptyBorder(10, 10, 10, 10));
+        pPost.setBackground(Color.WHITE);
+        pPost.setLayout(new BoxLayout(pPost, BoxLayout.Y_AXIS));
+        
+        pPosts.add(pPost);
         
         pPosts.setBackground(Color.WHITE);
 

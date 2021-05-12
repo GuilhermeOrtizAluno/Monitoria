@@ -76,6 +76,29 @@ public class ServerController extends ServerScreen {
         spLog.revalidate();
     }   
     
+    public void includeLogMonitorings(JSONObject routeAll) throws JSONException{
+        
+        logUsers = !logUsers;
+
+        String route = "{\"rota\":\"" + routeAll.getString("rota") + "\",";
+        route += "\"erro\":\"" + routeAll.getString("erro") + "\",";
+        
+        includeLog("Send -> "+route, Color.BLACK, Color.CYAN );
+        
+        includeLog("\"monitorias\":[", Color.BLACK, Color.WHITE);
+        
+        JSONArray monitorias = routeAll.getJSONArray("monitorias");
+        for(int i = 0; i < monitorias.length(); i++){
+            org.json.JSONObject monitoria = monitorias.getJSONObject(i);
+             includeLog(i==0 ? "" + monitoria.toString() : "," + monitoria.toString(), Color.BLACK,  Color.WHITE);
+        }
+        
+        logUsers = !logUsers;
+        
+        includeLog("]}", Color.BLACK, Color.WHITE);
+        
+    }
+    
     public void includeLogUsers(JSONObject routeAll, boolean broadcast) throws JSONException{
         
         logUsers = !logUsers;

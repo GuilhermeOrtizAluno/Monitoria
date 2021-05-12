@@ -144,29 +144,24 @@ public class ManagerClient extends Thread{
                         if("admin".equals(stUser))
                             monitors(sRoute);
                     }
-                    case "mensagem.mensagem" -> 
-                    {
-                        logController.showReceived(sRoute, legend);
-                        mensagem();
-                    }
                     case "monitoria.listar-monitor" ->{
                         monitoringsLog(sRoute);
                         monitorings(sRoute);
                     }
                     case "monitoria.registro" ->{
+                        logController.showReceived(sRoute, legend);
                         notification();
                         monitoringsRequest();
-                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.update" ->{
+                        logController.showReceived(sRoute, legend);
                         notification();
                         monitoringsRequest();
-                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.delete"->{
+                        logController.showReceived(sRoute, legend);
                         notification();
                         monitoringsRequest();
-                        logController.showReceived(sRoute, legend);
                     }
                     case "monitoria.listar" ->{
                         monitoringsLog(sRoute);
@@ -176,12 +171,20 @@ public class ManagerClient extends Thread{
                         logController.showReceived(sRoute, legend);
                     }
                     case "aluno-monitoria.inscrever" -> {
-                        notification();
                         logController.showReceived(sRoute, legend);
+                        notification();
                     }
                     case "aluno-monitoria.delete" -> {
-                        notification();
                         logController.showReceived(sRoute, legend);
+                        notification();        
+                    }
+                    case "chat.mensagem-recebida" ->{
+                        logController.showReceived(sRoute, legend);
+                        messageReceveid(sRoute);
+                    }
+                    case "chat.mensagem-enviar" ->{
+                        logController.showReceived(sRoute, legend);
+                        messageSend();
                     }
                     default -> 
                     {
@@ -287,7 +290,7 @@ public class ManagerClient extends Thread{
         if(bRoute){ 
             JOptionPane.showMessageDialog(
                 null, 
-                "Manager Success", 
+                "Success", 
                 "Manager User", 
                 JOptionPane.INFORMATION_MESSAGE
             );
@@ -371,10 +374,6 @@ public class ManagerClient extends Thread{
         legend = Color.GREEN;
         logController.includeLogMonitorings(new JSONObject(sRoute));
     }
-
-    private void mensagem() {
-
-    }
     
     private void notification(){
         if(bRoute){ 
@@ -413,6 +412,20 @@ public class ManagerClient extends Thread{
     private void monitoringsRequest() throws JSONException, IOException{
         JSONObject route = new JSONObject();
         route.put("rota", "monitoria.listar");
+        logController.showSend(route.toString());
+        // Send
+        pr.println(route);
+        pr.flush();
+    }
+    
+    private void messageReceveid(String sMessage) throws JSONException{
+        homeController.chatMessageReceveid(sMessage);
+    }
+    
+    private void messageSend() throws JSONException, IOException{
+        JSONObject route = new JSONObject();
+        route.put("rota", "chat.mensagem-recebida");
+        route.put("erro", "false");
         logController.showSend(route.toString());
         // Send
         pr.println(route);

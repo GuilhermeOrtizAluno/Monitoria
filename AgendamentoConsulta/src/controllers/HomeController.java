@@ -22,6 +22,7 @@ public class HomeController extends HomeScreen{
     
     public static MenuAdminController menuAdminController;
     public static MenuMonitorController menuMonitorController;
+    public static MenuStudentController menuStudentController;
     public static ManagementMonitorController managementMonitorController;
     public static ManagementMonitoringController managementMonitoringController;
     public static MonitoringManagementController monitoringManagementController;
@@ -40,6 +41,7 @@ public class HomeController extends HomeScreen{
         rScreen = "managementMonitor";
         menuAdminController = new MenuAdminController();
         menuMonitorController = new MenuMonitorController();
+        menuStudentController = new MenuStudentController();
         managementMonitorController = new ManagementMonitorController();
         managementMonitoringController = new ManagementMonitoringController();
         monitoringManagementController = new MonitoringManagementController();
@@ -89,7 +91,7 @@ public class HomeController extends HomeScreen{
     }
     
     public void student(){
-        pMenu.add(menuMonitorController, CENTER);
+        pMenu.add(menuStudentController, CENTER);
         contentAdd("studentManagement");
     }
     
@@ -117,13 +119,13 @@ public class HomeController extends HomeScreen{
                 contentRemove();
                 pContent.add(monitoringManagementController);
                 rScreen = "monitoringManagement";
-                //monitoringManagementController.cleanFields();
+                monitoringManagementController.cleanFields();
             }
             case "studentManagement" -> {
                 contentRemove();
                 pContent.add(studentManagementController);
                 rScreen = "studentManagement";
-                //monitoringManagementController.cleanFields();
+                studentManagementController.cleanFields();
             }
             case "chat" -> {
                 contentRemove();
@@ -146,6 +148,9 @@ public class HomeController extends HomeScreen{
             case "monitoringManagement" -> {
                 pContent.remove(monitoringManagementController);
             }
+            case "studentManagement" -> {
+                pContent.remove(studentManagementController);
+            }
              case "chat" -> {
                 pContent.remove(chatController);
             }
@@ -159,6 +164,10 @@ public class HomeController extends HomeScreen{
         managementMonitoringController.cleanFields();
         monitoringManagementController.cleanFields();
         studentManagementController.cleanFields();
+    }
+    
+    public void chatMessageReceveid(String message) throws JSONException{
+        chatController.includeMessageReceveid(new JSONObject(message));
     }
     
     @SuppressWarnings("unchecked")
@@ -193,6 +202,9 @@ public class HomeController extends HomeScreen{
         
         //Monitor monitoria
         monitoringManagementController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
+        
+        //Aluno inicial
+        studentManagementController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
     }
     
 }
