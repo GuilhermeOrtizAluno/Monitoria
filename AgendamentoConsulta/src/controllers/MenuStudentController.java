@@ -27,7 +27,7 @@ public class MenuStudentController extends MenuStudentScreen{
             homeController.contentAdd("studentManagement");
         }); 
         bHors.addActionListener((ActionEvent evt) -> {
-            homeController.contentAdd("");
+            homeController.contentAdd("hors");
         });
         bChat.addActionListener((ActionEvent evt) -> {
             homeController.contentAdd("chat");

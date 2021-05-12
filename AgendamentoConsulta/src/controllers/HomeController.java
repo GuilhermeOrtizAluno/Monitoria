@@ -27,6 +27,7 @@ public class HomeController extends HomeScreen{
     public static ManagementMonitoringController managementMonitoringController;
     public static MonitoringManagementController monitoringManagementController;
     public static StudentManagementController studentManagementController;
+    public static HorsController horsController;
     public static ChatController chatController;
     
     private String rScreen; 
@@ -46,6 +47,7 @@ public class HomeController extends HomeScreen{
         managementMonitoringController = new ManagementMonitoringController();
         monitoringManagementController = new MonitoringManagementController();
         studentManagementController = new StudentManagementController();
+        horsController = new HorsController();
         chatController = new ChatController();
     }
     
@@ -132,6 +134,11 @@ public class HomeController extends HomeScreen{
                 pContent.add(chatController);
                 rScreen = "chat";
             }
+            case "hors" -> {
+                contentRemove();
+                pContent.add(horsController);
+                rScreen = "hors";
+            }
             
         }
         reloadscreen();
@@ -151,8 +158,11 @@ public class HomeController extends HomeScreen{
             case "studentManagement" -> {
                 pContent.remove(studentManagementController);
             }
-             case "chat" -> {
+            case "chat" -> {
                 pContent.remove(chatController);
+            }
+            case "hors" -> {
+                pContent.remove(horsController);
             }
             
         }
@@ -205,6 +215,23 @@ public class HomeController extends HomeScreen{
         
         //Aluno inicial
         studentManagementController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
+        
+        //Monitor Hors
+        if("monitor".equals(stUser))
+            horsController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
+        
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void initCBMonitorings1(Vector<String> vMonitorings){
+        var mMonitorings = new DefaultListModel();
+        mMonitorings.addAll(vMonitorings);
+        
+        //Aluno Horarios
+        horsController.cbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
+        
+        //Aluno inicial
+         studentManagementController.dcbMonitoring.setModel(new DefaultComboBoxModel<>(vMonitorings));
     }
     
 }

@@ -20,7 +20,7 @@ public class MenuMonitorController extends MenuMonitorScreen{
             homeController.contentAdd("monitoringManagement");
         }); 
         bHors.addActionListener((ActionEvent evt) -> {
-            homeController.contentAdd("");
+            homeController.contentAdd("hors");
         });
         bChat.addActionListener((ActionEvent evt) -> {
             homeController.contentAdd("chat");

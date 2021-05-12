@@ -48,6 +48,12 @@ public class StudentManagement extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tfPass = new javax.swing.JTextField();
+        pContentDelete = new javax.swing.JPanel();
+        pUpdate2 = new javax.swing.JPanel();
+        ulTitle2 = new javax.swing.JLabel();
+        bDelete = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        dcbMonitoring = new javax.swing.JComboBox<>();
 
         setMinimumSize(new java.awt.Dimension(750, 470));
         setPreferredSize(new java.awt.Dimension(750, 470));
@@ -171,7 +177,7 @@ public class StudentManagement extends javax.swing.JPanel {
         pContentRegisterLayout.setHorizontalGroup(
             pContentRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pContentRegisterLayout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
@@ -268,20 +274,98 @@ public class StudentManagement extends javax.swing.JPanel {
         pContentMonitoring.setLayout(pContentMonitoringLayout);
         pContentMonitoringLayout.setHorizontalGroup(
             pContentMonitoringLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pContentMonitoringLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pContentMonitoringLayout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(pUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
         pContentMonitoringLayout.setVerticalGroup(
             pContentMonitoringLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pContentMonitoringLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(79, 79, 79)
                 .addComponent(pUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pContent.add(pContentMonitoring);
+
+        pContentDelete.setBackground(new java.awt.Color(255, 255, 255));
+        pContentDelete.setMinimumSize(new java.awt.Dimension(250, 430));
+
+        pUpdate2.setBackground(new java.awt.Color(255, 255, 255));
+        pUpdate2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pUpdate2.setMaximumSize(new java.awt.Dimension(230, 300));
+        pUpdate2.setMinimumSize(new java.awt.Dimension(230, 300));
+
+        ulTitle2.setBackground(new java.awt.Color(255, 255, 255));
+        ulTitle2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        ulTitle2.setForeground(new java.awt.Color(204, 204, 204));
+        ulTitle2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ulTitle2.setText("Cancelar Monitoria");
+
+        bDelete.setBackground(new java.awt.Color(204, 0, 204));
+        bDelete.setText("desinscrever-se");
+        bDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Monitoria");
+
+        dcbMonitoring.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        dcbMonitoring.setBorder(null);
+        dcbMonitoring.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dcbMonitoringActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pUpdate2Layout = new javax.swing.GroupLayout(pUpdate2);
+        pUpdate2.setLayout(pUpdate2Layout);
+        pUpdate2Layout.setHorizontalGroup(
+            pUpdate2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pUpdate2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pUpdate2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ulTitle2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(dcbMonitoring, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pUpdate2Layout.setVerticalGroup(
+            pUpdate2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pUpdate2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ulTitle2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dcbMonitoring, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(bDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pContentDeleteLayout = new javax.swing.GroupLayout(pContentDelete);
+        pContentDelete.setLayout(pContentDeleteLayout);
+        pContentDeleteLayout.setHorizontalGroup(
+            pContentDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pContentDeleteLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pUpdate2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pContentDeleteLayout.setVerticalGroup(
+            pContentDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pContentDeleteLayout.createSequentialGroup()
+                .addContainerGap(123, Short.MAX_VALUE)
+                .addComponent(pUpdate2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
+        );
+
+        pContent.add(pContentDelete);
 
         add(pContent, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -302,25 +386,39 @@ public class StudentManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPassActionPerformed
 
+    private void bDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bDeleteActionPerformed
+
+    private void dcbMonitoringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dcbMonitoringActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dcbMonitoringActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDelete;
     private javax.swing.JButton bRegister;
     private javax.swing.JButton bUpdate;
     public javax.swing.JComboBox<String> cbMonitoring;
+    public javax.swing.JComboBox<String> dcbMonitoring;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lTitle;
     private javax.swing.JPanel pContent;
+    private javax.swing.JPanel pContentDelete;
     private javax.swing.JPanel pContentMonitoring;
     private javax.swing.JPanel pContentRegister;
     private javax.swing.JPanel pTitle;
     private javax.swing.JPanel pUpdate;
     private javax.swing.JPanel pUpdate1;
+    private javax.swing.JPanel pUpdate2;
     private javax.swing.JTextField tfPass;
     private javax.swing.JLabel ulName;
     private javax.swing.JLabel ulPass;
     private javax.swing.JLabel ulTitle;
     private javax.swing.JLabel ulTitle1;
+    private javax.swing.JLabel ulTitle2;
     private javax.swing.JLabel ulUser;
     private javax.swing.JTextField utfName;
     private javax.swing.JTextField utfPass;
