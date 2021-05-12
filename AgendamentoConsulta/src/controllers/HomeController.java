@@ -25,6 +25,7 @@ public class HomeController extends HomeScreen{
     public static ManagementMonitorController managementMonitorController;
     public static ManagementMonitoringController managementMonitoringController;
     public static MonitoringManagementController monitoringManagementController;
+    public static StudentManagementController studentManagementController;
     public static ChatController chatController;
     
     private String rScreen; 
@@ -42,6 +43,7 @@ public class HomeController extends HomeScreen{
         managementMonitorController = new ManagementMonitorController();
         managementMonitoringController = new ManagementMonitoringController();
         monitoringManagementController = new MonitoringManagementController();
+        studentManagementController = new StudentManagementController();
         chatController = new ChatController();
     }
     
@@ -86,6 +88,11 @@ public class HomeController extends HomeScreen{
         contentAdd("monitoringManagement");
     }
     
+    public void student(){
+        pMenu.add(menuMonitorController, CENTER);
+        contentAdd("studentManagement");
+    }
+    
     public void reloadscreen(){
         validate();
         repaint();
@@ -110,6 +117,12 @@ public class HomeController extends HomeScreen{
                 contentRemove();
                 pContent.add(monitoringManagementController);
                 rScreen = "monitoringManagement";
+                //monitoringManagementController.cleanFields();
+            }
+            case "studentManagement" -> {
+                contentRemove();
+                pContent.add(studentManagementController);
+                rScreen = "studentManagement";
                 //monitoringManagementController.cleanFields();
             }
             case "chat" -> {
@@ -145,6 +158,7 @@ public class HomeController extends HomeScreen{
         managementMonitorController.cleanFields();
         managementMonitoringController.cleanFields();
         monitoringManagementController.cleanFields();
+        studentManagementController.cleanFields();
     }
     
     @SuppressWarnings("unchecked")

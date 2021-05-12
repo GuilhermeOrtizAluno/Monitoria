@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package screen;
+package interfaces;
 
 /**
  *
- * @author guilherme.santos
+ * @author Guilherme Ortiz
  */
-public class MenuMonitorScreen extends javax.swing.JPanel {
+public class MenuAdminScreen extends javax.swing.JPanel {
 
     /**
-     * Creates new form MenuMonitorScreen
+     * Creates new form MenuAdmin
      */
-    public MenuMonitorScreen() {
+    public MenuAdminScreen() {
         initComponents();
     }
 
@@ -27,17 +27,14 @@ public class MenuMonitorScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bHors = new javax.swing.JButton();
-        bMonitoring = new javax.swing.JButton();
-        bChat = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 0, 204));
 
-        bHors.setText("Horarios");
+        jButton1.setText("Monitor");
 
-        bMonitoring.setText("Monitoria");
-
-        bChat.setText("Chat");
+        jButton2.setText("Monitoria");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,28 +43,24 @@ public class MenuMonitorScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bHors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bMonitoring, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(bChat, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(bHors)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bMonitoring)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bChat)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton bChat;
-    public javax.swing.JButton bHors;
-    public javax.swing.JButton bMonitoring;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

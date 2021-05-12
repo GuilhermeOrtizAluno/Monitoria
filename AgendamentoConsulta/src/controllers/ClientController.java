@@ -126,6 +126,9 @@ public class ClientController extends ClientScreen {
             case "monitor" -> {
                 homeController.monitor();
             }
+            case "student" -> {
+                homeController.student();
+            }
             /*
             case "registerMonitor"  -> 
             {

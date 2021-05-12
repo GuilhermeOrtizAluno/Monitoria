@@ -2,28 +2,31 @@ package controllers;
 
 import static dice.ManagerClient.homeController;
 import java.awt.event.ActionEvent;
-import screens.MenuMonitorScreen;
+import screens.MenuStudentScreen;
 
 /**
  *
  * @author Guilherme Ortiz
  */
-public class MenuMonitorController extends MenuMonitorScreen{
+public class MenuStudentController extends MenuStudentScreen{
 
-    public MenuMonitorController() {
+    public MenuStudentController() {
         initComponents();
         continuationInitComponents();
     }
     
     private void continuationInitComponents(){
-        bMonitoring.addActionListener((ActionEvent evt) -> {
-            homeController.contentAdd("monitoringManagement");
+        bStudent.addActionListener((ActionEvent evt) -> {
+            homeController.contentAdd("studentManagement");
         }); 
         bHors.addActionListener((ActionEvent evt) -> {
             homeController.contentAdd("");
         });
         bChat.addActionListener((ActionEvent evt) -> {
             homeController.contentAdd("chat");
+        });
+        bDelete.addActionListener((ActionEvent evt) -> {
+            
         });
     }
     

@@ -246,7 +246,7 @@ public class ManagerClient extends Thread{
                 pr.flush();
             }
             case "aluno"   ->{
-                clientController.pContentAdd("updateStudent");
+                clientController.pContentAdd("student");
             }
         }
         
